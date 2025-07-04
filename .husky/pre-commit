@@ -1,0 +1,2 @@
+cd class-components
+npm run lint-staged
