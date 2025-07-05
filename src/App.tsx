@@ -1,11 +1,13 @@
 import { Component } from 'react';
-import Button from './components/Button/Button';
+import Header from './components/Header/Header';
+import Main from './components/Main/Main';
 
 class App extends Component {
   render() {
     return (
       <>
-        <Button />
+        <Header />
+        <Main />
       </>
     );
   }
