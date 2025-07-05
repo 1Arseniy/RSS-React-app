@@ -1,0 +1,6 @@
+@import url(./variables.css);
+@import 'tailwindcss';
+
+body {
+  margin: 0;
+}
