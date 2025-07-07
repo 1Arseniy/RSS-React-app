@@ -1,14 +1,17 @@
 import { Component } from 'react';
 
-class ErrorBoundary extends Component<{
-  children: React.ReactNode;
-}> {
+class ErrorBoundary extends Component<
+  {
+    children: React.ReactNode;
+  },
+  { hasError: boolean }
+> {
   constructor(props: { children: React.ReactNode }) {
     super(props);
     this.state = { hasError: false };
   }
 
-  static getDerivedStateFromError(): { hasError: boolean } {
+  static getDerivedStateFromError() {
     return { hasError: true };
   }
 

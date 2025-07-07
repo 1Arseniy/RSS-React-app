@@ -9,7 +9,7 @@ function error() {
 class Main extends Component {
   render() {
     return (
-      <main className="flex">
+      <main className="flex flex-col">
         <CardList />
         <div>
           <Button onClick={error}>Error</Button>
