@@ -5,6 +5,7 @@ class InputSearch extends Component {
     return (
       <input
         placeholder="Search..."
+        name="search"
         className="h-9 bg-white rounded-sm pl-2 focus-within:outline-2 focus-within:outline-blue-700"
       />
     );

@@ -4,11 +4,7 @@ export async function wrapperTryCatch<T = unknown>(
 ): Promise<T> {
   try {
     const res = await fetch(url, opts);
-    // if (!res.ok) {
-    //   const text = await res.text();
-    //   throw new Error(`Error ${res.status}: ${text}`);
-    // }
-    const data = (await res.json()) as T;
+    const data: T = await res.json();
     return data;
   } catch (err: unknown) {
     if (err instanceof Error) {

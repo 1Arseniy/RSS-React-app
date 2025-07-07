@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import Button from '../Button/Button';
 
 class ErrorBoundary extends Component<
   {
@@ -15,9 +16,24 @@ class ErrorBoundary extends Component<
     return { hasError: true };
   }
 
+  refreshPage() {
+    const startPage = 0;
+    history.go(startPage);
+  }
+
   render() {
     if (this.state.hasError) {
-      return <div className="h-screen bg-amber-500">Somthing went wrong</div>;
+      return (
+        <div className="h-screen bg-red-700 text-white flex flex-col justify-center items-center">
+          <h1 className="text-2xl">Something went wrong...</h1>
+          <Button
+            style={['bg-red-900', 'hover:bg-red-800']}
+            onClick={this.refreshPage}
+          >
+            Refresh
+          </Button>
+        </div>
+      );
     }
 
     return this.props.children;

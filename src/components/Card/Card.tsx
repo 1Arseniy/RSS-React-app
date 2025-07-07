@@ -6,9 +6,13 @@ class Card extends Component<{ obj: typeCharacter }> {
     const { image, gender, name, status } = this.props.obj;
     return (
       <div className="flex flex-col bg-blue-800 w-80 h-80 m-2.5 rounded-md">
-        <img className="object-cover h-52 rounded-t-md" src={image}></img>
+        <img
+          className="object-cover h-52 rounded-t-md"
+          src={image}
+          alt="rick&morty"
+        ></img>
         <div className="flex flex-col h-full justify-center p-2.5 text-white">
-          <span>Name: {name}</span>
+          <span>Full name: {name}</span>
           <span>Gender: {gender}</span>
           <span>Status: {status}</span>
         </div>
