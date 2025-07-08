@@ -27,7 +27,7 @@ class ErrorBoundary extends Component<
         <div className="h-screen bg-red-700 text-white flex flex-col justify-center items-center">
           <h1 className="text-2xl">Something went wrong...</h1>
           <Button
-            style={['bg-red-900', 'hover:bg-red-800']}
+            styles={['bg-red-900', 'hover:bg-red-800']}
             onClick={this.refreshPage}
           >
             Refresh
