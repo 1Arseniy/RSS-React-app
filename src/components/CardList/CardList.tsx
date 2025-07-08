@@ -13,11 +13,10 @@ class CardList extends Component<{
   }
 
   render() {
-    console.log(';ll', this.props.characterByRequest);
     return (
       <div className="flex flex-wrap justify-center">
         {this.props.loading ? (
-          <div className="h-screen">
+          <div className="h-screen flex items-center">
             <LuLoaderCircle className="text-blue-500 size-24 animate-spin" />
           </div>
         ) : this.props.characterByRequest ? (

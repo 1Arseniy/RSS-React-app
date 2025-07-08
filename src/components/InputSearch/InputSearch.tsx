@@ -1,6 +1,9 @@
 import { Component } from 'react';
 
-class InputSearch extends Component<{ setName: (name: string) => void }> {
+class InputSearch extends Component<{
+  setName: (name: string) => void;
+  InputValue: string;
+}> {
   state = { value: '' };
 
   setValue(event: React.ChangeEvent<HTMLInputElement>) {
@@ -11,6 +14,7 @@ class InputSearch extends Component<{ setName: (name: string) => void }> {
   render() {
     return (
       <input
+        value={this.props.InputValue}
         onChange={(e) => this.setValue(e)}
         placeholder="Search by name..."
         name="search"

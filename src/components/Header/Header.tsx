@@ -9,7 +9,9 @@ class Header extends Component<
   state = { text: '' };
 
   getName = async () => {
-    await this.props.getByRequest(this.state.text);
+    const deleteSpaces = this.state.text.trim();
+    this.setState({ text: deleteSpaces });
+    await this.props.getByRequest(deleteSpaces);
   };
 
   setName = (name: string) => {
@@ -19,7 +21,7 @@ class Header extends Component<
   render() {
     return (
       <header className="h-24 flex justify-center items-center">
-        <InputSearch setName={this.setName} />
+        <InputSearch setName={this.setName} InputValue={this.state.text} />
         <Button onClick={this.getName}>Search</Button>
       </header>
     );

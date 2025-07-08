@@ -1,19 +1,21 @@
-import { Component } from 'react';
+import { Component, type ErrorInfo } from 'react';
 import Button from '../Button/Button';
-
 class ErrorBoundary extends Component<
   {
     children: React.ReactNode;
   },
-  { hasError: boolean }
+  { errorInfo: string }
 > {
   constructor(props: { children: React.ReactNode }) {
     super(props);
-    this.state = { hasError: false };
+    this.state = { errorInfo: '' };
   }
 
-  static getDerivedStateFromError() {
-    return { hasError: true };
+  componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
+    if (errorInfo.componentStack) {
+      this.setState({ errorInfo: errorInfo.componentStack });
+    }
+    console.log(error, errorInfo);
   }
 
   refreshPage() {
@@ -22,7 +24,7 @@ class ErrorBoundary extends Component<
   }
 
   render() {
-    if (this.state.hasError) {
+    if (this.state.errorInfo) {
       return (
         <div className="h-screen bg-red-700 text-white flex flex-col justify-center items-center">
           <h1 className="text-2xl">Something went wrong...</h1>
