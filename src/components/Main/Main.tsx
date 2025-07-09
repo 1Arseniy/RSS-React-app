@@ -16,7 +16,7 @@ class Main extends Component<{
           getByRequest={this.props.getByRequest}
           loading={this.props.loading}
         />
-        <div className="flex justify-end">
+        <div className="h-[12vh] flex justify-end">
           <BuggyButton />
         </div>
       </main>

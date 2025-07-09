@@ -11,6 +11,7 @@ class Header extends Component<
   getName = async () => {
     const deleteSpaces = this.state.text.trim();
     this.setState({ text: deleteSpaces });
+    localStorage.setItem('name', deleteSpaces);
     await this.props.getByRequest(deleteSpaces);
   };
 
@@ -20,7 +21,7 @@ class Header extends Component<
 
   render() {
     return (
-      <header className="h-24 flex justify-center items-center">
+      <header className="h-[12vh] flex justify-center items-center">
         <InputSearch setName={this.setName} InputValue={this.state.text} />
         <Button onClick={this.getName}>Search</Button>
       </header>
