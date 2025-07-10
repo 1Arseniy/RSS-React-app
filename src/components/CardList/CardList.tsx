@@ -1,11 +1,10 @@
 import { Component } from 'react';
-import type { typeCharacter } from '../../types/types';
+import type { typeProps } from '../../types/types';
 import { LuLoaderCircle } from 'react-icons/lu';
 import Card from '../Card/Card';
 class CardList extends Component<{
-  characterByRequest: typeCharacter[];
+  states: typeProps;
   getByRequest: (name?: string) => Promise<void>;
-  loading: boolean;
 }> {
   async componentDidMount() {
     const name = localStorage.getItem('name');
@@ -13,18 +12,21 @@ class CardList extends Component<{
   }
 
   render() {
+    const { loading, characterByRequest, error } = this.props.states;
     return (
-      <div className="flex flex-wrap justify-center">
-        {this.props.loading || !this.props.characterByRequest ? (
-          <div className="flex items-center h-[76vh]">
-            {this.props.loading ? (
+      <div className={`flex flex-wrap justify-center`}>
+        {loading || !characterByRequest || error ? (
+          <div className="flex items-center h-[76vh] text-3xl text-center text-white">
+            {loading ? (
               <LuLoaderCircle className="text-blue-500 size-24 animate-spin" />
+            ) : !error ? (
+              <h1>Сharacter with this name not found</h1>
             ) : (
-              <h1 className="text-3xl text-white">Character not found</h1>
+              <h1>Something went wrong try again</h1>
             )}
           </div>
         ) : (
-          this.props.characterByRequest.map((character) => (
+          characterByRequest.map((character) => (
             <Card key={crypto.randomUUID()} obj={character} />
           ))
         )}

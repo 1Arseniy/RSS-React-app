@@ -26,8 +26,10 @@ class ErrorBoundary extends Component<
   render() {
     if (this.state.errorInfo) {
       return (
-        <div className="h-screen bg-red-700 text-white flex flex-col justify-center items-center">
-          <h1 className="text-2xl">Something went wrong...</h1>
+        <div className="h-screen bg-red-700  flex flex-col justify-center items-center">
+          <h1 className="text-3xl text-center text-white">
+            Something went wrong...
+          </h1>
           <Button
             styles={['bg-red-900', 'hover:bg-red-800']}
             onClick={this.refreshPage}

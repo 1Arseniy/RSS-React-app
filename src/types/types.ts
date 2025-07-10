@@ -8,3 +8,9 @@ export interface typeCharacter {
 export interface typeCharacters {
   results: typeCharacter[];
 }
+
+export interface typeProps {
+  characterByRequest: typeCharacter[];
+  loading: boolean;
+  error: boolean;
+}

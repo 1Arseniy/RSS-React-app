@@ -5,15 +5,17 @@ import type { typeCharacter } from './types/types';
 import { getCharaters } from './client/getCharacters';
 
 class App extends Component<
-  unknown,
-  { characterByRequest: typeCharacter[]; loading: boolean }
+  object,
+  { characterByRequest: typeCharacter[]; loading: boolean; error: boolean }
 > {
-  state = { characterByRequest: [], loading: true };
+  state = { characterByRequest: [], loading: true, error: false };
 
   getByRequest = async (name?: string) => {
     try {
       this.setState({ loading: true });
       this.setState({ characterByRequest: await getCharaters(name) });
+    } catch {
+      this.setState({ error: true });
     } finally {
       this.setState({ loading: false });
     }
@@ -23,11 +25,7 @@ class App extends Component<
     return (
       <>
         <Header getByRequest={this.getByRequest} />
-        <Main
-          characterByRequest={this.state.characterByRequest}
-          getByRequest={this.getByRequest}
-          loading={this.state.loading}
-        />
+        <Main states={this.state} getByRequest={this.getByRequest} />
       </>
     );
   }

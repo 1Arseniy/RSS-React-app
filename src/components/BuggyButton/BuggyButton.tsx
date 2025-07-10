@@ -1,8 +1,8 @@
 import { Component } from 'react';
 import Button from '../Button/Button';
 
-class BuggyButton extends Component<unknown, { error: boolean }> {
-  constructor(props: unknown) {
+class BuggyButton extends Component<object, { error: boolean }> {
+  constructor(props: object) {
     super(props);
     this.state = { error: false };
   }

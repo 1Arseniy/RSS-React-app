@@ -1,20 +1,18 @@
 import { Component } from 'react';
 import CardList from '../CardList/CardList';
 import BuggyButton from '../BuggyButton/BuggyButton';
-import type { typeCharacter } from '../../types/types';
+import type { typeProps } from '../../types/types';
 
 class Main extends Component<{
-  characterByRequest: typeCharacter[];
+  states: typeProps;
   getByRequest: (name?: string) => Promise<void>;
-  loading: boolean;
 }> {
   render() {
     return (
-      <main className="flex flex-col">
+      <main className="flex flex-col px-12">
         <CardList
-          characterByRequest={this.props.characterByRequest}
+          states={this.props.states}
           getByRequest={this.props.getByRequest}
-          loading={this.props.loading}
         />
         <div className="h-[12vh] flex justify-end">
           <BuggyButton />

@@ -6,7 +6,18 @@ body {
 
 #root {
   display: flex;
+  min-height: 100vh;
   flex-direction: column;
   background-color: var(--color-blue-950);
   font-weight: var(--font-weight-medium);
+}
+
+@media (max-width: 720px) and (min-width: 320px) {
+  h1 {
+    font-size: 25px;
+  }
+
+  main {
+    padding-inline: 28px;
+  }
 }
