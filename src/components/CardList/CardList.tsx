@@ -22,7 +22,7 @@ class CardList extends Component<{
             ) : !error ? (
               <h1>Сharacter with this name not found</h1>
             ) : (
-              <h1>Something went wrong try again</h1>
+              <h1>Server not responding, try later</h1>
             )}
           </div>
         ) : (

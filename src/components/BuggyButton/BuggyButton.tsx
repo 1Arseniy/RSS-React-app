@@ -1,11 +1,8 @@
 import { Component } from 'react';
 import Button from '../Button/Button';
 
-class BuggyButton extends Component<object, { error: boolean }> {
-  constructor(props: object) {
-    super(props);
-    this.state = { error: false };
-  }
+class BuggyButton extends Component<{ styles: string[] }, { error: boolean }> {
+  state = { error: false };
 
   Click = () => {
     this.setState({ error: true });
@@ -16,7 +13,11 @@ class BuggyButton extends Component<object, { error: boolean }> {
       throw new Error('Error bomb');
     }
 
-    return <Button onClick={this.Click}>Error</Button>;
+    return (
+      <Button styles={this.props.styles} onClick={this.Click}>
+        Error
+      </Button>
+    );
   }
 }
 

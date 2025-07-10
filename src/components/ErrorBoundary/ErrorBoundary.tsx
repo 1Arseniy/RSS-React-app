@@ -28,7 +28,7 @@ class ErrorBoundary extends Component<
       return (
         <div className="h-screen bg-red-700  flex flex-col justify-center items-center">
           <h1 className="text-3xl text-center text-white">
-            Something went wrong...
+            Something went wrong, the button below should help
           </h1>
           <Button
             styles={['bg-red-900', 'hover:bg-red-800']}

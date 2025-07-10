@@ -13,7 +13,9 @@ class App extends Component<
   getByRequest = async (name?: string) => {
     try {
       this.setState({ loading: true });
-      this.setState({ characterByRequest: await getCharaters(name) });
+      this.setState({
+        characterByRequest: await getCharaters(name),
+      });
     } catch {
       this.setState({ error: true });
     } finally {

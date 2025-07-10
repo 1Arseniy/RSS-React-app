@@ -14,9 +14,9 @@ class Main extends Component<{
           states={this.props.states}
           getByRequest={this.props.getByRequest}
         />
-        <div className="h-[12vh] flex justify-end">
-          <BuggyButton />
-        </div>
+        <BuggyButton
+          styles={['fixed right-0 bottom-0 bg-red-900 hover:bg-red-800']}
+        />
       </main>
     );
   }
