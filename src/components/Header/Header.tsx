@@ -1,7 +1,6 @@
 import { Component } from 'react';
 import Button from '../Button/Button';
 import InputSearch from '../InputSearch/InputSearch';
-
 class Header extends Component<
   { getByRequest: (name: string) => Promise<void> },
   { text: string }
@@ -14,6 +13,13 @@ class Header extends Component<
     localStorage.setItem('name', deleteSpaces);
     await this.props.getByRequest(deleteSpaces);
   };
+
+  componentDidMount(): void {
+    const name = localStorage.getItem('name');
+    if (name) {
+      this.setState({ text: name });
+    }
+  }
 
   setName = (name: string) => {
     this.setState({ text: name });
