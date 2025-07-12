@@ -5,31 +5,24 @@ class Header extends Component<
   { getByRequest: (name: string) => Promise<void> },
   { text: string }
 > {
-  state = { text: '' };
+  state = { text: localStorage.getItem('name') || '' };
 
-  getName = async () => {
+  getText = async () => {
     const deleteSpaces = this.state.text.trim();
     this.setState({ text: deleteSpaces });
     localStorage.setItem('name', deleteSpaces);
     await this.props.getByRequest(deleteSpaces);
   };
 
-  componentDidMount(): void {
-    const name = localStorage.getItem('name');
-    if (name) {
-      this.setState({ text: name });
-    }
-  }
-
-  setName = (name: string) => {
+  setText = (name: string) => {
     this.setState({ text: name });
   };
 
   render() {
     return (
       <header className="h-[12vh] flex justify-center items-center">
-        <InputSearch setName={this.setName} InputValue={this.state.text} />
-        <Button onClick={this.getName}>Search</Button>
+        <InputSearch setText={this.setText} InputValue={this.state.text} />
+        <Button onClick={this.getText}>Search</Button>
       </header>
     );
   }

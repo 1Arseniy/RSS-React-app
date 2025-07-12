@@ -27,7 +27,7 @@ class CardList extends Component<{
           </div>
         ) : (
           characterByRequest.map((character) => (
-            <Card key={crypto.randomUUID()} obj={character} />
+            <Card key={crypto.randomUUID()} character={character} />
           ))
         )}
       </div>

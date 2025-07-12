@@ -6,10 +6,7 @@ class ErrorBoundary extends Component<
   },
   { errorInfo: string }
 > {
-  constructor(props: { children: React.ReactNode }) {
-    super(props);
-    this.state = { errorInfo: '' };
-  }
+  state = { errorInfo: '' };
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
     if (errorInfo.componentStack) {
