@@ -1,19 +1,16 @@
 import { Component } from 'react';
 
 class InputSearch extends Component<{
-  setName: (name: string) => void;
+  setText: (name: string) => void;
   InputValue: string;
 }> {
-  state = { value: '' };
-
   setValue(event: React.ChangeEvent<HTMLInputElement>) {
-    this.setState({ value: event.target.value });
-    this.props.setName(event.target.value);
+    this.props.setText(event.target.value);
   }
-
   render() {
     return (
       <input
+        type="text"
         value={this.props.InputValue}
         onChange={(e) => this.setValue(e)}
         placeholder="Search by name..."
