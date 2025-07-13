@@ -7,5 +7,5 @@ export async function getCharaters(name?: string): Promise<typeCharacter[]> {
   const response = await wrapperTryCatch<typeCharacters>(url, {
     method: 'GET',
   });
-  return response.results;
+  return response.results ? response.results : [];
 }

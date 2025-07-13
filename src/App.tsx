@@ -19,7 +19,7 @@ class App extends Component<
     } catch {
       this.setState({ error: true });
     } finally {
-      this.setState({ loading: false });
+      setTimeout(() => this.setState({ loading: false }), 300);
     }
   };
 
