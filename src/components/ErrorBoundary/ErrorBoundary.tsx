@@ -4,14 +4,15 @@ class ErrorBoundary extends Component<
   {
     children: React.ReactNode;
   },
-  { errorInfo: string }
+  { hasError: boolean }
 > {
-  state = { errorInfo: '' };
+  state = { hasError: false };
+
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
-    if (errorInfo.componentStack) {
-      this.setState({ errorInfo: errorInfo.componentStack });
-    }
     console.log(error, errorInfo);
   }
 
@@ -21,7 +22,7 @@ class ErrorBoundary extends Component<
   }
 
   render() {
-    if (this.state.errorInfo) {
+    if (this.state.hasError) {
       return (
         <div className="h-screen bg-red-700  flex flex-col justify-center items-center">
           <h1 className="text-3xl text-center text-white">
