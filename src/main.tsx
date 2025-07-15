@@ -1,7 +1,9 @@
 import { createRoot } from 'react-dom/client';
-import App from './App.tsx';
+
+import App from '@/App.tsx';
+import { ErrorBoundary } from '@/components';
+
 import './styles/index.css';
-import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <ErrorBoundary>

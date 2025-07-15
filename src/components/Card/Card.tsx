@@ -1,5 +1,6 @@
 import { Component } from 'react';
-import type { typeCharacter } from '../../types/types';
+
+import type { typeCharacter } from '@/types/types';
 
 class Card extends Component<{ character?: typeCharacter }> {
   cardTemplate = {

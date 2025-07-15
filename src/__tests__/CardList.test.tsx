@@ -1,6 +1,9 @@
 import { it, expect, describe, vi, afterEach } from 'vitest';
+
 import { cleanup, render, screen } from '@testing-library/react';
-import CardList from '../components/CardList/CardList';
+
+import { CardList } from '@/components';
+
 import '@testing-library/jest-dom/vitest';
 
 describe('testing CardList', () => {

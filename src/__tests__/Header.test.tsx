@@ -1,6 +1,9 @@
 import { it, expect, describe, vi, beforeEach, afterEach } from 'vitest';
+
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
-import Header from '../components/Header/Header';
+
+import { Header } from '@/components';
+
 import '@testing-library/jest-dom/vitest';
 
 describe('testing Header', () => {

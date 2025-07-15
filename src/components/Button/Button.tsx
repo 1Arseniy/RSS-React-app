@@ -1,7 +1,9 @@
 import { Component } from 'react';
 
+import type { ReactNode } from 'react';
+
 class Button extends Component<{
-  children: React.ReactNode;
+  children: ReactNode;
   onClick?: () => void;
   styles?: string[];
 }> {

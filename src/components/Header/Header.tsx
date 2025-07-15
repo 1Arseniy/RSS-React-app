@@ -1,6 +1,7 @@
 import { Component } from 'react';
-import Button from '../Button/Button';
-import InputSearch from '../InputSearch/InputSearch';
+
+import { Button } from '@/components';
+import { InputSearch } from '@/components';
 class Header extends Component<
   { getByRequest: (name: string) => Promise<void> },
   { text: string }

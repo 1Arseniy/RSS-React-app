@@ -1,0 +1,8 @@
+export { default as Main } from '@/components/Main/Main';
+export { default as Header } from '@/components/Header/Header';
+export { default as InputSearch } from '@/components/InputSearch/InputSearch';
+export { default as ErrorBoundary } from '@/components/ErrorBoundary/ErrorBoundary';
+export { default as CardList } from '@/components/CardList/CardList';
+export { default as Card } from '@/components/Card/Card';
+export { default as Button } from '@/components/Button/Button';
+export { default as BuggyButton } from '@/components/BuggyButton/BuggyButton';

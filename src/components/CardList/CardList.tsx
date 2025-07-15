@@ -1,8 +1,10 @@
 import { Component } from 'react';
-import type { typeProps } from '../../types/types';
-import { LuLoaderCircle } from 'react-icons/lu';
-import Card from '../Card/Card';
 
+import { LuLoaderCircle } from 'react-icons/lu';
+
+import { Card } from '@/components';
+
+import type { typeProps } from '@/types/types';
 class CardList extends Component<{
   states: typeProps;
   getByRequest: (name?: string) => Promise<void>;

@@ -1,9 +1,11 @@
 import { Component } from 'react';
-import Header from './components/Header/Header';
-import Main from './components/Main/Main';
-import type { typeCharacter } from './types/types';
-import { getCharaters } from './client/getCharacters';
 
+import { Header } from '@/components';
+import { Main } from '@/components';
+
+import { getCharacters } from '@/client/getCharacters';
+
+import type { typeCharacter } from '@/types/types';
 class App extends Component<
   object,
   { characterByRequest: typeCharacter[]; loading: boolean; error: boolean }
@@ -14,7 +16,7 @@ class App extends Component<
     try {
       this.setState({ loading: true });
       this.setState({
-        characterByRequest: await getCharaters(name),
+        characterByRequest: await getCharacters(name),
       });
     } catch {
       this.setState({ error: true });

@@ -1,7 +1,9 @@
 import { Component } from 'react';
-import CardList from '../CardList/CardList';
-import BuggyButton from '../BuggyButton/BuggyButton';
-import type { typeProps } from '../../types/types';
+
+import { CardList } from '@/components';
+import { BuggyButton } from '@/components';
+
+import type { typeProps } from '@/types/types';
 
 class Main extends Component<{
   states: typeProps;

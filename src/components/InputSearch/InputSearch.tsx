@@ -1,10 +1,12 @@
 import { Component } from 'react';
 
+import type { ChangeEvent } from 'react';
+
 class InputSearch extends Component<{
   setText: (name: string) => void;
   InputValue: string;
 }> {
-  setValue(event: React.ChangeEvent<HTMLInputElement>) {
+  setValue(event: ChangeEvent<HTMLInputElement>) {
     this.props.setText(event.target.value);
   }
   render() {

@@ -1,8 +1,11 @@
-import { Component, type ErrorInfo } from 'react';
-import Button from '../Button/Button';
+import { Component } from 'react';
+
+import type { ErrorInfo, ReactNode } from 'react';
+
+import { Button } from '@/components';
 class ErrorBoundary extends Component<
   {
-    children: React.ReactNode;
+    children: ReactNode;
   },
   { hasError: boolean }
 > {
@@ -24,7 +27,10 @@ class ErrorBoundary extends Component<
   render() {
     if (this.state.hasError) {
       return (
-        <div className="h-screen bg-red-700  flex flex-col justify-center items-center">
+        <div
+          data-testid="errorFallback"
+          className="h-screen bg-red-700  flex flex-col justify-center items-center"
+        >
           <h1 className="text-3xl text-center text-white">
             Something went wrong, the button below should help
           </h1>
