@@ -1,6 +1,10 @@
-import { it, expect, describe, vi } from 'vitest';
+import { Component } from 'react';
 
-import { fireEvent, render, screen } from '@testing-library/react';
+import { it, expect, describe, vi, afterEach } from 'vitest';
+
+import { cleanup, render, screen } from '@testing-library/react';
+
+import userEvent from '@testing-library/user-event';
 
 import { ErrorBoundary } from '@/components';
 
@@ -10,15 +14,31 @@ const ComponentWithError = () => {
   throw new Error('Error');
 };
 
-const BuggyButton = () => {
-  return (
-    <button data-testid="buggyButton" onClick={() => ComponentWithError}>
-      Test
-    </button>
-  );
-};
+class BuggyButton extends Component<object, { error: boolean }> {
+  state = { error: false };
+
+  Click = () => {
+    this.setState({ error: true });
+  };
+
+  render() {
+    if (this.state.error) {
+      ComponentWithError();
+    }
+
+    return (
+      <button data-testid="buggyButton" onClick={this.Click}>
+        Test
+      </button>
+    );
+  }
+}
 
 describe('testing Error Boundary', () => {
+  afterEach(() => {
+    cleanup();
+  });
+
   it('tests error catching', () => {
     const spy = vi.spyOn(console, 'log').mockImplementation(() => {});
 
@@ -33,7 +53,7 @@ describe('testing Error Boundary', () => {
     expect(spy).toHaveBeenCalled();
   });
 
-  it('tests error button', () => {
+  it('tests error button', async () => {
     render(
       <ErrorBoundary>
         <BuggyButton />
@@ -41,7 +61,7 @@ describe('testing Error Boundary', () => {
     );
 
     const buggyButton = screen.getByTestId('buggyButton');
-    fireEvent.click(buggyButton);
+    await userEvent.click(buggyButton);
     const errorFallback = screen.getByTestId('errorFallback');
     expect(errorFallback).toBeVisible();
   });

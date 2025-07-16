@@ -12,6 +12,7 @@ class InputSearch extends Component<{
   render() {
     return (
       <input
+        data-testid="input"
         type="text"
         value={this.props.InputValue}
         onChange={(e) => this.setValue(e)}

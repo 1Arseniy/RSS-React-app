@@ -26,11 +26,9 @@ class CardList extends Component<{
                 className="text-blue-500 size-24 animate-spin"
               />
             ) : !error ? (
-              <h1 data-testid="notFound">Сharacter with this name not found</h1>
+              <h1>Сharacter with this name not found</h1>
             ) : (
-              <h1 data-testid="errorMessage">
-                Server not responding, try later
-              </h1>
+              <h1>Server not responding, try later</h1>
             )}
           </div>
         ) : (

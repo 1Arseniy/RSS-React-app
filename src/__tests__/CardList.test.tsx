@@ -47,8 +47,9 @@ describe('testing CardList', () => {
           getByRequest={mockFunc}
         />
       );
-      const message = screen.getByTestId('notFound');
-      expect(message.textContent).toBe('Сharacter with this name not found');
+      expect(
+        screen.getByText('Сharacter with this name not found')
+      ).toBeVisible();
     });
 
     it('should show loader before get data', () => {
@@ -81,8 +82,9 @@ describe('testing CardList', () => {
           getByRequest={mockFunc}
         />
       );
-      const errorMessage = screen.getByTestId('errorMessage');
-      expect(errorMessage.textContent).toBe('Server not responding, try later');
+      expect(
+        screen.getByText('Server not responding, try later')
+      ).toBeVisible();
     });
   });
 });
