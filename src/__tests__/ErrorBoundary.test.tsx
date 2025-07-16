@@ -1,5 +1,3 @@
-import { Component } from 'react';
-
 import { it, expect, describe, vi, afterEach } from 'vitest';
 
 import { cleanup, render, screen } from '@testing-library/react';
@@ -7,32 +5,13 @@ import { cleanup, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { ErrorBoundary } from '@/components';
+import { BuggyButton } from '@/components';
 
 import '@testing-library/jest-dom/vitest';
 
 const ComponentWithError = () => {
   throw new Error('Error');
 };
-
-class BuggyButton extends Component<object, { error: boolean }> {
-  state = { error: false };
-
-  Click = () => {
-    this.setState({ error: true });
-  };
-
-  render() {
-    if (this.state.error) {
-      ComponentWithError();
-    }
-
-    return (
-      <button data-testid="buggyButton" onClick={this.Click}>
-        Test
-      </button>
-    );
-  }
-}
 
 describe('testing Error Boundary', () => {
   afterEach(() => {
@@ -56,11 +35,11 @@ describe('testing Error Boundary', () => {
   it('tests error button', async () => {
     render(
       <ErrorBoundary>
-        <BuggyButton />
+        <BuggyButton styles={[]} />
       </ErrorBoundary>
     );
 
-    const buggyButton = screen.getByTestId('buggyButton');
+    const buggyButton = screen.getByRole('button');
     await userEvent.click(buggyButton);
     const errorFallback = screen.getByTestId('errorFallback');
     expect(errorFallback).toBeVisible();

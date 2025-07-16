@@ -1,19 +1,21 @@
 import { it, expect, describe, vi, beforeEach, afterEach } from 'vitest';
 
-import { cleanup, fireEvent, render, screen } from '@testing-library/react';
+import { cleanup, render, screen } from '@testing-library/react';
 
 import { Header } from '@/components';
 
 import '@testing-library/jest-dom/vitest';
 
+import userEvent from '@testing-library/user-event';
+
 describe('testing Header', () => {
   const rick = 'rick';
-  localStorage.setItem('name', rick);
   const mockFunc = vi.fn();
   let input: HTMLInputElement;
   let button: HTMLButtonElement;
 
   beforeEach(() => {
+    localStorage.setItem('name', rick);
     render(<Header getByRequest={mockFunc} />);
     input = screen.getByRole('textbox');
     button = screen.getByRole('button', { name: 'Search' });
@@ -35,45 +37,41 @@ describe('testing Header', () => {
     it('should show name from LS', () => {
       expect(input.value).toBe(rick);
     });
-
-    it('should show empty field if LS is empty', () => {
-      if (!localStorage.getItem('name')) {
-        expect(input.value).toBe('');
-      }
-    });
-  });
-
-  describe('tests user interaction ', () => {
-    // it('should updates input value when user types', () => {
-    //   fireEvent.change(input, { target: { value: rick } });
-    //   expect(input.value).toBe(rick);
-    // });
-
-    it('when click button should save name in LS', () => {
-      fireEvent.change(input, { target: { value: rick } });
-      fireEvent.click(button);
-      expect(localStorage.getItem('name')).toBe(rick);
-    });
-
-    it('should leading and trailing spaces are removed', () => {
-      fireEvent.change(input, { target: { value: rick } });
-      fireEvent.click(button);
-      expect(input.value).toBe(rick);
-    });
   });
 });
 
-// describe('tests InputSearch', () => {
-//   const onChange = vi.fn();
-//   const NumberOfCalls = 4;
-//   let input: HTMLInputElement;
-//   beforeEach(() => {
-//     render(<InputSearch setText={onChange} InputValue="" />);
-//     input = screen.getByTestId('input');
-//   });
+describe.each([
+  ['rick', 'rick'],
+  ['Alya       ', 'Alya'],
+  ['Shanks  ', 'Shanks'],
+])('tests user interaction', (value, expected) => {
+  const mockFunc = vi.fn();
+  let input: HTMLInputElement;
+  let button: HTMLButtonElement;
+  beforeEach(() => {
+    localStorage.clear();
+    render(<Header getByRequest={mockFunc} />);
+    input = screen.getByRole('textbox');
+    button = screen.getByRole('button', { name: 'Search' });
+  });
 
-//   it('should updates input value when user types', async () => {
-//     await userEvent.type(input, 'rick');
-//     expect(onChange).toHaveBeenCalledTimes(NumberOfCalls);
-//   });
-// });
+  afterEach(() => {
+    cleanup();
+  });
+
+  it('when click button should save name in LS', async () => {
+    await userEvent.type(input, value);
+    await userEvent.click(button);
+    expect(localStorage.getItem('name')).toBe(expected);
+  });
+
+  it('should leading and trailing spaces are removed', async () => {
+    await userEvent.type(input, value);
+    await userEvent.click(button);
+    expect(input.value).toBe(expected);
+  });
+
+  it('should show empty field if LS is empty', () => {
+    expect(input.value).toBe('');
+  });
+});
