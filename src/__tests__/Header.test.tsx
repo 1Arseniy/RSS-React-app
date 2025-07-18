@@ -48,6 +48,7 @@ describe.each([
   const mockFunc = vi.fn();
   let input: HTMLInputElement;
   let button: HTMLButtonElement;
+
   beforeEach(() => {
     localStorage.clear();
     render(<Header getByRequest={mockFunc} />);

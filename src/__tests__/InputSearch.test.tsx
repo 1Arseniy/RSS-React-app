@@ -1,4 +1,4 @@
-import { it, expect, describe, vi, beforeEach } from 'vitest';
+import { it, expect, describe, vi } from 'vitest';
 
 import { render, screen } from '@testing-library/react';
 
@@ -12,14 +12,10 @@ describe('tests InputSearch', () => {
   const onChange = vi.fn();
   const rick = 'rick';
   const NumberOfCalls = 4;
-  let input: HTMLInputElement;
-
-  beforeEach(() => {
-    render(<InputSearch setText={onChange} InputValue="" />);
-    input = screen.getByTestId('input');
-  });
 
   it('should updates input value when user types', async () => {
+    render(<InputSearch setText={onChange} InputValue="" />);
+    const input = screen.getByTestId('input');
     await userEvent.type(input, rick);
     expect(onChange).toHaveBeenCalledTimes(NumberOfCalls);
   });

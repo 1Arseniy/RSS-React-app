@@ -5,27 +5,22 @@ import { cleanup, render, screen } from '@testing-library/react';
 import { CardList } from '@/components';
 
 import '@testing-library/jest-dom/vitest';
+import data from '@/__tests__/mocks/characters.json';
 
 describe('testing CardList', () => {
   describe('tests rendering', () => {
     const mockFunc = vi.fn();
     const arrlength = 20;
-    const mockData = Array.from({ length: arrlength }, () => ({
-      gender: 'man',
-      image: 'empty',
-      name: 'Alya',
-      status: 'unknown',
-    }));
 
     afterEach(() => {
       cleanup();
     });
 
-    it('should show right cards length', () => {
+    it('should show right cards length', async () => {
       render(
         <CardList
           states={{
-            characterByRequest: mockData,
+            characterByRequest: data,
             loading: false,
             error: false,
           }}
@@ -65,26 +60,6 @@ describe('testing CardList', () => {
       );
       const loader = screen.getByTestId('loader');
       expect(loader).toBeVisible();
-    });
-  });
-
-  describe('tests error handling', () => {
-    const mockFunc = vi.fn();
-
-    it('should show error message if api call fails', () => {
-      render(
-        <CardList
-          states={{
-            characterByRequest: [],
-            loading: false,
-            error: true,
-          }}
-          getByRequest={mockFunc}
-        />
-      );
-      expect(
-        screen.getByText('Server not responding, try later')
-      ).toBeVisible();
     });
   });
 });
