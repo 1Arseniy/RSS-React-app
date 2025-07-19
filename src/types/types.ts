@@ -14,3 +14,10 @@ export interface typeProps {
   loading: boolean;
   error: boolean;
 }
+
+export type typeGetByRequest = (name?: string) => Promise<void>;
+
+export interface charactersRequestProps {
+  states: typeProps;
+  getByRequest: typeGetByRequest;
+}

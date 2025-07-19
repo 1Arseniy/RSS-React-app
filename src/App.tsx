@@ -1,38 +1,40 @@
-import { Component } from 'react';
+import { useState } from 'react';
 
 import { Header } from '@/components';
 import { Main } from '@/components';
 
 import { getCharacters } from '@/client/getCharacters';
 
-import type { typeCharacter } from '@/types/types';
-class App extends Component<
-  object,
-  { characterByRequest: typeCharacter[]; loading: boolean; error: boolean }
-> {
-  state = { characterByRequest: [], loading: true, error: false };
+import type { typeProps } from '@/types/types';
 
-  getByRequest = async (name?: string) => {
+function App() {
+  const [state, setState] = useState<typeProps>({
+    characterByRequest: [],
+    loading: true,
+    error: false,
+  });
+
+  const getByRequest = async (name?: string) => {
     try {
-      this.setState({ loading: true });
-      this.setState({
-        characterByRequest: await getCharacters(name),
-      });
+      setState((prev) => ({ ...prev, loading: true }));
+      const result = await getCharacters(name);
+      setState((prev) => ({
+        ...prev,
+        characterByRequest: result,
+      }));
     } catch {
-      this.setState({ error: true });
+      setState((prev) => ({ ...prev, error: true }));
     } finally {
-      setTimeout(() => this.setState({ loading: false }), 300);
+      setTimeout(() => setState((prev) => ({ ...prev, loading: false })), 300);
     }
   };
 
-  render() {
-    return (
-      <>
-        <Header getByRequest={this.getByRequest} />
-        <Main states={this.state} getByRequest={this.getByRequest} />
-      </>
-    );
-  }
+  return (
+    <>
+      <Header getByRequest={getByRequest} />
+      <Main states={state} getByRequest={getByRequest} />
+    </>
+  );
 }
 
 export default App;

@@ -1,32 +1,32 @@
-import { Component } from 'react';
+import { useState } from 'react';
 
 import { Button } from '@/components';
 import { InputSearch } from '@/components';
-class Header extends Component<
-  { getByRequest: (name: string) => Promise<void> },
-  { text: string }
-> {
-  state = { text: localStorage.getItem('name') || '' };
 
-  getText = async () => {
-    const deleteSpaces = this.state.text.trim();
-    this.setState({ text: deleteSpaces });
+import type { typeGetByRequest } from '@/types/types';
+
+function Header({ getByRequest }: { getByRequest: typeGetByRequest }) {
+  const [state, setState] = useState({
+    text: localStorage.getItem('name') || '',
+  });
+
+  const getText = async () => {
+    const deleteSpaces = state.text.trim();
+    setState({ text: deleteSpaces });
     localStorage.setItem('name', deleteSpaces);
-    await this.props.getByRequest(deleteSpaces);
+    await getByRequest(deleteSpaces);
   };
 
-  setText = (name: string) => {
-    this.setState({ text: name });
+  const setText = (name: string) => {
+    setState({ text: name });
   };
 
-  render() {
-    return (
-      <header className="h-[12vh] flex justify-center items-center">
-        <InputSearch setText={this.setText} InputValue={this.state.text} />
-        <Button onClick={this.getText}>Search</Button>
-      </header>
-    );
-  }
+  return (
+    <header className="h-[12vh] flex justify-center items-center">
+      <InputSearch setText={setText} InputValue={state.text} />
+      <Button onClick={getText}>Search</Button>
+    </header>
+  );
 }
 
 export default Header;
