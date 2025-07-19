@@ -14,7 +14,7 @@ describe('tests InputSearch', () => {
   const NumberOfCalls = 4;
 
   it('should updates input value when user types', async () => {
-    render(<InputSearch setText={onChange} InputValue="" />);
+    render(<InputSearch setText={onChange} inputValue="" />);
     const input = screen.getByTestId('input');
     await userEvent.type(input, rick);
     expect(onChange).toHaveBeenCalledTimes(NumberOfCalls);

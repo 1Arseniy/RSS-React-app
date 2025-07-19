@@ -23,7 +23,7 @@ function Header({ getByRequest }: { getByRequest: typeGetByRequest }) {
 
   return (
     <header className="h-[12vh] flex justify-center items-center">
-      <InputSearch setText={setText} InputValue={state.text} />
+      <InputSearch setText={setText} inputValue={state.text} />
       <Button onClick={getText}>Search</Button>
     </header>
   );

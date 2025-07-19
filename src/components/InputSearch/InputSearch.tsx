@@ -2,11 +2,11 @@ import type { ChangeEvent } from 'react';
 
 interface typePropsInputSearch {
   setText: (name: string) => void;
-  InputValue: string;
+  inputValue: string;
 }
 
 function InputSearch(props: typePropsInputSearch) {
-  const { setText, InputValue } = props;
+  const { setText, inputValue } = props;
 
   const setValue = (event: ChangeEvent<HTMLInputElement>) => {
     setText(event.target.value);
@@ -16,7 +16,7 @@ function InputSearch(props: typePropsInputSearch) {
     <input
       data-testid="input"
       type="text"
-      value={InputValue}
+      value={inputValue}
       onChange={(e) => setValue(e)}
       placeholder="Search by name..."
       name="search"
