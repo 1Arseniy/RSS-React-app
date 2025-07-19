@@ -11,7 +11,7 @@ class Main extends Component<{
 }> {
   render() {
     return (
-      <main className="flex flex-col px-12">
+      <main data-testid="Main" className="flex flex-col px-12">
         <CardList
           states={this.props.states}
           getByRequest={this.props.getByRequest}

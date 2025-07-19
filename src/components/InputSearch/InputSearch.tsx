@@ -4,7 +4,7 @@ import type { ChangeEvent } from 'react';
 
 class InputSearch extends Component<{
   setText: (name: string) => void;
-  InputValue: string;
+  inputValue: string;
 }> {
   setValue(event: ChangeEvent<HTMLInputElement>) {
     this.props.setText(event.target.value);
@@ -14,7 +14,7 @@ class InputSearch extends Component<{
       <input
         data-testid="input"
         type="text"
-        value={this.props.InputValue}
+        value={this.props.inputValue}
         onChange={(e) => this.setValue(e)}
         placeholder="Search by name..."
         name="search"
