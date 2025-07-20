@@ -27,8 +27,25 @@ describe('testing CardList', () => {
           getByRequest={mockFunc}
         />
       );
-      const card = screen.getByTestId('cardList');
-      expect(card.children).toHaveLength(arrlength);
+      const cards = screen.getByTestId('cardList');
+      expect(cards.children).toHaveLength(arrlength);
+    });
+
+    it('should right data', () => {
+      render(
+        <CardList
+          states={{
+            characterByRequest: data,
+            loading: false,
+            error: false,
+          }}
+          getByRequest={mockFunc}
+        />
+      );
+
+      data.forEach((el) => {
+        expect(screen.getByText(`Full name: ${el.name}`)).toBeVisible();
+      });
     });
 
     it('should show message if array is empty', () => {
