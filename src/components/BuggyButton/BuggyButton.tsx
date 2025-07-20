@@ -1,5 +1,6 @@
 import { Component } from 'react';
-import Button from '../Button/Button';
+
+import { Button } from '@/components';
 
 class BuggyButton extends Component<{ styles: string[] }, { error: boolean }> {
   state = { error: false };

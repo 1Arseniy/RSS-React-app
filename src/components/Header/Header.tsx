@@ -1,6 +1,7 @@
 import { Component } from 'react';
-import Button from '../Button/Button';
-import InputSearch from '../InputSearch/InputSearch';
+
+import { Button } from '@/components';
+import { InputSearch } from '@/components';
 class Header extends Component<
   { getByRequest: (name: string) => Promise<void> },
   { text: string }
@@ -21,7 +22,7 @@ class Header extends Component<
   render() {
     return (
       <header className="h-[12vh] flex justify-center items-center">
-        <InputSearch setText={this.setText} InputValue={this.state.text} />
+        <InputSearch setText={this.setText} inputValue={this.state.text} />
         <Button onClick={this.getText}>Search</Button>
       </header>
     );

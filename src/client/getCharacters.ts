@@ -1,7 +1,8 @@
-import type { typeCharacters, typeCharacter } from '../types/types';
-import { wrapperTryCatch } from '../utils/wrapperTryCatch';
+import type { typeCharacters, typeCharacter } from '@/types/types';
 
-export async function getCharaters(name?: string): Promise<typeCharacter[]> {
+import { wrapperTryCatch } from '@/utils/wrapperTryCatch';
+
+export async function getCharacters(name?: string): Promise<typeCharacter[]> {
   const sortByName = name ? `&name=${name}` : '';
   const url = `https://rickandmortyapi.com/api/character/?page=1${sortByName}`;
   const response = await wrapperTryCatch<typeCharacters>(url, {

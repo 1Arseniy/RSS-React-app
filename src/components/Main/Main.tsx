@@ -1,7 +1,9 @@
 import { Component } from 'react';
-import CardList from '../CardList/CardList';
-import BuggyButton from '../BuggyButton/BuggyButton';
-import type { typeProps } from '../../types/types';
+
+import { CardList } from '@/components';
+import { BuggyButton } from '@/components';
+
+import type { typeProps } from '@/types/types';
 
 class Main extends Component<{
   states: typeProps;
@@ -9,7 +11,7 @@ class Main extends Component<{
 }> {
   render() {
     return (
-      <main className="flex flex-col px-12">
+      <main data-testid="Main" className="flex flex-col px-12">
         <CardList
           states={this.props.states}
           getByRequest={this.props.getByRequest}
