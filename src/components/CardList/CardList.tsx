@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
 
+import useLocalStorage from '@/hooks/useLocalStorage';
+
 import { LuLoaderCircle } from 'react-icons/lu';
 
 import { Card } from '@/components';
@@ -8,10 +10,10 @@ import type { charactersRequestProps } from '@/types/types';
 
 function CardList(props: charactersRequestProps) {
   const { states, getByRequest } = props;
+  const [value] = useLocalStorage('name', '');
 
   useEffect(() => {
-    const name = localStorage.getItem('name');
-    getByRequest(name ? name : '');
+    getByRequest(value);
   }, []);
 
   const { loading, characterByRequest, error } = states;

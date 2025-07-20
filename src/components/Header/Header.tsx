@@ -1,19 +1,23 @@
 import { useState } from 'react';
 
+import useLocalStorage from '@/hooks/useLocalStorage';
+
 import { Button } from '@/components';
 import { InputSearch } from '@/components';
 
 import type { typeGetByRequest } from '@/types/types';
 
 function Header({ getByRequest }: { getByRequest: typeGetByRequest }) {
+  const [value, setValue] = useLocalStorage('name', '');
+
   const [state, setState] = useState({
-    text: localStorage.getItem('name') || '',
+    text: value,
   });
 
   const getText = async () => {
     const deleteSpaces = state.text.trim();
     setState({ text: deleteSpaces });
-    localStorage.setItem('name', deleteSpaces);
+    setValue(deleteSpaces);
     await getByRequest(deleteSpaces);
   };
 
