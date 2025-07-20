@@ -1,4 +1,4 @@
-import { it, expect, describe, vi, afterEach } from 'vitest';
+import { it, expect, describe, vi, afterEach, beforeEach } from 'vitest';
 
 import { cleanup, render, screen } from '@testing-library/react';
 
@@ -14,6 +14,10 @@ const ComponentWithError = () => {
 };
 
 describe('testing Error Boundary', () => {
+  beforeEach(() => {
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+  });
+
   afterEach(() => {
     cleanup();
   });
