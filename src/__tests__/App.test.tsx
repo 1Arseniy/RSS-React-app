@@ -6,6 +6,7 @@ import {
   beforeAll,
   afterAll,
   afterEach,
+  beforeEach,
 } from 'vitest';
 
 import { render, screen } from '@testing-library/react';
@@ -24,6 +25,10 @@ afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
 describe('tests App', () => {
+  beforeEach(() => {
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+  });
+
   describe('tests integration ', () => {
     it('should get data when App render', () => {
       const getCharactersSpy = vi.spyOn(getData, 'getCharacters');
