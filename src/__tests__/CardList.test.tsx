@@ -23,6 +23,7 @@ describe('testing CardList', () => {
             characterByRequest: data,
             loading: false,
             error: false,
+            page: 1,
           }}
           getByRequest={mockFunc}
         />
@@ -38,6 +39,7 @@ describe('testing CardList', () => {
             characterByRequest: data,
             loading: false,
             error: false,
+            page: 1,
           }}
           getByRequest={mockFunc}
         />
@@ -55,6 +57,7 @@ describe('testing CardList', () => {
             characterByRequest: [],
             loading: false,
             error: false,
+            page: 1,
           }}
           getByRequest={mockFunc}
         />
@@ -71,6 +74,7 @@ describe('testing CardList', () => {
             characterByRequest: [],
             loading: true,
             error: false,
+            page: 1,
           }}
           getByRequest={mockFunc}
         />

@@ -5,9 +5,16 @@ import useLocalStorage from '@/hooks/useLocalStorage';
 import { Button } from '@/components';
 import { InputSearch } from '@/components';
 
-import type { typeGetByRequest } from '@/types/types';
+import type { typeGetByRequest, typeSetUpdatePage } from '@/types/types';
 
-function Header({ getByRequest }: { getByRequest: typeGetByRequest }) {
+interface typePropsHeader {
+  getByRequest: typeGetByRequest;
+  setUpdatePage: typeSetUpdatePage;
+}
+
+function Header(props: typePropsHeader) {
+  const { getByRequest, setUpdatePage } = props;
+
   const [value, setValue] = useLocalStorage('name', '');
 
   const [state, setState] = useState({
@@ -18,6 +25,7 @@ function Header({ getByRequest }: { getByRequest: typeGetByRequest }) {
     const deleteSpaces = state.text.trim();
     setState({ text: deleteSpaces });
     setValue(deleteSpaces);
+    setUpdatePage((prev) => ({ ...prev, page: 1 }));
     await getByRequest(deleteSpaces);
   };
 

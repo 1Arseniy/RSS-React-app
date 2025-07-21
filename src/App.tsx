@@ -12,12 +12,13 @@ function App() {
     characterByRequest: [],
     loading: true,
     error: false,
+    page: 1,
   });
 
-  const getByRequest = async (name?: string) => {
+  const getByRequest = async (name?: string, page?: number) => {
     try {
       setState((prev) => ({ ...prev, loading: true }));
-      const result = await getCharacters(name);
+      const result = await getCharacters(name, page);
       setState((prev) => ({
         ...prev,
         characterByRequest: result,
@@ -31,8 +32,12 @@ function App() {
 
   return (
     <>
-      <Header getByRequest={getByRequest} />
-      <Main states={state} getByRequest={getByRequest} />
+      <Header setUpdatePage={setState} getByRequest={getByRequest} />
+      <Main
+        setUpdatePage={setState}
+        states={state}
+        getByRequest={getByRequest}
+      />
     </>
   );
 }

@@ -16,7 +16,7 @@ describe('testing Header', () => {
 
   beforeEach(() => {
     localStorage.setItem('name', rick);
-    render(<Header getByRequest={mockFunc} />);
+    render(<Header setUpdatePage={mockFunc} getByRequest={mockFunc} />);
     input = screen.getByRole('textbox');
     button = screen.getByRole('button', { name: 'Search' });
   });
@@ -51,7 +51,7 @@ describe.each([
 
   beforeEach(() => {
     localStorage.clear();
-    render(<Header getByRequest={mockFunc} />);
+    render(<Header setUpdatePage={mockFunc} getByRequest={mockFunc} />);
     input = screen.getByRole('textbox');
     button = screen.getByRole('button', { name: 'Search' });
   });
