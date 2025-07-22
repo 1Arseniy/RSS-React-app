@@ -34,7 +34,7 @@ function Header(props: typePropsHeader) {
   };
 
   return (
-    <header className="h-[12vh] flex justify-center items-center">
+    <header className="h-[10vh] flex justify-center items-center">
       <InputSearch setText={setText} inputValue={state.text} />
       <Button onClick={getText}>Search</Button>
     </header>

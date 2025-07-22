@@ -1,44 +1,22 @@
-import { useState } from 'react';
+import { HomeView, AboutView, NotFoundView } from '@/views';
 
-import { Header } from '@/components';
-import { Main } from '@/components';
+import { Menu } from './components';
 
-import { getCharacters } from '@/client/getCharacters';
-
-import type { typeProps } from '@/types/types';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 function App() {
-  const [state, setState] = useState<typeProps>({
-    characterByRequest: [],
-    loading: true,
-    error: false,
-    page: 1,
-  });
-
-  const getByRequest = async (name?: string, page?: number) => {
-    try {
-      setState((prev) => ({ ...prev, loading: true }));
-      const result = await getCharacters(name, page);
-      setState((prev) => ({
-        ...prev,
-        characterByRequest: result,
-      }));
-    } catch {
-      setState((prev) => ({ ...prev, error: true }));
-    } finally {
-      setTimeout(() => setState((prev) => ({ ...prev, loading: false })), 300);
-    }
-  };
-
   return (
-    <>
-      <Header setUpdatePage={setState} getByRequest={getByRequest} />
-      <Main
-        setUpdatePage={setState}
-        states={state}
-        getByRequest={getByRequest}
-      />
-    </>
+    <BrowserRouter>
+      <>
+        <Routes>
+          <Route path="/" element={<Menu />}>
+            <Route index element={<HomeView />}></Route>
+            <Route path="about" element={<AboutView />}></Route>
+          </Route>
+          <Route path="*" element={<NotFoundView />}></Route>
+        </Routes>
+      </>
+    </BrowserRouter>
   );
 }
 

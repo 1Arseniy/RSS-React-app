@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
 
+import { useNavigate } from 'react-router-dom';
+
 import Button from '../Button/Button';
 
 import type { charactersRequestProps } from '@/types/types';
@@ -7,6 +9,7 @@ import type { charactersRequestProps } from '@/types/types';
 function Pagination(props: charactersRequestProps) {
   const startPage = 1;
 
+  const navigate = useNavigate();
   const { getByRequest, states, setUpdatePage } = props;
   const { page } = states;
 
@@ -22,12 +25,13 @@ function Pagination(props: charactersRequestProps) {
 
   useEffect(() => {
     const item = localStorage.getItem('name') || '';
+    navigate(`?page=${page}`);
     getByRequest(item, page);
   }, [page]);
 
   return (
     !!states.characterByRequest.length && (
-      <div>
+      <div className="flex justify-center items-center">
         <Button onClick={() => togglePage()} disabled={page <= startPage}>
           Prev
         </Button>
