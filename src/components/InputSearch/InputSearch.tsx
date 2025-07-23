@@ -14,7 +14,6 @@ function InputSearch(props: typePropsInputSearch) {
 
   return (
     <input
-      data-testid="input"
       type="text"
       value={inputValue}
       onChange={(e) => setValue(e)}

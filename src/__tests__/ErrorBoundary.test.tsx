@@ -22,17 +22,17 @@ describe('testing Error Boundary', () => {
     cleanup();
   });
 
-  it('tests error catching', () => {
+  it('tests error catching', async () => {
     const spy = vi.spyOn(console, 'log').mockImplementation(() => {});
-
     render(
       <ErrorBoundary>
         <ComponentWithError />
       </ErrorBoundary>
     );
 
-    const errorFallback = screen.getByTestId('errorFallback');
-    expect(errorFallback).toBeVisible();
+    expect(
+      screen.getByText('Something went wrong, the button below should help')
+    ).toBeVisible();
     expect(spy).toHaveBeenCalled();
   });
 
@@ -43,9 +43,10 @@ describe('testing Error Boundary', () => {
       </ErrorBoundary>
     );
 
-    const buggyButton = screen.getByRole('button');
+    const buggyButton = screen.getByRole('button', { name: 'Error' });
     await userEvent.click(buggyButton);
-    const errorFallback = screen.getByTestId('errorFallback');
-    expect(errorFallback).toBeVisible();
+    expect(
+      screen.getByText('Something went wrong, the button below should help')
+    ).toBeVisible();
   });
 });

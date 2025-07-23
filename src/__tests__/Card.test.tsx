@@ -40,13 +40,10 @@ describe('testing Card', () => {
   ])('tests rendering', ({ props, expected }) => {
     it('should show card with props or without props', () => {
       render(<Card character={props} />);
-      const fullName = screen.getByTestId('full-name');
-      const gender = screen.getByTestId('gender');
-      const status = screen.getByTestId('status');
       const img = screen.getByTestId('img');
-      expect(fullName.textContent).toBe(expected.name);
-      expect(gender.textContent).toBe(expected.gender);
-      expect(status.textContent).toBe(expected.status);
+      expect(screen.getByText(expected.name)).toBeVisible();
+      expect(screen.getByText(expected.status)).toBeVisible();
+      expect(screen.getByText(expected.gender)).toBeVisible();
       expect(img).toHaveAttribute('src', expected.image);
     });
   });

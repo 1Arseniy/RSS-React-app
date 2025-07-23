@@ -21,7 +21,7 @@ function Header(props: typePropsHeader) {
     text: value,
   });
 
-  const getText = async () => {
+  const trimmedText = async () => {
     const deleteSpaces = state.text.trim();
     setState({ text: deleteSpaces });
     setValue(deleteSpaces);
@@ -36,7 +36,7 @@ function Header(props: typePropsHeader) {
   return (
     <header className="h-[10vh] flex justify-center items-center">
       <InputSearch setText={setText} inputValue={state.text} />
-      <Button onClick={getText}>Search</Button>
+      <Button onClick={trimmedText}>Search</Button>
     </header>
   );
 }

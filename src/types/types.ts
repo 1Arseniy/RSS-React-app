@@ -1,6 +1,6 @@
 import type { Dispatch } from 'react';
 
-export interface typeCharacter {
+export interface TypeCharacter {
   gender: string;
   image: string;
   name: string;
@@ -8,11 +8,11 @@ export interface typeCharacter {
 }
 
 export interface typeCharacters {
-  results: typeCharacter[];
+  results: TypeCharacter[];
 }
 
 export interface typeProps {
-  characterByRequest: typeCharacter[];
+  characterByRequest: TypeCharacter[];
   loading: boolean;
   error: boolean;
   page: number;

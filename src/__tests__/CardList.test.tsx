@@ -32,7 +32,7 @@ describe('testing CardList', () => {
       expect(cards.children).toHaveLength(arrlength);
     });
 
-    it('should right data', () => {
+    it('should display right data for user', () => {
       render(
         <CardList
           states={{
@@ -50,7 +50,7 @@ describe('testing CardList', () => {
       });
     });
 
-    it('should show message if array is empty', () => {
+    it('should show message for user if no matching results found', () => {
       render(
         <CardList
           states={{
@@ -67,7 +67,7 @@ describe('testing CardList', () => {
       ).toBeVisible();
     });
 
-    it('should show loader before get data', () => {
+    it('should show loader for user when get data', () => {
       render(
         <CardList
           states={{
