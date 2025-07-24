@@ -6,6 +6,7 @@ import { CardList } from '@/components';
 
 import '@testing-library/jest-dom/vitest';
 import data from '@/__tests__/mocks/characters.json';
+import { MemoryRouter } from 'react-router-dom';
 
 describe('testing CardList', () => {
   describe('tests rendering', () => {
@@ -18,15 +19,19 @@ describe('testing CardList', () => {
 
     it('should show right cards length', async () => {
       render(
-        <CardList
-          states={{
-            characterByRequest: data,
-            loading: false,
-            error: false,
-            page: 1,
-          }}
-          getByRequest={mockFunc}
-        />
+        <MemoryRouter>
+          <CardList
+            states={{
+              characterByRequest: data,
+              loading: false,
+              error: false,
+              page: 1,
+              isOpen: false,
+            }}
+            setState={mockFunc}
+            getByRequest={mockFunc}
+          />
+        </MemoryRouter>
       );
       const cards = screen.getByTestId('cardList');
       expect(cards.children).toHaveLength(arrlength);
@@ -34,15 +39,19 @@ describe('testing CardList', () => {
 
     it('should display right data for user', () => {
       render(
-        <CardList
-          states={{
-            characterByRequest: data,
-            loading: false,
-            error: false,
-            page: 1,
-          }}
-          getByRequest={mockFunc}
-        />
+        <MemoryRouter>
+          <CardList
+            states={{
+              characterByRequest: data,
+              loading: false,
+              error: false,
+              page: 1,
+              isOpen: false,
+            }}
+            setState={mockFunc}
+            getByRequest={mockFunc}
+          />
+        </MemoryRouter>
       );
 
       data.forEach((el) => {
@@ -52,15 +61,19 @@ describe('testing CardList', () => {
 
     it('should show message for user if no matching results found', () => {
       render(
-        <CardList
-          states={{
-            characterByRequest: [],
-            loading: false,
-            error: false,
-            page: 1,
-          }}
-          getByRequest={mockFunc}
-        />
+        <MemoryRouter>
+          <CardList
+            states={{
+              characterByRequest: [],
+              loading: false,
+              error: false,
+              page: 1,
+              isOpen: false,
+            }}
+            setState={mockFunc}
+            getByRequest={mockFunc}
+          />
+        </MemoryRouter>
       );
       expect(
         screen.getByText('Сharacter with this name not found')
@@ -69,15 +82,19 @@ describe('testing CardList', () => {
 
     it('should show loader for user when get data', () => {
       render(
-        <CardList
-          states={{
-            characterByRequest: [],
-            loading: true,
-            error: false,
-            page: 1,
-          }}
-          getByRequest={mockFunc}
-        />
+        <MemoryRouter>
+          <CardList
+            states={{
+              characterByRequest: [],
+              loading: true,
+              error: false,
+              page: 1,
+              isOpen: false,
+            }}
+            setState={mockFunc}
+            getByRequest={mockFunc}
+          />
+        </MemoryRouter>
       );
       const loader = screen.getByTestId('loader');
       expect(loader).toBeVisible();

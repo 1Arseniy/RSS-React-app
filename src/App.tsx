@@ -1,4 +1,4 @@
-import { HomeView, AboutView, NotFoundView } from '@/views';
+import { HomeView, AboutView, NotFoundView, Modal } from '@/views';
 
 import { Menu } from './components';
 
@@ -10,10 +10,12 @@ function App() {
       <>
         <Routes>
           <Route path="/" element={<Menu />}>
-            <Route index element={<HomeView />}></Route>
-            <Route path="about" element={<AboutView />}></Route>
+            <Route path="/" element={<HomeView />}>
+              <Route path="details/:id" element={<Modal />} />
+            </Route>
+            <Route path="about" element={<AboutView />} />
           </Route>
-          <Route path="*" element={<NotFoundView />}></Route>
+          <Route path="*" element={<NotFoundView />} />
         </Routes>
       </>
     </BrowserRouter>

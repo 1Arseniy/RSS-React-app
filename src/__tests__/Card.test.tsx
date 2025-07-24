@@ -6,8 +6,11 @@ import { Card } from '@/components';
 
 import '@testing-library/jest-dom/vitest';
 
+import { MemoryRouter } from 'react-router-dom';
+
 describe('testing Card', () => {
   const mockData = {
+    id: 1,
     gender: 'uncnown',
     image: 'no',
     name: 'Alya',
@@ -39,7 +42,11 @@ describe('testing Card', () => {
     },
   ])('tests rendering', ({ props, expected }) => {
     it('should show card with props or without props', () => {
-      render(<Card character={props} />);
+      render(
+        <MemoryRouter>
+          <Card character={props} />
+        </MemoryRouter>
+      );
       const img = screen.getByTestId('img');
       expect(screen.getByText(expected.name)).toBeVisible();
       expect(screen.getByText(expected.status)).toBeVisible();

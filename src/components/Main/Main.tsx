@@ -3,11 +3,11 @@ import { CardList, Pagination } from '@/components';
 import type { charactersRequestProps } from '@/types/types';
 
 function Main(props: charactersRequestProps) {
-  const { states, getByRequest, setUpdatePage } = props;
+  const { states, getByRequest, setState } = props;
   return (
     <main className="flex flex-col px-12">
       <Pagination
-        setUpdatePage={setUpdatePage}
+        setState={setState}
         states={states}
         getByRequest={getByRequest}
       />

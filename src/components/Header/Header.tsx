@@ -15,27 +15,25 @@ interface typePropsHeader {
 function Header(props: typePropsHeader) {
   const { getByRequest, setUpdatePage } = props;
 
-  const [value, setValue] = useLocalStorage('name', '');
+  const [savedValue, setSavedValue] = useLocalStorage('name', '');
 
-  const [state, setState] = useState({
-    text: value,
-  });
+  const [inputValue, setInputValue] = useState(savedValue);
 
   const trimmedText = async () => {
-    const deleteSpaces = state.text.trim();
-    setState({ text: deleteSpaces });
-    setValue(deleteSpaces);
+    const deleteSpaces = inputValue.trim();
+    setInputValue(deleteSpaces);
+    setSavedValue(deleteSpaces);
     setUpdatePage((prev) => ({ ...prev, page: 1 }));
     await getByRequest(deleteSpaces);
   };
 
   const setText = (name: string) => {
-    setState({ text: name });
+    setInputValue(name);
   };
 
   return (
     <header className="h-[10vh] flex justify-center items-center">
-      <InputSearch setText={setText} inputValue={state.text} />
+      <InputSearch setText={setText} inputValue={inputValue} />
       <Button onClick={trimmedText}>Search</Button>
     </header>
   );

@@ -8,24 +8,28 @@ import type { charactersRequestProps } from '@/types/types';
 
 function Pagination(props: charactersRequestProps) {
   const startPage = 1;
+  const searchParams = new URLSearchParams(window.location.search);
 
-  const navigate = useNavigate();
-  const { getByRequest, states, setUpdatePage } = props;
+  const { getByRequest, states, setState } = props;
   const { page } = states;
+  searchParams.set('page', `${page}`);
+  const navigate = useNavigate();
 
   const togglePage = async (isNext = false) => {
-    if (setUpdatePage) {
+    if (setState) {
       if (isNext) {
-        setUpdatePage((prev) => ({ ...prev, page: prev.page + startPage }));
+        setState((prev) => ({ ...prev, page: prev.page + startPage }));
       } else {
-        setUpdatePage((prev) => ({ ...prev, page: prev.page - startPage }));
+        setState((prev) => ({ ...prev, page: prev.page - startPage }));
       }
     }
   };
 
   useEffect(() => {
     const item = localStorage.getItem('name') || '';
-    navigate(`?page=${page}`);
+    // navigate(`?page=${searchParams}`);
+    navigate({ search: `?${searchParams}` });
+
     getByRequest(item, page);
   }, [page]);
 

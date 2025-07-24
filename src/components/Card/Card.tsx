@@ -1,17 +1,28 @@
-import type { TypeCharacter } from '@/types/types';
+import { useNavigate } from 'react-router-dom';
 
-function Card(props: { character?: TypeCharacter }) {
+import type { TypeCardProps } from '@/types/types';
+
+function Card(props: TypeCardProps) {
+  const navigate = useNavigate();
+
   const cardTemplate = {
+    id: 1,
     gender: 'empty',
     image: 'empty',
     name: 'empty',
     status: 'empty',
   };
-
   const data = props.character || cardTemplate;
 
+  const openModal = () => {
+    navigate(`details/${data.id}`);
+  };
+
   return (
-    <div className="flex flex-col bg-blue-800 w-80 h-80 m-2.5 rounded-md">
+    <div
+      onClick={openModal}
+      className="flex flex-col bg-blue-800 w-80 h-80 m-2.5 rounded-md cursor-pointer"
+    >
       <img
         className="object-cover h-52 rounded-t-md"
         src={data.image}

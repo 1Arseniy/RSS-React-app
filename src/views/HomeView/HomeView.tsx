@@ -6,12 +6,18 @@ import { getCharacters } from '@/client/getCharacters';
 
 import type { typeProps } from '@/types/types';
 
+import { Outlet } from 'react-router-dom';
+
 function HomeView() {
+  // const [searchProps] = useSearchParams();
+  // const characterId = searchProps.get('details');
+
   const [state, setState] = useState<typeProps>({
     characterByRequest: [],
     loading: true,
     error: false,
     page: 1,
+    isOpen: false,
   });
 
   const getByRequest = async (name?: string, page?: number) => {
@@ -30,12 +36,10 @@ function HomeView() {
   };
   return (
     <>
+      <Outlet />
+      {/* {characterId && <Modal characterId={characterId} />} */}
       <Header setUpdatePage={setState} getByRequest={getByRequest} />
-      <Main
-        setUpdatePage={setState}
-        states={state}
-        getByRequest={getByRequest}
-      />
+      <Main setState={setState} states={state} getByRequest={getByRequest} />
     </>
   );
 }
