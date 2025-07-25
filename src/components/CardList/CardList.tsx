@@ -34,7 +34,11 @@ function CardList(props: charactersRequestProps) {
         </div>
       ) : (
         characterByRequest.map((character) => (
-          <Card key={crypto.randomUUID()} character={character} />
+          <Card
+            key={crypto.randomUUID()}
+            states={states}
+            character={character}
+          />
         ))
       )}
     </div>

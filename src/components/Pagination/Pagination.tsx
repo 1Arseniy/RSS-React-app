@@ -1,19 +1,17 @@
 import { useEffect } from 'react';
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
-import Button from '../Button/Button';
+import { Button } from '@/components';
 
 import type { charactersRequestProps } from '@/types/types';
 
 function Pagination(props: charactersRequestProps) {
   const startPage = 1;
-  const searchParams = new URLSearchParams(window.location.search);
-
   const { getByRequest, states, setState } = props;
-  const { page } = states;
-  searchParams.set('page', `${page}`);
+  const { page, loading } = states;
   const navigate = useNavigate();
+  const params = useParams();
 
   const togglePage = async (isNext = false) => {
     if (setState) {
@@ -24,17 +22,21 @@ function Pagination(props: charactersRequestProps) {
       }
     }
   };
-
   useEffect(() => {
     const item = localStorage.getItem('name') || '';
-    // navigate(`?page=${searchParams}`);
-    navigate({ search: `?${searchParams}` });
-
+    if (params.page) {
+      if (!/^\d+$/.test(params.page)) {
+        navigate('not-found');
+        return;
+      }
+    }
+    navigate(`${page}`);
     getByRequest(item, page);
   }, [page]);
 
   return (
-    !!states.characterByRequest.length && (
+    !!states.characterByRequest.length &&
+    !loading && (
       <div className="flex justify-center items-center">
         <Button onClick={() => togglePage()} disabled={page <= startPage}>
           Prev

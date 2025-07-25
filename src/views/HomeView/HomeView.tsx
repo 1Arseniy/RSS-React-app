@@ -9,9 +9,6 @@ import type { typeProps } from '@/types/types';
 import { Outlet } from 'react-router-dom';
 
 function HomeView() {
-  // const [searchProps] = useSearchParams();
-  // const characterId = searchProps.get('details');
-
   const [state, setState] = useState<typeProps>({
     characterByRequest: [],
     loading: true,
@@ -37,7 +34,6 @@ function HomeView() {
   return (
     <>
       <Outlet />
-      {/* {characterId && <Modal characterId={characterId} />} */}
       <Header setUpdatePage={setState} getByRequest={getByRequest} />
       <Main setState={setState} states={state} getByRequest={getByRequest} />
     </>

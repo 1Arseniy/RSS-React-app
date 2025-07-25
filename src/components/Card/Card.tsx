@@ -4,6 +4,7 @@ import type { TypeCardProps } from '@/types/types';
 
 function Card(props: TypeCardProps) {
   const navigate = useNavigate();
+  const { character, states } = props;
 
   const cardTemplate = {
     id: 1,
@@ -12,10 +13,10 @@ function Card(props: TypeCardProps) {
     name: 'empty',
     status: 'empty',
   };
-  const data = props.character || cardTemplate;
+  const data = character || cardTemplate;
 
   const openModal = () => {
-    navigate(`details/${data.id}`);
+    navigate(`${states.page}/${data.id}`);
   };
 
   return (

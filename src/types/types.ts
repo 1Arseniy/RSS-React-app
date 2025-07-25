@@ -38,4 +38,5 @@ export interface typeModalStates {
 
 export interface TypeCardProps {
   character?: TypeCharacter;
+  states: typeProps;
 }

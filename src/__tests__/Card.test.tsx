@@ -44,14 +44,22 @@ describe('testing Card', () => {
     it('should show card with props or without props', () => {
       render(
         <MemoryRouter>
-          <Card character={props} />
+          <Card
+            states={{
+              characterByRequest: [],
+              loading: false,
+              error: false,
+              page: 1,
+              isOpen: false,
+            }}
+            character={props}
+          />
         </MemoryRouter>
       );
-      const img = screen.getByTestId('img');
       expect(screen.getByText(expected.name)).toBeVisible();
       expect(screen.getByText(expected.status)).toBeVisible();
       expect(screen.getByText(expected.gender)).toBeVisible();
-      expect(img).toHaveAttribute('src', expected.image);
+      expect(screen.getByRole('img')).toHaveAttribute('src', expected.image);
     });
   });
 });

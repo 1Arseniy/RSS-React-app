@@ -1,12 +1,23 @@
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+
 import { LuLoaderCircle } from 'react-icons/lu';
 
 import { Button } from '@/components';
 
-import type { typeModalStates } from '@/types/types';
-import { useNavigate } from 'react-router-dom';
+import type { typeModalStates, typeGetByRequest } from '@/types/types';
 
-function ModalContent({ modalStates }: { modalStates: typeModalStates }) {
-  const { loading, character } = modalStates;
+interface typeModalContent {
+  getCharacter: typeGetByRequest;
+  modalStates: typeModalStates;
+}
+
+function ModalContent(props: typeModalContent) {
+  const { loading, character } = props.modalStates;
+
+  useEffect(() => {
+    props.getCharacter();
+  }, [character.id]);
 
   const navigate = useNavigate();
 
