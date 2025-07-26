@@ -17,7 +17,6 @@ export interface typeProps {
   loading: boolean;
   error: boolean;
   page: number;
-  isOpen: boolean;
 }
 
 export type typeGetByRequest = (name?: string, page?: number) => Promise<void>;
@@ -33,7 +32,6 @@ export interface charactersRequestProps {
 export interface typeModalStates {
   character: Partial<TypeCharacter>;
   loading: boolean;
-  isOpen: boolean;
 }
 
 export interface TypeCardProps {

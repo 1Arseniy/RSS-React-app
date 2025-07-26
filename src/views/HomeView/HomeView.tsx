@@ -14,7 +14,6 @@ function HomeView() {
     loading: true,
     error: false,
     page: 1,
-    isOpen: false,
   });
 
   const getByRequest = async (name?: string, page?: number) => {
@@ -31,6 +30,7 @@ function HomeView() {
       setTimeout(() => setState((prev) => ({ ...prev, loading: false })), 300);
     }
   };
+
   return (
     <>
       <Outlet />

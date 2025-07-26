@@ -16,11 +16,12 @@ function Card(props: TypeCardProps) {
   const data = character || cardTemplate;
 
   const openModal = () => {
-    navigate(`${states.page}/${data.id}`);
+    navigate(`details/${data.id}?page=${states.page}`);
   };
 
   return (
     <div
+      data-testid="openModal"
       onClick={openModal}
       className="flex flex-col bg-blue-800 w-80 h-80 m-2.5 rounded-md cursor-pointer"
     >

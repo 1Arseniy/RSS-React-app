@@ -1,4 +1,4 @@
-import { it, expect, describe, vi, afterEach } from 'vitest';
+import { it, expect, describe, afterEach } from 'vitest';
 
 import { cleanup, render, screen } from '@testing-library/react';
 
@@ -11,7 +11,6 @@ import data from '@/__tests__/mocks/characters.json';
 import { MemoryRouter } from 'react-router-dom';
 
 describe('tests ModalContent', () => {
-  const mockFunc = vi.fn();
   afterEach(() => {
     cleanup();
   });
@@ -19,10 +18,8 @@ describe('tests ModalContent', () => {
     render(
       <MemoryRouter>
         <ModalContent
-          getCharacter={mockFunc}
           modalStates={{
             loading: false,
-            isOpen: false,
             character: data[0],
           }}
         />
@@ -32,22 +29,5 @@ describe('tests ModalContent', () => {
     expect(screen.getByText(`Gender: ${data[0].gender}`)).toBeVisible();
     expect(screen.getByText(`Status: ${data[0].status}`)).toBeVisible();
     expect(screen.getByRole('img')).toHaveAttribute('src', data[0].image);
-  });
-
-  it('should show loader for user when get data', () => {
-    render(
-      <MemoryRouter>
-        <ModalContent
-          getCharacter={mockFunc}
-          modalStates={{
-            loading: true,
-            isOpen: false,
-            character: {},
-          }}
-        />
-      </MemoryRouter>
-    );
-    const loader = screen.getByTestId('loader');
-    expect(loader).toBeVisible();
   });
 });

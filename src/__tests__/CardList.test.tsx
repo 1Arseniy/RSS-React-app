@@ -26,7 +26,6 @@ describe('testing CardList', () => {
               loading: false,
               error: false,
               page: 1,
-              isOpen: false,
             }}
             setState={mockFunc}
             getByRequest={mockFunc}
@@ -46,7 +45,6 @@ describe('testing CardList', () => {
               loading: false,
               error: false,
               page: 1,
-              isOpen: false,
             }}
             setState={mockFunc}
             getByRequest={mockFunc}
@@ -68,7 +66,6 @@ describe('testing CardList', () => {
               loading: false,
               error: false,
               page: 1,
-              isOpen: false,
             }}
             setState={mockFunc}
             getByRequest={mockFunc}
@@ -89,7 +86,6 @@ describe('testing CardList', () => {
               loading: true,
               error: false,
               page: 1,
-              isOpen: false,
             }}
             setState={mockFunc}
             getByRequest={mockFunc}

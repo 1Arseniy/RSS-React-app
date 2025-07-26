@@ -24,7 +24,6 @@ describe('tests Pagination', () => {
             loading: false,
             error: false,
             page: 2,
-            isOpen: false,
           }}
           getByRequest={mockFunc}
           setState={mockFunc}

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { useNavigate, useParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 
 import { Button } from '@/components';
 
@@ -10,8 +10,7 @@ function Pagination(props: charactersRequestProps) {
   const startPage = 1;
   const { getByRequest, states, setState } = props;
   const { page, loading } = states;
-  const navigate = useNavigate();
-  const params = useParams();
+  const [param, setParam] = useSearchParams();
 
   const togglePage = async (isNext = false) => {
     if (setState) {
@@ -22,16 +21,20 @@ function Pagination(props: charactersRequestProps) {
       }
     }
   };
+
   useEffect(() => {
-    const item = localStorage.getItem('name') || '';
-    if (params.page) {
-      if (!/^\d+$/.test(params.page)) {
-        navigate('not-found');
-        return;
-      }
+    const currentPage = param.get('page') || 1;
+    const revertToNumber = Number(currentPage);
+    if (setState && revertToNumber) {
+      setState((prev) => ({ ...prev, page: revertToNumber }));
     }
-    navigate(`${page}`);
-    getByRequest(item, page);
+  }, []);
+
+  useEffect(() => {
+    setParam(`page=${page}`);
+
+    const item = localStorage.getItem('name') || '';
+    getByRequest(item, Number(page));
   }, [page]);
 
   return (

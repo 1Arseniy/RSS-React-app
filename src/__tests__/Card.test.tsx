@@ -50,7 +50,6 @@ describe('testing Card', () => {
               loading: false,
               error: false,
               page: 1,
-              isOpen: false,
             }}
             character={props}
           />
@@ -60,6 +59,7 @@ describe('testing Card', () => {
       expect(screen.getByText(expected.status)).toBeVisible();
       expect(screen.getByText(expected.gender)).toBeVisible();
       expect(screen.getByRole('img')).toHaveAttribute('src', expected.image);
+      screen.debug();
     });
   });
 });

@@ -11,11 +11,11 @@ function App() {
         <Routes>
           <Route path="/" element={<Menu />}>
             <Route path="/" element={<HomeView />}>
-              <Route path=":page/:id?" element={<Modal />} />
+              <Route path="details/:id" element={<Modal />} />
             </Route>
             <Route path="about" element={<AboutView />} />
           </Route>
-          <Route path="not-found" element={<NotFoundView />} />
+          <Route path="*" element={<NotFoundView />} />
         </Routes>
       </>
     </BrowserRouter>
