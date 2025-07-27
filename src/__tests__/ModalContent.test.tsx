@@ -1,6 +1,6 @@
-import { it, expect, describe, afterEach } from 'vitest';
+import { it, expect, describe } from 'vitest';
 
-import { cleanup, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 import { ModalContent } from '@/views';
 
@@ -11,9 +11,6 @@ import data from '@/__tests__/mocks/characters.json';
 import { MemoryRouter } from 'react-router-dom';
 
 describe('tests ModalContent', () => {
-  afterEach(() => {
-    cleanup();
-  });
   it('should display right data for user', () => {
     render(
       <MemoryRouter>

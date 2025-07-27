@@ -1,6 +1,6 @@
-import { it, expect, describe, afterEach } from 'vitest';
+import { it, expect, describe } from 'vitest';
 
-import { cleanup, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 import { Card } from '@/components';
 
@@ -16,10 +16,6 @@ describe('testing Card', () => {
     name: 'Alya',
     status: 'Alive',
   };
-
-  afterEach(() => {
-    cleanup();
-  });
 
   describe.each([
     {
@@ -59,7 +55,6 @@ describe('testing Card', () => {
       expect(screen.getByText(expected.status)).toBeVisible();
       expect(screen.getByText(expected.gender)).toBeVisible();
       expect(screen.getByRole('img')).toHaveAttribute('src', expected.image);
-      screen.debug();
     });
   });
 });

@@ -1,6 +1,6 @@
-import { it, expect, describe, vi, beforeEach, afterEach } from 'vitest';
+import { it, expect, describe, vi, beforeEach } from 'vitest';
 
-import { cleanup, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 import { Header } from '@/components';
 
@@ -19,10 +19,6 @@ describe('testing Header', () => {
     render(<Header setUpdatePage={mockFunc} getByRequest={mockFunc} />);
     input = screen.getByRole('textbox');
     button = screen.getByRole('button', { name: 'Search' });
-  });
-
-  afterEach(() => {
-    cleanup();
   });
 
   describe('tests rendering', () => {
@@ -54,10 +50,6 @@ describe.each([
     render(<Header setUpdatePage={mockFunc} getByRequest={mockFunc} />);
     input = screen.getByRole('textbox');
     button = screen.getByRole('button', { name: 'Search' });
-  });
-
-  afterEach(() => {
-    cleanup();
   });
 
   it('when click button should save name in LS', async () => {

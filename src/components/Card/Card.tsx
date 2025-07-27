@@ -21,7 +21,6 @@ function Card(props: TypeCardProps) {
 
   return (
     <div
-      data-testid="openModal"
       onClick={openModal}
       className="flex flex-col bg-blue-800 w-80 h-80 m-2.5 rounded-md cursor-pointer"
     >
@@ -29,7 +28,6 @@ function Card(props: TypeCardProps) {
         className="object-cover h-52 rounded-t-md"
         src={data.image}
         alt="rick&morty"
-        data-testid="img"
       ></img>
       <div className="flex flex-col h-full justify-center p-2.5 text-white">
         <span>Full name: {data.name}</span>

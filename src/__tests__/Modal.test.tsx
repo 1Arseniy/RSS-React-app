@@ -17,5 +17,6 @@ describe('tests Modal', () => {
     );
     const loader = screen.getByTestId('loader');
     expect(loader).toBeVisible();
+    expect(screen.getByRole('button', { name: 'Close' }));
   });
 });

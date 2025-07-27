@@ -1,6 +1,6 @@
-import { it, expect, describe, vi, afterEach, beforeEach } from 'vitest';
+import { it, expect, describe, vi, beforeEach } from 'vitest';
 
-import { cleanup, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 import { Pagination } from '@/components';
 
@@ -32,10 +32,6 @@ describe('tests Pagination', () => {
     );
     prevButton = screen.getByRole('button', { name: 'Prev' });
     nextButton = screen.getByRole('button', { name: 'Next' });
-  });
-
-  afterEach(() => {
-    cleanup();
   });
 
   it('should show user buttons: prev, next and curent page', () => {

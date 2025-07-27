@@ -23,6 +23,7 @@ export default defineConfig({
         'src/main.tsx',
       ],
     },
+    setupFiles: ['src/__tests__/tests.ts'],
   },
   resolve: {
     alias: {
