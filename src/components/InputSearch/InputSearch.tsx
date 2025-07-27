@@ -1,27 +1,27 @@
-import { Component } from 'react';
-
 import type { ChangeEvent } from 'react';
 
-class InputSearch extends Component<{
+interface typePropsInputSearch {
   setText: (name: string) => void;
   inputValue: string;
-}> {
-  setValue(event: ChangeEvent<HTMLInputElement>) {
-    this.props.setText(event.target.value);
-  }
-  render() {
-    return (
-      <input
-        data-testid="input"
-        type="text"
-        value={this.props.inputValue}
-        onChange={(e) => this.setValue(e)}
-        placeholder="Search by name..."
-        name="search"
-        className="h-9 bg-white rounded-sm pl-2 focus-within:outline-2 focus-within:outline-blue-700"
-      />
-    );
-  }
+}
+
+function InputSearch(props: typePropsInputSearch) {
+  const { setText, inputValue } = props;
+
+  const setValue = (event: ChangeEvent<HTMLInputElement>) => {
+    setText(event.target.value);
+  };
+
+  return (
+    <input
+      type="text"
+      value={inputValue}
+      onChange={(e) => setValue(e)}
+      placeholder="Search by name..."
+      name="search"
+      className="h-9 bg-white rounded-sm pl-2 focus-within:outline-2 focus-within:outline-blue-700"
+    />
+  );
 }
 
 export default InputSearch;

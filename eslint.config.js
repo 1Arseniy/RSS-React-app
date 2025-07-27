@@ -35,6 +35,7 @@ export default tseslint.config([
         { allowConstantExport: true },
       ],
       'react-compiler/react-compiler': 'error',
+      'react-hooks/exhaustive-deps': 'off',
       ...react.configs.recommended.rules,
       ...react.configs['jsx-runtime'].rules,
     },

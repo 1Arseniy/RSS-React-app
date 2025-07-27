@@ -1,32 +1,42 @@
-import { Component } from 'react';
+import { useState } from 'react';
+
+import useLocalStorage from '@/hooks/useLocalStorage';
 
 import { Button } from '@/components';
 import { InputSearch } from '@/components';
-class Header extends Component<
-  { getByRequest: (name: string) => Promise<void> },
-  { text: string }
-> {
-  state = { text: localStorage.getItem('name') || '' };
 
-  getText = async () => {
-    const deleteSpaces = this.state.text.trim();
-    this.setState({ text: deleteSpaces });
-    localStorage.setItem('name', deleteSpaces);
-    await this.props.getByRequest(deleteSpaces);
+import type { typeGetByRequest, typeSetUpdatePage } from '@/types/types';
+
+interface typePropsHeader {
+  getByRequest: typeGetByRequest;
+  setUpdatePage: typeSetUpdatePage;
+}
+
+function Header(props: typePropsHeader) {
+  const { getByRequest, setUpdatePage } = props;
+
+  const [savedValue, setSavedValue] = useLocalStorage('name', '');
+
+  const [inputValue, setInputValue] = useState(savedValue);
+
+  const trimmedText = async () => {
+    const deleteSpaces = inputValue.trim();
+    setInputValue(deleteSpaces);
+    setSavedValue(deleteSpaces);
+    setUpdatePage((prev) => ({ ...prev, page: 1 }));
+    await getByRequest(deleteSpaces);
   };
 
-  setText = (name: string) => {
-    this.setState({ text: name });
+  const setText = (name: string) => {
+    setInputValue(name);
   };
 
-  render() {
-    return (
-      <header className="h-[12vh] flex justify-center items-center">
-        <InputSearch setText={this.setText} inputValue={this.state.text} />
-        <Button onClick={this.getText}>Search</Button>
-      </header>
-    );
-  }
+  return (
+    <header className="h-[10vh] flex justify-center items-center">
+      <InputSearch setText={setText} inputValue={inputValue} />
+      <Button onClick={trimmedText}>Search</Button>
+    </header>
+  );
 }
 
 export default Header;

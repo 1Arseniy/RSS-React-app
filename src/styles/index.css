@@ -12,6 +12,10 @@ body {
   font-weight: var(--font-weight-medium);
 }
 
+.active {
+  background-color: var(--color-blue-900);
+}
+
 @media (max-width: 720px) and (min-width: 320px) {
   h1 {
     font-size: 25px;

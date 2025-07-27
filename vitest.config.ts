@@ -20,8 +20,10 @@ export default defineConfig({
         'src/**/*.d.ts',
         '**/node_modules/**',
         '**/dist/**',
+        'src/main.tsx',
       ],
     },
+    setupFiles: ['src/__tests__/tests.ts'],
   },
   resolve: {
     alias: {

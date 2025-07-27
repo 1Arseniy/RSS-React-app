@@ -15,7 +15,7 @@ describe('tests InputSearch', () => {
 
   it('should updates input value when user types', async () => {
     render(<InputSearch setText={onChange} inputValue="" />);
-    const input = screen.getByTestId('input');
+    const input = screen.getByPlaceholderText('Search by name...');
     await userEvent.type(input, rick);
     expect(onChange).toHaveBeenCalledTimes(NumberOfCalls);
   });

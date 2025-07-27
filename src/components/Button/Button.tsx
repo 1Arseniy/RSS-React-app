@@ -1,24 +1,23 @@
-import { Component } from 'react';
-
 import type { ReactNode } from 'react';
-
-class Button extends Component<{
+interface typePropsButton {
   children: ReactNode;
   onClick?: () => void;
   styles?: string[];
-}> {
-  render() {
-    const { children, onClick, styles } = this.props;
+  disabled?: boolean;
+}
 
-    return (
-      <button
-        onClick={onClick}
-        className={`bg-blue-800 text-white px-7 rounded-sm py-2 cursor-pointer hover:bg-blue-700 m-5 ${styles ? styles.join(' ') : ''}`}
-      >
-        {children}
-      </button>
-    );
-  }
+function Button(props: typePropsButton) {
+  const { children, onClick, styles, disabled } = props;
+
+  return (
+    <button
+      disabled={disabled}
+      onClick={onClick}
+      className={`bg-blue-800 text-white px-7 rounded-sm py-2 cursor-pointer hover:bg-blue-700 m-5 disabled:bg-blue-900 disabled:cursor-default  ${styles ? styles.join(' ') : ''}`}
+    >
+      {children}
+    </button>
+  );
 }
 
 export default Button;

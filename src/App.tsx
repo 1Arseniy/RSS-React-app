@@ -1,38 +1,25 @@
-import { Component } from 'react';
+import { HomeView, AboutView, NotFoundView, Modal } from '@/views';
 
-import { Header } from '@/components';
-import { Main } from '@/components';
+import { Menu } from './components';
 
-import { getCharacters } from '@/client/getCharacters';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import type { typeCharacter } from '@/types/types';
-class App extends Component<
-  object,
-  { characterByRequest: typeCharacter[]; loading: boolean; error: boolean }
-> {
-  state = { characterByRequest: [], loading: true, error: false };
-
-  getByRequest = async (name?: string) => {
-    try {
-      this.setState({ loading: true });
-      this.setState({
-        characterByRequest: await getCharacters(name),
-      });
-    } catch {
-      this.setState({ error: true });
-    } finally {
-      setTimeout(() => this.setState({ loading: false }), 300);
-    }
-  };
-
-  render() {
-    return (
+function App() {
+  return (
+    <BrowserRouter>
       <>
-        <Header getByRequest={this.getByRequest} />
-        <Main states={this.state} getByRequest={this.getByRequest} />
+        <Routes>
+          <Route path="/" element={<Menu />}>
+            <Route path="/" element={<HomeView />}>
+              <Route path="details/:id" element={<Modal />} />
+            </Route>
+            <Route path="about" element={<AboutView />} />
+          </Route>
+          <Route path="*" element={<NotFoundView />} />
+        </Routes>
       </>
-    );
-  }
+    </BrowserRouter>
+  );
 }
 
 export default App;

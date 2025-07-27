@@ -19,18 +19,14 @@ class ErrorBoundary extends Component<
     console.log(error, errorInfo);
   }
 
-  refreshPage() {
-    const startPage = 0;
-    history.go(startPage);
-  }
+  refreshPage = () => {
+    this.setState({ hasError: false });
+  };
 
   render() {
     if (this.state.hasError) {
       return (
-        <div
-          data-testid="errorFallback"
-          className="h-screen bg-red-700  flex flex-col justify-center items-center"
-        >
+        <div className="h-screen bg-red-700  flex flex-col justify-center items-center">
           <h1 className="text-3xl text-center text-white">
             Something went wrong, the button below should help
           </h1>

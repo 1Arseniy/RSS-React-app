@@ -1,22 +1,21 @@
-import { it, expect, describe, afterEach } from 'vitest';
+import { it, expect, describe } from 'vitest';
 
-import { cleanup, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 import { Card } from '@/components';
 
 import '@testing-library/jest-dom/vitest';
 
+import { MemoryRouter } from 'react-router-dom';
+
 describe('testing Card', () => {
   const mockData = {
+    id: 1,
     gender: 'uncnown',
     image: 'no',
     name: 'Alya',
     status: 'Alive',
   };
-
-  afterEach(() => {
-    cleanup();
-  });
 
   describe.each([
     {
@@ -39,15 +38,23 @@ describe('testing Card', () => {
     },
   ])('tests rendering', ({ props, expected }) => {
     it('should show card with props or without props', () => {
-      render(<Card character={props} />);
-      const fullName = screen.getByTestId('full-name');
-      const gender = screen.getByTestId('gender');
-      const status = screen.getByTestId('status');
-      const img = screen.getByTestId('img');
-      expect(fullName.textContent).toBe(expected.name);
-      expect(gender.textContent).toBe(expected.gender);
-      expect(status.textContent).toBe(expected.status);
-      expect(img).toHaveAttribute('src', expected.image);
+      render(
+        <MemoryRouter>
+          <Card
+            states={{
+              characterByRequest: [],
+              loading: false,
+              error: false,
+              page: 1,
+            }}
+            character={props}
+          />
+        </MemoryRouter>
+      );
+      expect(screen.getByText(expected.name)).toBeVisible();
+      expect(screen.getByText(expected.status)).toBeVisible();
+      expect(screen.getByText(expected.gender)).toBeVisible();
+      expect(screen.getByRole('img')).toHaveAttribute('src', expected.image);
     });
   });
 });
