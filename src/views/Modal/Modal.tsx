@@ -11,27 +11,26 @@ import type { typeModalStates } from '@/types/types';
 function Modal() {
   const { id } = useParams();
 
-  console.log(id);
-
   const [states, setState] = useState<typeModalStates>({
     character: {},
     loading: true,
   });
 
-  const getCharacter = async () => {
-    try {
-      if (id) {
-        setState((prev) => ({ ...prev, loading: true }));
-        const result = await getCharacterById(id);
-        setState((prev) => ({ ...prev, character: result }));
-      }
-    } finally {
-      setTimeout(() => setState((prev) => ({ ...prev, loading: false })), 300);
-    }
-  };
-
   useEffect(() => {
-    getCharacter();
+    (async () => {
+      try {
+        if (id) {
+          setState((prev) => ({ ...prev, loading: true }));
+          const result = await getCharacterById(id);
+          setState((prev) => ({ ...prev, character: result }));
+        }
+      } finally {
+        setTimeout(
+          () => setState((prev) => ({ ...prev, loading: false })),
+          300
+        );
+      }
+    })();
   }, [id]);
 
   return id && <ModalContent modalStates={states} />;
