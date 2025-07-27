@@ -11,6 +11,8 @@ import type { typeModalStates } from '@/types/types';
 function Modal() {
   const { id } = useParams();
 
+  console.log(id);
+
   const [states, setState] = useState<typeModalStates>({
     character: {},
     loading: true,
@@ -32,7 +34,7 @@ function Modal() {
     getCharacter();
   }, [id]);
 
-  return <ModalContent modalStates={states} />;
+  return id && <ModalContent modalStates={states} />;
 }
 
 export default Modal;
