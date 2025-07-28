@@ -20,11 +20,11 @@ function CardList(props: charactersRequestProps) {
   return (
     <div className={`flex flex-wrap justify-center`} data-testid="cardList">
       {loading || !characterByRequest.length || error ? (
-        <div className="flex items-center h-[76vh] text-3xl text-center text-white">
+        <div className={`flex items-center h-[76vh] text-3xl text-center`}>
           {loading ? (
             <LuLoaderCircle
               data-testid="loader"
-              className="text-blue-500 size-24 animate-spin"
+              className="size-24 animate-spin"
             />
           ) : !error ? (
             <h1>Сharacter with this name not found</h1>
