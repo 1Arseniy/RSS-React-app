@@ -22,21 +22,16 @@ const characterSlice = createSlice({
       );
     },
 
-    toggleCardSelected(state, action) {
-      console.log(state);
-      console.log(action);
+    clearAllItems(state) {
+      state.results = [];
     },
-
-    // getResultsLength(state) {
-    //   return state.results.length
-    // }
   },
 });
 
 export const {
-  toggleCardSelected,
   addToSelectedCharacters,
   removeFromSelectedCharacters,
+  clearAllItems,
 } = characterSlice.actions;
 
 export default characterSlice.reducer;

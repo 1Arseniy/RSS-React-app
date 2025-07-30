@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-import { useAppDispatch } from '@/hooks/useStore';
+import { useAppDispatch, useAppSelector } from '@/hooks/useStore';
 
 import {
   addToSelectedCharacters,
@@ -10,34 +10,34 @@ import {
 import type { TypeCardProps } from '@/types/types';
 
 import useTheme from '@/hooks/useTheme';
-import { useState } from 'react';
 
 function Card(props: TypeCardProps) {
   const navigate = useNavigate();
-  const [selected, setSelected] = useState(true);
   const { darkTheme } = useTheme();
   const { character, states } = props;
   const disapatch = useAppDispatch();
 
-  const cardTemplate = {
-    id: 1,
-    gender: 'empty',
-    image: 'empty',
-    name: 'empty',
-    status: 'empty',
-  };
-  const data = character || cardTemplate;
+  const checked = useAppSelector((state) => {
+    if (character) {
+      return state.selectedCharacters.results.some(
+        (item) => item.id === character.id
+      );
+    }
+  });
 
   const openModal = () => {
-    navigate(`details/${data.id}?page=${states.page}`);
+    if (character) {
+      navigate(`details/${character.id}?page=${states.page}`);
+    }
   };
 
   const toggleCard = () => {
-    setSelected((prev) => !prev);
-    if (selected) {
-      disapatch(addToSelectedCharacters(data));
-    } else {
-      disapatch(removeFromSelectedCharacters(data.id));
+    if (character) {
+      if (checked) {
+        disapatch(removeFromSelectedCharacters(character.id));
+      } else {
+        disapatch(addToSelectedCharacters(character));
+      }
     }
   };
 
@@ -48,20 +48,21 @@ function Card(props: TypeCardProps) {
       <img
         onClick={openModal}
         className="object-cover h-52 rounded-t-md cursor-pointer"
-        src={data.image}
+        src={character ? character.image : 'empty'}
         alt="rick&morty"
       ></img>
       <div className="flex">
         <div className="grow-[3] flex flex-col h-full justify-center p-2.5">
-          <span>Full name: {data.name}</span>
-          <span>Gender: {data.gender}</span>
-          <span>Status: {data.status}</span>
+          <span>Full name: {character ? character.name : 'empty'}</span>
+          <span>Gender: {character ? character.gender : 'empty'}</span>
+          <span>Status: {character ? character.status : 'empty'}</span>
         </div>
         <form className="flex grow-[2]">
           <input
-            onClick={toggleCard}
+            onChange={toggleCard}
             type="checkbox"
             className="w-5 accent-blue-700"
+            checked={checked}
           />
         </form>
       </div>

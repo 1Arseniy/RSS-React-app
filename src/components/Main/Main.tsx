@@ -1,4 +1,4 @@
-import { CardList, Pagination } from '@/components';
+import { CardList, Pagination, Flyout } from '@/components';
 
 import type { charactersRequestProps } from '@/types/types';
 
@@ -12,6 +12,7 @@ function Main(props: charactersRequestProps) {
         getByRequest={getByRequest}
       />
       <CardList states={states} getByRequest={getByRequest} />
+      <Flyout />
     </main>
   );
 }
