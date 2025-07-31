@@ -11,12 +11,12 @@ import type { charactersRequestProps } from '@/types/types';
 function CardList(props: charactersRequestProps) {
   const { states, getByRequest } = props;
   const [value] = useLocalStorage('name', '');
+  const { loading, characterByRequest, error } = states;
 
   useEffect(() => {
     getByRequest(value);
   }, []);
 
-  const { loading, characterByRequest, error } = states;
   return (
     <div className={`flex flex-wrap justify-center`} data-testid="cardList">
       {loading || !characterByRequest.length || error ? (

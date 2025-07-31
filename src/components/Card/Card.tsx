@@ -1,15 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 
-import { useAppDispatch, useAppSelector } from '@/hooks/useStore';
-
 import {
   addToSelectedCharacters,
   removeFromSelectedCharacters,
 } from '@/store/characterSlice';
 
-import type { TypeCardProps } from '@/types/types';
-
-import useTheme from '@/hooks/useTheme';
+import { useAppDispatch, useAppSelector } from '@/store';
 
 function Card(props: TypeCardProps) {
   const navigate = useNavigate();
@@ -69,5 +65,8 @@ function Card(props: TypeCardProps) {
     </div>
   );
 }
+import type { TypeCardProps } from '@/types/types';
+
+import useTheme from '@/hooks/useTheme';
 
 export default Card;

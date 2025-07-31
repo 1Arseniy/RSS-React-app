@@ -38,3 +38,7 @@ export interface TypeCardProps {
   character?: TypeCharacter;
   states: typeProps;
 }
+
+// interface Window  {
+//   showSaveFilePicker: (options?: SaveFilePickerOptions) => Promise<FileSystemFileHandle>
+// }
