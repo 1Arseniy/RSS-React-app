@@ -18,7 +18,7 @@ function Flyout() {
   return (
     !!selectedCards.length && (
       <div
-        className={`${darkTheme ? 'bg-blue-900' : 'bg-blue-600'} flex justify-center items-center rounded-t-2xl`}
+        className={`${darkTheme ? 'bg-blue-900' : 'bg-blue-600'} flex justify-center items-center rounded-t-2xl flyout`}
       >
         <span className="text-2xl">selected {selectedCards.length} items</span>
         <Button onClick={() => dispatch(clearAllItems())}>Unselect all</Button>

@@ -11,6 +11,7 @@ import data from '@/__tests__/mocks/characters.json';
 import { MemoryRouter } from 'react-router-dom';
 
 import { Provider } from 'react-redux';
+
 import store from '@/store';
 
 describe('testing CardList', () => {

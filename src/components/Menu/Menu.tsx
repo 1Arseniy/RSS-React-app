@@ -41,7 +41,7 @@ function Menu() {
             <IoMoon className="h-8 w-8 cursor-pointer" onClick={toggleTheme} />
           ) : (
             <MdWbSunny
-              className="h-8 w-8 cursor-pointer"
+              className="h-8 w-8 cursor-pointer text-blue-600"
               onClick={toggleTheme}
             />
           )}
