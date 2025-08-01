@@ -7,6 +7,10 @@ import {
 
 import { useAppDispatch, useAppSelector } from '@/store';
 
+import type { TypeCardProps } from '@/types/types';
+
+import useTheme from '@/hooks/useTheme';
+
 function Card(props: TypeCardProps) {
   const navigate = useNavigate();
   const { darkTheme } = useTheme();
@@ -65,8 +69,5 @@ function Card(props: TypeCardProps) {
     </div>
   );
 }
-import type { TypeCardProps } from '@/types/types';
-
-import useTheme from '@/hooks/useTheme';
 
 export default Card;
