@@ -4,15 +4,15 @@ import { LuLoaderCircle } from 'react-icons/lu';
 
 import { Button } from '@/components';
 
-import type { typeModalStates } from '@/types/types';
+import type { TypeModalStates } from '@/types/types';
 
 import useTheme from '@/hooks/useTheme';
 
-interface typeModalContent {
-  modalStates: typeModalStates;
+interface TypeModalContent {
+  modalStates: TypeModalStates;
 }
 
-function ModalContent(props: typeModalContent) {
+function ModalContent(props: TypeModalContent) {
   const { loading, character } = props.modalStates;
   const navigate = useNavigate();
   const { darkTheme } = useTheme();

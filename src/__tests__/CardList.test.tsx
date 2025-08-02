@@ -1,4 +1,4 @@
-import { it, expect, describe, vi, afterEach } from 'vitest';
+import { it, expect, describe, afterEach } from 'vitest';
 
 import { cleanup, render, screen } from '@testing-library/react';
 
@@ -16,7 +16,6 @@ import store from '@/store';
 
 describe('testing CardList', () => {
   describe('tests rendering', () => {
-    const mockFunc = vi.fn();
     const arrlength = 20;
 
     afterEach(() => {
@@ -28,14 +27,12 @@ describe('testing CardList', () => {
         <Provider store={store}>
           <MemoryRouter>
             <CardList
-              states={{
+              {...{
                 characterByRequest: data,
                 loading: false,
                 error: false,
                 page: 1,
               }}
-              setState={mockFunc}
-              getByRequest={mockFunc}
             />
           </MemoryRouter>
         </Provider>
@@ -49,14 +46,12 @@ describe('testing CardList', () => {
         <Provider store={store}>
           <MemoryRouter>
             <CardList
-              states={{
+              {...{
                 characterByRequest: data,
                 loading: false,
                 error: false,
                 page: 1,
               }}
-              setState={mockFunc}
-              getByRequest={mockFunc}
             />
           </MemoryRouter>
         </Provider>
@@ -71,14 +66,12 @@ describe('testing CardList', () => {
       render(
         <MemoryRouter>
           <CardList
-            states={{
+            {...{
               characterByRequest: [],
               loading: false,
               error: false,
               page: 1,
             }}
-            setState={mockFunc}
-            getByRequest={mockFunc}
           />
         </MemoryRouter>
       );
@@ -91,14 +84,12 @@ describe('testing CardList', () => {
       render(
         <MemoryRouter>
           <CardList
-            states={{
+            {...{
               characterByRequest: [],
               loading: true,
               error: false,
               page: 1,
             }}
-            setState={mockFunc}
-            getByRequest={mockFunc}
           />
         </MemoryRouter>
       );

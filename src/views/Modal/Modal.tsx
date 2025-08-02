@@ -6,12 +6,12 @@ import { getCharacterById } from '@/client/getCharacterById';
 
 import { ModalContent } from '@/views';
 
-import type { typeModalStates } from '@/types/types';
+import type { TypeModalStates } from '@/types/types';
 
 function Modal() {
   const { id } = useParams();
 
-  const [states, setState] = useState<typeModalStates>({
+  const [states, setState] = useState<TypeModalStates>({
     character: {},
     loading: true,
   });
@@ -25,10 +25,7 @@ function Modal() {
           setState((prev) => ({ ...prev, character: result }));
         }
       } finally {
-        setTimeout(
-          () => setState((prev) => ({ ...prev, loading: false })),
-          300
-        );
+        setState((prev) => ({ ...prev, loading: false }));
       }
     })();
   }, [id]);

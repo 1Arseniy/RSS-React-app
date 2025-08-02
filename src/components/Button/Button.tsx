@@ -1,13 +1,13 @@
 import useTheme from '@/hooks/useTheme';
 import type { ReactNode } from 'react';
-interface typePropsButton {
+interface TypePropsButton {
   children: ReactNode;
   onClick?: () => void;
   styles?: string[];
   disabled?: boolean;
 }
 
-function Button(props: typePropsButton) {
+function Button(props: TypePropsButton) {
   const { children, onClick, styles, disabled } = props;
   const { darkTheme } = useTheme();
 

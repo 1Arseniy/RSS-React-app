@@ -22,6 +22,9 @@ describe('tests AboutView', () => {
       )
     ).toBeVisible();
 
-    expect(screen.getByText('RSS React')).toBeVisible();
+    expect(screen.getByRole('link', { name: 'RSS React' })).toHaveAttribute(
+      'href',
+      'https://rs.school/courses/reactjs'
+    );
   });
 });

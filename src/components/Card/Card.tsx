@@ -7,11 +7,11 @@ import {
 
 import { useAppDispatch, useAppSelector } from '@/store';
 
-import type { TypeCardProps } from '@/types/types';
+import type { TypePropsCard } from '@/types/types';
 
 import useTheme from '@/hooks/useTheme';
 
-function Card(props: TypeCardProps) {
+function Card(props: TypePropsCard) {
   const navigate = useNavigate();
   const { darkTheme } = useTheme();
   const { character, states } = props;

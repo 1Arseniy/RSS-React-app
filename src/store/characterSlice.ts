@@ -2,9 +2,9 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import type { PayloadAction } from '@reduxjs/toolkit';
 
-import type { typeCharacters, TypeCharacter } from '@/types/types';
+import type { TypeCharacters, TypeCharacter } from '@/types/types';
 
-const initialState: typeCharacters = {
+const initialState: TypeCharacters = {
   results: [],
 };
 

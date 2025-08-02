@@ -1,11 +1,11 @@
 import type { ChangeEvent } from 'react';
 
-interface typePropsInputSearch {
+interface TypePropsInputSearch {
   setText: (name: string) => void;
   inputValue: string;
 }
 
-function InputSearch(props: typePropsInputSearch) {
+function InputSearch(props: TypePropsInputSearch) {
   const { setText, inputValue } = props;
   const setValue = (event: ChangeEvent<HTMLInputElement>) => {
     setText(event.target.value);

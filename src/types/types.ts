@@ -8,37 +8,33 @@ export interface TypeCharacter {
   status: string;
 }
 
-export interface typeCharacters {
+export interface TypeCharacters {
   results: TypeCharacter[];
 }
 
-export interface typeProps {
+export interface TypeProps {
   characterByRequest: TypeCharacter[];
   loading: boolean;
   error: boolean;
   page: number;
 }
 
-export type typeGetByRequest = (name?: string, page?: number) => Promise<void>;
+export type TypeGetByRequest = (name?: string, page?: number) => Promise<void>;
 
-export type typeSetUpdatePage = Dispatch<React.SetStateAction<typeProps>>;
+export type TypeSetUpdatePage = Dispatch<React.SetStateAction<TypeProps>>;
 
-export interface charactersRequestProps {
-  states: typeProps;
-  getByRequest: typeGetByRequest;
-  setState?: typeSetUpdatePage;
+export interface CharactersRequestProps {
+  states: TypeProps;
+  getByRequest: TypeGetByRequest;
+  setState: TypeSetUpdatePage;
 }
 
-export interface typeModalStates {
+export interface TypeModalStates {
   character: Partial<TypeCharacter>;
   loading: boolean;
 }
 
-export interface TypeCardProps {
+export interface TypePropsCard {
   character?: TypeCharacter;
-  states: typeProps;
+  states: TypeProps;
 }
-
-// interface Window  {
-//   showSaveFilePicker: (options?: SaveFilePickerOptions) => Promise<FileSystemFileHandle>
-// }

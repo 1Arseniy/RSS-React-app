@@ -4,11 +4,11 @@ import type { ReactNode } from 'react';
 
 import ThemeContext from './ThemeContext';
 
-interface typeThemeProvider {
+interface TypeThemeProvider {
   children: ReactNode;
 }
 
-export function ThemeProvider({ children }: typeThemeProvider) {
+export function ThemeProvider({ children }: TypeThemeProvider) {
   const [darkTheme, setDarkTheme] = useState(false);
 
   const toggleTheme = () => {
