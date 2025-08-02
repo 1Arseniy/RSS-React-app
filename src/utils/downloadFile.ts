@@ -1,7 +1,4 @@
-async function downloadFile(
-  content: FileSystemWriteChunkType,
-  fileName: string
-) {
+async function downloadFile(content: string, fileName: string) {
   try {
     const handle = await window.showSaveFilePicker({
       suggestedName: fileName,

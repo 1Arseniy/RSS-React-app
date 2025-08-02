@@ -51,20 +51,19 @@ function Card(props: TypeCardProps) {
         src={character ? character.image : 'empty'}
         alt="rick&morty"
       ></img>
-      <div className="flex">
-        <div className="grow-[3] flex flex-col h-full justify-center p-2.5">
-          <span>Full name: {character ? character.name : 'empty'}</span>
-          <span>Gender: {character ? character.gender : 'empty'}</span>
-          <span>Status: {character ? character.status : 'empty'}</span>
-        </div>
-        <form className="flex grow-[2]">
+      <div className="flex flex-col h-full justify-center p-2.5">
+        <span>Full name: {character ? character.name : 'empty'}</span>
+        <span>Gender: {character ? character.gender : 'empty'}</span>
+        <span>Status: {character ? character.status : 'empty'}</span>
+        <div className="flex items-center justify-between">
+          <span>Favorite:</span>
           <input
             onChange={toggleCard}
             type="checkbox"
-            className="w-5 accent-blue-700"
+            className="w-5 h-6 accent-blue-200 mr-2.5"
             checked={checked}
           />
-        </form>
+        </div>
       </div>
     </div>
   );
