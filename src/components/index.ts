@@ -7,3 +7,4 @@ export { default as Card } from '@/components/Card/Card';
 export { default as Button } from '@/components/Button/Button';
 export { default as Pagination } from '@/components/Pagination/Pagination';
 export { default as Menu } from '@/components/Menu/Menu';
+export { default as Flyout } from '@/components/Flyout/Flyout';

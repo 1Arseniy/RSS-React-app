@@ -4,16 +4,18 @@ import { LuLoaderCircle } from 'react-icons/lu';
 
 import { Button } from '@/components';
 
-import type { typeModalStates } from '@/types/types';
+import type { TypeModalStates } from '@/types/types';
 
-interface typeModalContent {
-  modalStates: typeModalStates;
+import useTheme from '@/hooks/useTheme';
+
+interface TypeModalContent {
+  modalStates: TypeModalStates;
 }
 
-function ModalContent(props: typeModalContent) {
+function ModalContent(props: TypeModalContent) {
   const { loading, character } = props.modalStates;
-
   const navigate = useNavigate();
+  const { darkTheme } = useTheme();
 
   const closeModal = () => {
     navigate(`/`);
@@ -24,7 +26,7 @@ function ModalContent(props: typeModalContent) {
       <div onClick={closeModal} className="h-full w-full fixed top-0"></div>
       <div className="absolute right-0 h-screen">
         <div
-          className={`fixed h-screen z-10 bg-blue-900  inset-y-0 right-0  w-80 flex flex-col justify-center items-center `}
+          className={`${darkTheme ? 'bg-blue-900 text-white' : 'bg-blue-600 text-black'}  fixed h-screen z-10  inset-y-0 right-0  w-80 flex flex-col justify-center items-center `}
         >
           <div className="h-full w-full absolute flex items-start justify-end">
             <Button onClick={closeModal}>Close</Button>
@@ -32,7 +34,7 @@ function ModalContent(props: typeModalContent) {
           {loading ? (
             <LuLoaderCircle
               data-testid="loader"
-              className="text-white size-24 animate-spin"
+              className="size-24 animate-spin"
             />
           ) : (
             <>
@@ -42,7 +44,7 @@ function ModalContent(props: typeModalContent) {
                 alt="rick&morty"
                 data-testid="img"
               ></img>
-              <div className="flex flex-col justify-center p-2.5 text-white">
+              <div className="flex flex-col justify-center p-2.5">
                 <span>Full name: {character.name}</span>
                 <span>Gender: {character.gender}</span>
                 <span>Status: {character.status}</span>

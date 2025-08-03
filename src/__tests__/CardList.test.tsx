@@ -1,16 +1,21 @@
-import { it, expect, describe, vi, afterEach } from 'vitest';
+import { it, expect, describe, afterEach } from 'vitest';
 
 import { cleanup, render, screen } from '@testing-library/react';
 
 import { CardList } from '@/components';
 
 import '@testing-library/jest-dom/vitest';
+
 import data from '@/__tests__/mocks/characters.json';
+
 import { MemoryRouter } from 'react-router-dom';
+
+import { Provider } from 'react-redux';
+
+import store from '@/store';
 
 describe('testing CardList', () => {
   describe('tests rendering', () => {
-    const mockFunc = vi.fn();
     const arrlength = 20;
 
     afterEach(() => {
@@ -19,18 +24,18 @@ describe('testing CardList', () => {
 
     it('should show right cards length', async () => {
       render(
-        <MemoryRouter>
-          <CardList
-            states={{
-              characterByRequest: data,
-              loading: false,
-              error: false,
-              page: 1,
-            }}
-            setState={mockFunc}
-            getByRequest={mockFunc}
-          />
-        </MemoryRouter>
+        <Provider store={store}>
+          <MemoryRouter>
+            <CardList
+              {...{
+                characterByRequest: data,
+                loading: false,
+                error: false,
+                page: 1,
+              }}
+            />
+          </MemoryRouter>
+        </Provider>
       );
       const cards = screen.getByTestId('cardList');
       expect(cards.children).toHaveLength(arrlength);
@@ -38,18 +43,18 @@ describe('testing CardList', () => {
 
     it('should display right data for user', () => {
       render(
-        <MemoryRouter>
-          <CardList
-            states={{
-              characterByRequest: data,
-              loading: false,
-              error: false,
-              page: 1,
-            }}
-            setState={mockFunc}
-            getByRequest={mockFunc}
-          />
-        </MemoryRouter>
+        <Provider store={store}>
+          <MemoryRouter>
+            <CardList
+              {...{
+                characterByRequest: data,
+                loading: false,
+                error: false,
+                page: 1,
+              }}
+            />
+          </MemoryRouter>
+        </Provider>
       );
 
       data.forEach((el) => {
@@ -61,14 +66,12 @@ describe('testing CardList', () => {
       render(
         <MemoryRouter>
           <CardList
-            states={{
+            {...{
               characterByRequest: [],
               loading: false,
               error: false,
               page: 1,
             }}
-            setState={mockFunc}
-            getByRequest={mockFunc}
           />
         </MemoryRouter>
       );
@@ -81,14 +84,12 @@ describe('testing CardList', () => {
       render(
         <MemoryRouter>
           <CardList
-            states={{
+            {...{
               characterByRequest: [],
               loading: true,
               error: false,
               page: 1,
             }}
-            setState={mockFunc}
-            getByRequest={mockFunc}
           />
         </MemoryRouter>
       );

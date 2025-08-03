@@ -1,8 +1,8 @@
-import { CardList, Pagination } from '@/components';
+import { CardList, Pagination, Flyout } from '@/components';
 
-import type { charactersRequestProps } from '@/types/types';
+import type { CharactersRequestProps } from '@/types/types';
 
-function Main(props: charactersRequestProps) {
+function Main(props: CharactersRequestProps) {
   const { states, getByRequest, setState } = props;
   return (
     <main className="flex flex-col px-12">
@@ -11,7 +11,8 @@ function Main(props: charactersRequestProps) {
         states={states}
         getByRequest={getByRequest}
       />
-      <CardList states={states} getByRequest={getByRequest} />
+      <CardList {...states} />
+      <Flyout />
     </main>
   );
 }

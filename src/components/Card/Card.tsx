@@ -1,38 +1,69 @@
 import { useNavigate } from 'react-router-dom';
 
-import type { TypeCardProps } from '@/types/types';
+import {
+  addToSelectedCharacters,
+  removeFromSelectedCharacters,
+} from '@/store/characterSlice';
 
-function Card(props: TypeCardProps) {
+import { useAppDispatch, useAppSelector } from '@/store';
+
+import type { TypePropsCard } from '@/types/types';
+
+import useTheme from '@/hooks/useTheme';
+
+function Card(props: TypePropsCard) {
   const navigate = useNavigate();
+  const { darkTheme } = useTheme();
   const { character, states } = props;
+  const disapatch = useAppDispatch();
 
-  const cardTemplate = {
-    id: 1,
-    gender: 'empty',
-    image: 'empty',
-    name: 'empty',
-    status: 'empty',
-  };
-  const data = character || cardTemplate;
+  const checked = useAppSelector((state) => {
+    if (character) {
+      return state.selectedCharacters.results.some(
+        (item) => item.id === character.id
+      );
+    }
+  });
 
   const openModal = () => {
-    navigate(`details/${data.id}?page=${states.page}`);
+    if (character) {
+      navigate(`details/${character.id}?page=${states.page}`);
+    }
+  };
+
+  const toggleCard = () => {
+    if (character) {
+      if (checked) {
+        disapatch(removeFromSelectedCharacters(character.id));
+      } else {
+        disapatch(addToSelectedCharacters(character));
+      }
+    }
   };
 
   return (
     <div
-      onClick={openModal}
-      className="flex flex-col bg-blue-800 w-80 h-80 m-2.5 rounded-md cursor-pointer"
+      className={`${darkTheme ? 'bg-blue-800 text-white' : 'bg-blue-600 text-black'} flex flex-col w-80 h-80 m-2.5 rounded-md`}
     >
       <img
-        className="object-cover h-52 rounded-t-md"
-        src={data.image}
+        onClick={openModal}
+        className="object-cover h-52 rounded-t-md cursor-pointer"
+        src={character ? character.image : 'empty'}
         alt="rick&morty"
       ></img>
-      <div className="flex flex-col h-full justify-center p-2.5 text-white">
-        <span>Full name: {data.name}</span>
-        <span>Gender: {data.gender}</span>
-        <span>Status: {data.status}</span>
+      <div className="flex flex-col h-full justify-center p-2.5">
+        <span>Full name: {character ? character.name : 'empty'}</span>
+        <span>Gender: {character ? character.gender : 'empty'}</span>
+        <span>Status: {character ? character.status : 'empty'}</span>
+        <div className="flex items-center justify-between">
+          <span>Favorite:</span>
+          <input
+            onChange={toggleCard}
+            type="checkbox"
+            className="w-5 h-6 accent-blue-200 mr-2.5"
+            checked={checked}
+          />
+        </div>
       </div>
     </div>
   );

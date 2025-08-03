@@ -1,30 +1,20 @@
-import { useEffect } from 'react';
-
-import useLocalStorage from '@/hooks/useLocalStorage';
-
 import { LuLoaderCircle } from 'react-icons/lu';
 
 import { Card } from '@/components';
 
-import type { charactersRequestProps } from '@/types/types';
+import type { TypeProps } from '@/types/types';
 
-function CardList(props: charactersRequestProps) {
-  const { states, getByRequest } = props;
-  const [value] = useLocalStorage('name', '');
+function CardList(props: TypeProps) {
+  const { loading, characterByRequest, error } = props;
 
-  useEffect(() => {
-    getByRequest(value);
-  }, []);
-
-  const { loading, characterByRequest, error } = states;
   return (
     <div className={`flex flex-wrap justify-center`} data-testid="cardList">
       {loading || !characterByRequest.length || error ? (
-        <div className="flex items-center h-[76vh] text-3xl text-center text-white">
+        <div className={`flex items-center h-[76vh] text-3xl text-center`}>
           {loading ? (
             <LuLoaderCircle
               data-testid="loader"
-              className="text-blue-500 size-24 animate-spin"
+              className="size-24 animate-spin"
             />
           ) : !error ? (
             <h1>Сharacter with this name not found</h1>
@@ -36,7 +26,7 @@ function CardList(props: charactersRequestProps) {
         characterByRequest.map((character) => (
           <Card
             key={crypto.randomUUID()}
-            states={states}
+            states={props}
             character={character}
           />
         ))

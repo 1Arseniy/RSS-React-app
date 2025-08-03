@@ -4,12 +4,12 @@ import { Header, Main } from '@/components';
 
 import { getCharacters } from '@/client/getCharacters';
 
-import type { typeProps } from '@/types/types';
+import type { TypeProps } from '@/types/types';
 
 import { Outlet } from 'react-router-dom';
 
 function HomeView() {
-  const [state, setState] = useState<typeProps>({
+  const [state, setState] = useState<TypeProps>({
     characterByRequest: [],
     loading: true,
     error: false,
@@ -27,7 +27,7 @@ function HomeView() {
     } catch {
       setState((prev) => ({ ...prev, error: true }));
     } finally {
-      setTimeout(() => setState((prev) => ({ ...prev, loading: false })), 300);
+      setState((prev) => ({ ...prev, loading: false }));
     }
   };
 

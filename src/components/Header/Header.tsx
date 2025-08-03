@@ -5,26 +5,26 @@ import useLocalStorage from '@/hooks/useLocalStorage';
 import { Button } from '@/components';
 import { InputSearch } from '@/components';
 
-import type { typeGetByRequest, typeSetUpdatePage } from '@/types/types';
+import type { TypeGetByRequest, TypeSetUpdatePage } from '@/types/types';
 
-interface typePropsHeader {
-  getByRequest: typeGetByRequest;
-  setUpdatePage: typeSetUpdatePage;
+interface TypePropsHeader {
+  getByRequest: TypeGetByRequest;
+  setUpdatePage: TypeSetUpdatePage;
 }
 
-function Header(props: typePropsHeader) {
+function Header(props: TypePropsHeader) {
   const { getByRequest, setUpdatePage } = props;
 
   const [savedValue, setSavedValue] = useLocalStorage('name', '');
 
   const [inputValue, setInputValue] = useState(savedValue);
 
-  const trimmedText = async () => {
-    const deleteSpaces = inputValue.trim();
-    setInputValue(deleteSpaces);
-    setSavedValue(deleteSpaces);
+  const trimText = async () => {
+    const trimmedText = inputValue.trim();
+    setInputValue(trimmedText);
+    setSavedValue(trimmedText);
     setUpdatePage((prev) => ({ ...prev, page: 1 }));
-    await getByRequest(deleteSpaces);
+    await getByRequest(trimmedText);
   };
 
   const setText = (name: string) => {
@@ -34,7 +34,7 @@ function Header(props: typePropsHeader) {
   return (
     <header className="h-[10vh] flex justify-center items-center">
       <InputSearch setText={setText} inputValue={inputValue} />
-      <Button onClick={trimmedText}>Search</Button>
+      <Button onClick={trimText}>Search</Button>
     </header>
   );
 }

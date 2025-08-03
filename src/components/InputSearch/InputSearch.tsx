@@ -1,13 +1,12 @@
 import type { ChangeEvent } from 'react';
 
-interface typePropsInputSearch {
+interface TypePropsInputSearch {
   setText: (name: string) => void;
   inputValue: string;
 }
 
-function InputSearch(props: typePropsInputSearch) {
+function InputSearch(props: TypePropsInputSearch) {
   const { setText, inputValue } = props;
-
   const setValue = (event: ChangeEvent<HTMLInputElement>) => {
     setText(event.target.value);
   };
@@ -19,7 +18,7 @@ function InputSearch(props: typePropsInputSearch) {
       onChange={(e) => setValue(e)}
       placeholder="Search by name..."
       name="search"
-      className="h-9 bg-white rounded-sm pl-2 focus-within:outline-2 focus-within:outline-blue-700"
+      className={`text-black h-9 bg-white rounded-sm pl-2 focus-within:outline-2 focus-within:outline-blue-700`}
     />
   );
 }

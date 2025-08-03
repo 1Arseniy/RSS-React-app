@@ -24,4 +24,8 @@ body {
   main {
     padding-inline: 28px;
   }
+
+  .flyout {
+    flex-direction: column;
+  }
 }
