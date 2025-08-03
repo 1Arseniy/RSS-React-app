@@ -12,7 +12,7 @@ import * as useTheme from '@/hooks/useTheme';
 
 import { Provider } from 'react-redux';
 import store from '@/store';
-import renderWithProviders from '@/__tests__/utils/renderWithProviders';
+import renderWithProvider from '@/__tests__/utils/renderWithProvider';
 
 import data from '@/__tests__/mocks/characters.json';
 
@@ -71,7 +71,7 @@ describe('testing Card', () => {
 
   it('should call useTheme when component rendering', async () => {
     const spyTheme = vi.spyOn(useTheme, 'default');
-    renderWithProviders(
+    renderWithProvider(
       <MemoryRouter>
         <Card
           states={{

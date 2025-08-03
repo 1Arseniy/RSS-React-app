@@ -8,7 +8,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import type { ReactNode } from 'react';
 import { Provider } from 'react-redux';
 
-function renderWithProviders(
+function renderWithProvider(
   ui: ReactNode,
   { initialState }: { initialState: TypeCharacter[] }
 ) {
@@ -25,4 +25,4 @@ function renderWithProviders(
   return render(<Provider store={store}>{ui}</Provider>);
 }
 
-export default renderWithProviders;
+export default renderWithProvider;

@@ -1,19 +1,7 @@
-async function downloadFile(content: string, fileName: string) {
-  try {
-    const handle = await window.showSaveFilePicker({
-      suggestedName: fileName,
-      types: [
-        {
-          accept: { 'text/csv': ['.csv'] },
-        },
-      ],
-    });
-    const writable = await handle.createWritable();
-    await writable.write(content);
-    await writable.close();
-  } catch (err) {
-    console.log('downloadFile', err);
-  }
+function downloadFile(content: string) {
+  const blob = new Blob([...content], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  return url;
 }
 
 export default downloadFile;

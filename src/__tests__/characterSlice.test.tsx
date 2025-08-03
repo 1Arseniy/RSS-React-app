@@ -14,7 +14,7 @@ describe('tests characterSlice', () => {
   });
 
   it('should add new item', () => {
-    const action = { type: addToSelectedCharacters.type, payload: '' };
+    const action = { type: addToSelectedCharacters.type, payload: data[0] };
     const result = selectedReducer({ results: data }, action);
     expect(result.results[0]).toEqual(data[0]);
   });
