@@ -23,9 +23,7 @@ function Pagination(props: CharactersRequestProps) {
   useEffect(() => {
     const currentPage = param.get('page') || 1;
     const revertToNumber = Number(currentPage);
-    if (setState && revertToNumber) {
-      setState((prev) => ({ ...prev, page: revertToNumber }));
-    }
+    setState((prev) => ({ ...prev, page: revertToNumber }));
   }, []);
 
   useEffect(() => {
