@@ -8,8 +8,8 @@ import type { CharactersRequestProps } from '@/types/types';
 
 function Pagination(props: CharactersRequestProps) {
   const step = 1;
-  const { getByRequest, states, setState } = props;
-  const { page, loading } = states;
+  const { states, setState } = props;
+  const { page } = states;
   const [param, setParam] = useSearchParams();
 
   const handleNext = () => {
@@ -29,20 +29,18 @@ function Pagination(props: CharactersRequestProps) {
   useEffect(() => {
     setParam(`page=${page}`);
 
-    const item = localStorage.getItem('name') || '';
-    getByRequest(item, Number(page));
+    // const item = localStorage.getItem('name') || '';
+    // getByRequest(item, Number(page));
   }, [page]);
-
+  // !loading &&
   return (
-    !loading && (
-      <div className="flex justify-center items-center">
-        <Button onClick={handlePrevious} disabled={page <= step}>
-          Prev
-        </Button>
-        <span className="text-white text-2xl">{page}</span>
-        <Button onClick={handleNext}>Next</Button>
-      </div>
-    )
+    <div className="flex justify-center items-center">
+      <Button onClick={handlePrevious} disabled={page <= step}>
+        Prev
+      </Button>
+      <span className="text-white text-2xl">{page}</span>
+      <Button onClick={handleNext}>Next</Button>
+    </div>
   );
 }
 

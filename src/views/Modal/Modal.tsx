@@ -19,22 +19,22 @@ function Modal() {
   };
 
   return (
-    data && (
-      <>
-        <div onClick={closeModal} className="h-full w-full fixed top-0"></div>
-        <div className="absolute right-0 h-screen">
-          <div
-            className={`${darkTheme ? 'bg-blue-900 text-white' : 'bg-blue-600 text-black'}  fixed h-screen z-10  inset-y-0 right-0  w-80 flex flex-col justify-center items-center `}
-          >
-            <div className="h-full w-full absolute flex items-start justify-end">
-              <Button onClick={closeModal}>Close</Button>
-            </div>
-            {isLoading ? (
-              <LuLoaderCircle
-                data-testid="loader"
-                className="size-24 animate-spin"
-              />
-            ) : (
+    <>
+      <div onClick={closeModal} className="h-full w-full fixed top-0"></div>
+      <div className="absolute right-0 h-screen">
+        <div
+          className={`${darkTheme ? 'bg-blue-900 text-white' : 'bg-blue-600 text-black'}  fixed h-screen z-10  inset-y-0 right-0  w-80 flex flex-col justify-center items-center `}
+        >
+          <div className="h-full w-full absolute flex items-start justify-end">
+            <Button onClick={closeModal}>Close</Button>
+          </div>
+          {isLoading ? (
+            <LuLoaderCircle
+              data-testid="loader"
+              className="size-24 animate-spin"
+            />
+          ) : (
+            data && (
               <>
                 <img
                   className="object-cover h-52"
@@ -48,11 +48,11 @@ function Modal() {
                   <span>Status: {data.status}</span>
                 </div>
               </>
-            )}
-          </div>
+            )
+          )}
         </div>
-      </>
-    )
+      </div>
+    </>
   );
 }
 

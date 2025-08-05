@@ -1,3 +1,5 @@
+import type { SerializedError } from '@reduxjs/toolkit';
+import type { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import type { Dispatch } from 'react';
 
 export interface TypeCharacter {
@@ -12,11 +14,20 @@ export interface TypeCharacters {
   results: TypeCharacter[];
 }
 
+export interface TypeQueryResult {
+  data: TypeCharacters | undefined;
+  isLoading: boolean;
+  isError: boolean;
+  error: FetchBaseQueryError | SerializedError | undefined;
+  isFetching: boolean;
+}
+
 export interface TypeProps {
-  characterByRequest: TypeCharacter[];
-  loading: boolean;
-  error: boolean;
+  // characterByRequest: TypeCharacter[];
+  // loading: boolean;
+  // error: boolean;
   page: number;
+  // characters: TypeCharacters | undefined;
 }
 
 export type TypeGetByRequest = (name?: string, page?: number) => Promise<void>;
@@ -25,7 +36,9 @@ export type TypeSetUpdatePage = Dispatch<React.SetStateAction<TypeProps>>;
 
 export interface CharactersRequestProps {
   states: TypeProps;
-  getByRequest: TypeGetByRequest;
+  queryResult: TypeQueryResult;
+  // characters: TypeCharacters | undefined;
+  // getByRequest: TypeGetByRequest;
   setState: TypeSetUpdatePage;
 }
 

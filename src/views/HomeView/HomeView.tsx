@@ -1,41 +1,36 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Header, Main } from '@/components';
-
-import { getCharacters } from '@/client/getCharacters';
 
 import type { TypeProps } from '@/types/types';
 
 import { Outlet } from 'react-router-dom';
 
+import { useLazyGetCharactersQuery } from '@/client/api';
+
+import useLocalStorage from '@/hooks/useLocalStorage';
+
 function HomeView() {
   const [state, setState] = useState<TypeProps>({
-    characterByRequest: [],
-    loading: true,
-    error: false,
+    // characterByRequest: [],
+    // loading: true,
+    // error: false,
     page: 1,
   });
+  const [savedValue] = useLocalStorage('name', '');
+  const [trigger, { data, isLoading, isError, error, isFetching }] =
+    useLazyGetCharactersQuery();
+  const queryResult = { data, isLoading, isError, error, isFetching };
 
-  const getByRequest = async (name?: string, page?: number) => {
-    try {
-      setState((prev) => ({ ...prev, loading: true }));
-      const result = await getCharacters(name, page);
-      setState((prev) => ({
-        ...prev,
-        characterByRequest: result,
-      }));
-    } catch {
-      setState((prev) => ({ ...prev, error: true }));
-    } finally {
-      setState((prev) => ({ ...prev, loading: false }));
-    }
-  };
+  useEffect(() => {
+    trigger(savedValue);
+  }, [savedValue, trigger]);
 
   return (
     <>
       <Outlet />
-      <Header setUpdatePage={setState} getByRequest={getByRequest} />
-      <Main setState={setState} states={state} getByRequest={getByRequest} />
+      <Header setUpdatePage={setState} trigger={trigger} />
+      <Main setState={setState} states={state} queryResult={queryResult} />
     </>
   );
 }
