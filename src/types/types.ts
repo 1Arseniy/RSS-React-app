@@ -21,6 +21,7 @@ export interface TypeQueryResult {
   isError: boolean;
   error: FetchBaseQueryError | SerializedError | undefined;
   isFetching: boolean;
+  refetch: () => void;
 }
 
 export interface TypeProps {

@@ -12,20 +12,13 @@ import useLocalStorage from '@/hooks/useLocalStorage';
 
 function HomeView() {
   const [state, setState] = useState<TypeProps>({
-    // characters: [],
-    // loading: true,
-    // error: false,
     page: 1,
     name: '',
   });
   const [savedValue] = useLocalStorage('name', '');
-  const { data, isLoading, isError, error, isFetching } = useGetCharactersQuery(
-    { name: state.name, page: state.page }
-  );
-  const queryResult = { data, isLoading, isError, error, isFetching };
-  // const getByRequest = (name?: string, page? ) => {
-
-  // }
+  const { data, isLoading, isError, error, isFetching, refetch } =
+    useGetCharactersQuery({ name: state.name, page: state.page });
+  const queryResult = { data, isLoading, isError, error, isFetching, refetch };
 
   useEffect(() => {
     setState((prev) => ({ ...prev, name: savedValue || '' }));
@@ -35,12 +28,7 @@ function HomeView() {
     <>
       <Outlet />
       <Header setUpdatePage={setState} />
-      <Main
-        setState={setState}
-        states={state}
-        queryResult={queryResult}
-        // trigger={trigger}
-      />
+      <Main setState={setState} states={state} queryResult={queryResult} />
     </>
   );
 }

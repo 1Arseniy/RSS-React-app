@@ -8,7 +8,7 @@ import type { CharactersRequestProps } from '@/types/types';
 
 function Pagination(props: CharactersRequestProps) {
   const step = 1;
-  const { states, setState } = props;
+  const { states, setState, queryResult } = props;
   const { page } = states;
   const [param, setParam] = useSearchParams();
 
@@ -32,6 +32,7 @@ function Pagination(props: CharactersRequestProps) {
 
   return (
     <div className="flex justify-center items-center">
+      <Button onClick={() => queryResult.refetch()}>Refresh Call</Button>
       <Button onClick={handlePrevious} disabled={page <= step}>
         Prev
       </Button>

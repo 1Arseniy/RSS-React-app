@@ -11,7 +11,6 @@ function Main(props: CharactersRequestProps) {
         states={states}
         trigger={trigger}
         queryResult={queryResult}
-        // getByRequest={getByRequest}
       />
       <CardList {...states} queryResult={queryResult} />
       <Flyout />

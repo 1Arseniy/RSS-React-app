@@ -13,9 +13,10 @@ function CardList(props: TypePropsCardList) {
   const { data, error, isFetching } = props.queryResult;
 
   if (error) {
+    const statusNotfound = 404;
     if ('status' in error) {
       const errorMessage =
-        error.status === 404
+        error.status === statusNotfound
           ? 'Сharacter with this name not found'
           : 'Server not responding, try later';
       return (
