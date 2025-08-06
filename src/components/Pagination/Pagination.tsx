@@ -28,11 +28,8 @@ function Pagination(props: CharactersRequestProps) {
 
   useEffect(() => {
     setParam(`page=${page}`);
-
-    // const item = localStorage.getItem('name') || '';
-    // getByRequest(item, Number(page));
   }, [page]);
-  // !loading &&
+
   return (
     <div className="flex justify-center items-center">
       <Button onClick={handlePrevious} disabled={page <= step}>

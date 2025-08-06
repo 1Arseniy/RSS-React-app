@@ -1,6 +1,7 @@
 import type { SerializedError } from '@reduxjs/toolkit';
 import type { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import type { Dispatch } from 'react';
+import type { TypeTrigger } from '@/client/api';
 
 export interface TypeCharacter {
   id: number;
@@ -15,7 +16,7 @@ export interface TypeCharacters {
 }
 
 export interface TypeQueryResult {
-  data: TypeCharacters | undefined;
+  data: TypeCharacter[] | undefined;
   isLoading: boolean;
   isError: boolean;
   error: FetchBaseQueryError | SerializedError | undefined;
@@ -23,10 +24,12 @@ export interface TypeQueryResult {
 }
 
 export interface TypeProps {
-  // characterByRequest: TypeCharacter[];
+  // characters: TypeCharacter[];
+  // characterByRequest: ;
   // loading: boolean;
   // error: boolean;
   page: number;
+  name: string;
   // characters: TypeCharacters | undefined;
 }
 
@@ -36,6 +39,7 @@ export type TypeSetUpdatePage = Dispatch<React.SetStateAction<TypeProps>>;
 
 export interface CharactersRequestProps {
   states: TypeProps;
+  trigger?: TypeTrigger;
   queryResult: TypeQueryResult;
   // characters: TypeCharacters | undefined;
   // getByRequest: TypeGetByRequest;
@@ -49,5 +53,5 @@ export interface TypeModalStates {
 
 export interface TypePropsCard {
   character?: TypeCharacter;
-  states: TypeProps;
+  page: number;
 }

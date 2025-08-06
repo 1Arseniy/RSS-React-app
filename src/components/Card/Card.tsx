@@ -14,7 +14,7 @@ import useTheme from '@/hooks/useTheme';
 function Card(props: TypePropsCard) {
   const navigate = useNavigate();
   const { darkTheme } = useTheme();
-  const { character, states } = props;
+  const { character, page } = props;
   const disapatch = useAppDispatch();
 
   const checked = useAppSelector((state) => {
@@ -27,7 +27,7 @@ function Card(props: TypePropsCard) {
 
   const openModal = () => {
     if (character) {
-      navigate(`details/${character.id}?page=${states.page}`);
+      navigate(`details/${character.id}?page=${page}`);
     }
   };
 

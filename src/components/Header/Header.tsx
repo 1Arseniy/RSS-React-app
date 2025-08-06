@@ -11,12 +11,12 @@ import type { TypeSetUpdatePage } from '@/types/types';
 
 interface TypePropsHeader {
   // getByRequest: TypeGetByRequest;
-  trigger: TypeTrigger;
+  trigger?: TypeTrigger;
   setUpdatePage: TypeSetUpdatePage;
 }
 
 function Header(props: TypePropsHeader) {
-  const { setUpdatePage, trigger } = props;
+  const { setUpdatePage } = props;
 
   const [savedValue, setSavedValue] = useLocalStorage('name', '');
 
@@ -30,8 +30,8 @@ function Header(props: TypePropsHeader) {
     setInputValue(trimmedText);
     setSavedValue(trimmedText);
     // console.log('LS', localStorage.getItem('name'));
-    setUpdatePage((prev) => ({ ...prev, page: 1 }));
-    await trigger(trimmedText);
+    setUpdatePage((prev) => ({ ...prev, page: 1, name: trimmedText }));
+    // await trigger({ name: trimmedText });
     // console.log('headr', data);
     // await getByRequest(trimmedText);
   };

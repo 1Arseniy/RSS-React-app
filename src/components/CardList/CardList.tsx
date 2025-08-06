@@ -18,22 +18,28 @@ function CardList(props: TypePropsCardList) {
         error.status === 404
           ? 'Сharacter with this name not found'
           : 'Server not responding, try later';
-      return <h1>{errorMessage}</h1>;
+      return (
+        <div className="flex h-[65vh] justify-center items-center">
+          <h1 className="text-3xl">{errorMessage}</h1>
+        </div>
+      );
     }
   }
 
   if (isFetching)
     return (
-      <LuLoaderCircle data-testid="loader" className="size-24 animate-spin" />
+      <div className="flex h-[65vh] justify-center items-center">
+        <LuLoaderCircle data-testid="loader" className="size-24 animate-spin" />
+      </div>
     );
 
   return (
     <>
       <div className={`flex flex-wrap justify-center`} data-testid="cardList">
-        {data?.results.map((character) => (
+        {data?.map((character) => (
           <Card
             key={crypto.randomUUID()}
-            states={props}
+            page={props.page}
             character={character}
           />
         ))}
