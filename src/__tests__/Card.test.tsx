@@ -49,15 +49,7 @@ describe('testing Card', () => {
       render(
         <Provider store={store}>
           <MemoryRouter>
-            <Card
-              states={{
-                characterByRequest: [],
-                loading: false,
-                error: false,
-                page: 1,
-              }}
-              character={props}
-            />
+            <Card page={1} character={props} />
           </MemoryRouter>
         </Provider>
       );
@@ -73,16 +65,7 @@ describe('testing Card', () => {
     const spyTheme = vi.spyOn(useTheme, 'default');
     renderWithProvider(
       <MemoryRouter>
-        <Card
-          states={{
-            characterByRequest: [],
-            loading: false,
-            error: false,
-            page: 1,
-          }}
-          character={data[0]}
-        />
-        ,
+        <Card page={1} character={data[0]} />,
       </MemoryRouter>,
       { initialState: data }
     );

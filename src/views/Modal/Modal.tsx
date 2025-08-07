@@ -10,8 +10,9 @@ import { Button } from '@/components';
 
 function Modal() {
   const navigate = useNavigate();
+  const statusNotfound = 404;
   const { id } = useParams();
-  const { data, isFetching, refetch, isError } = useGetCharacterByIdQuery(
+  const { data, isFetching, refetch, error } = useGetCharacterByIdQuery(
     id ?? ''
   );
   const { darkTheme } = useTheme();
@@ -36,8 +37,12 @@ function Modal() {
               data-testid="loader"
               className="size-24 animate-spin"
             />
-          ) : isError ? (
-            <h1>Server not responding, try later</h1>
+          ) : error ? (
+            'status' in error && error.status === statusNotfound ? (
+              <h1>Сharacter with this id not found</h1>
+            ) : (
+              <h1>Server not responding, try later</h1>
+            )
           ) : (
             data && (
               <>

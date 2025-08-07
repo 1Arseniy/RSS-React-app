@@ -13,7 +13,7 @@ import { render, screen } from '@testing-library/react';
 
 import App from '@/App';
 
-import * as getData from '@/client/getCharacters';
+// import * as getData from '@/client/getCharacters';
 
 import { server } from '@/__tests__/mocks/node';
 import { http, HttpResponse } from 'msw';
@@ -30,18 +30,6 @@ afterAll(() => server.close());
 describe('tests App', () => {
   beforeEach(() => {
     vi.spyOn(console, 'error').mockImplementation(() => {});
-  });
-
-  describe('tests integration ', () => {
-    it('should get data when App render', () => {
-      const getCharactersSpy = vi.spyOn(getData, 'getCharacters');
-      render(
-        <Provider store={store}>
-          <App />
-        </Provider>
-      );
-      expect(getCharactersSpy).toHaveBeenCalled();
-    });
   });
 
   describe('tests handles API error responses', () => {

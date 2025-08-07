@@ -14,16 +14,21 @@ describe('tests Pagination', () => {
   const mockFunc = vi.fn();
   let prevButton: HTMLButtonElement;
   let nextButton: HTMLButtonElement;
-
+  let refreshButton: HTMLButtonElement;
   beforeEach(() => {
     render(
       <MemoryRouter>
         <Pagination
           states={{
-            characterByRequest: data,
-            loading: false,
-            error: false,
+            name: '',
             page: 2,
+          }}
+          queryResult={{
+            refetch: mockFunc,
+            isError: false,
+            error: undefined,
+            isFetching: false,
+            data: data,
           }}
           setState={mockFunc}
         />
@@ -31,11 +36,13 @@ describe('tests Pagination', () => {
     );
     prevButton = screen.getByRole('button', { name: 'Prev' });
     nextButton = screen.getByRole('button', { name: 'Next' });
+    refreshButton = screen.getByRole('button', { name: 'Refresh Call' });
   });
 
   it('should show user buttons: prev, next and curent page', () => {
     expect(prevButton).toBeVisible();
     expect(nextButton).toBeVisible();
+    expect(refreshButton).toBeVisible();
     expect(screen.getByText('2')).toBeVisible();
   });
 });
