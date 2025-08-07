@@ -11,7 +11,9 @@ import { Button } from '@/components';
 function Modal() {
   const navigate = useNavigate();
   const { id } = useParams();
-  const { data, isFetching, refetch } = useGetCharacterByIdQuery(id ?? '');
+  const { data, isFetching, refetch, isError } = useGetCharacterByIdQuery(
+    id ?? ''
+  );
   const { darkTheme } = useTheme();
 
   const closeModal = () => {
@@ -34,6 +36,8 @@ function Modal() {
               data-testid="loader"
               className="size-24 animate-spin"
             />
+          ) : isError ? (
+            <h1>Server not responding, try later</h1>
           ) : (
             data && (
               <>

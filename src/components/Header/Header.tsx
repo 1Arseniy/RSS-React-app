@@ -5,35 +5,24 @@ import useLocalStorage from '@/hooks/useLocalStorage';
 import { Button } from '@/components';
 import { InputSearch } from '@/components';
 
-import type { TypeTrigger } from '@/client/api';
-
-import type { TypeSetUpdatePage } from '@/types/types';
+import type { TypeSetState } from '@/types/types';
 
 interface TypePropsHeader {
-  // getByRequest: TypeGetByRequest;
-  trigger?: TypeTrigger;
-  setUpdatePage: TypeSetUpdatePage;
+  setState: TypeSetState;
 }
 
 function Header(props: TypePropsHeader) {
-  const { setUpdatePage } = props;
+  const { setState } = props;
 
   const [savedValue, setSavedValue] = useLocalStorage('name', '');
 
   const [inputValue, setInputValue] = useState(savedValue);
 
-  // const [trigge, { data, isLoading }] = useLazyGetCharactersQuery();
-
   const trimText = async () => {
     const trimmedText = inputValue.trim();
-    // console.log(trimmedText);
     setInputValue(trimmedText);
     setSavedValue(trimmedText);
-    // console.log('LS', localStorage.getItem('name'));
-    setUpdatePage((prev) => ({ ...prev, page: 1, name: trimmedText }));
-    // await trigger({ name: trimmedText });
-    // console.log('headr', data);
-    // await getByRequest(trimmedText);
+    setState((prev) => ({ ...prev, page: 1, name: trimmedText }));
   };
 
   const setText = (name: string) => {

@@ -25,7 +25,6 @@ describe('tests Pagination', () => {
             error: false,
             page: 2,
           }}
-          getByRequest={mockFunc}
           setState={mockFunc}
         />
       </MemoryRouter>

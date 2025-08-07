@@ -16,9 +16,12 @@ function HomeView() {
     name: '',
   });
   const [savedValue] = useLocalStorage('name', '');
-  const { data, isLoading, isError, error, isFetching, refetch } =
-    useGetCharactersQuery({ name: state.name, page: state.page });
-  const queryResult = { data, isLoading, isError, error, isFetching, refetch };
+
+  const { data, isError, error, isFetching, refetch } = useGetCharactersQuery({
+    name: state.name,
+    page: state.page,
+  });
+  const queryResult = { data, isError, error, isFetching, refetch };
 
   useEffect(() => {
     setState((prev) => ({ ...prev, name: savedValue || '' }));
@@ -27,7 +30,7 @@ function HomeView() {
   return (
     <>
       <Outlet />
-      <Header setUpdatePage={setState} />
+      <Header setState={setState} />
       <Main setState={setState} states={state} queryResult={queryResult} />
     </>
   );

@@ -23,11 +23,4 @@ export const api = createApi({
   }),
 });
 
-export const {
-  useGetCharacterByIdQuery,
-  useLazyGetCharacterByIdQuery,
-  useGetCharactersQuery,
-  useLazyGetCharactersQuery,
-} = api;
-
-export type TypeTrigger = ReturnType<typeof useLazyGetCharactersQuery>[0];
+export const { useGetCharacterByIdQuery, useGetCharactersQuery } = api;
