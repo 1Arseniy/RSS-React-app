@@ -1,4 +1,4 @@
-import { it, expect, describe, vi } from 'vitest';
+import { it, expect, describe, vi, beforeEach } from 'vitest';
 
 import { render, screen } from '@testing-library/react';
 
@@ -15,8 +15,13 @@ import store from '@/store';
 import renderWithProvider from '@/__tests__/utils/renderWithProvider';
 
 import data from '@/__tests__/mocks/characters.json';
+import userEvent from '@testing-library/user-event';
 
 describe('testing Card', () => {
+  beforeEach(() => {
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+  });
+
   const mockData = {
     id: 1,
     gender: 'uncnown',
@@ -57,7 +62,6 @@ describe('testing Card', () => {
       expect(screen.getByText(expected.status)).toBeVisible();
       expect(screen.getByText(expected.gender)).toBeVisible();
       expect(screen.getByRole('img')).toHaveAttribute('src', expected.image);
-      expect(screen.getByRole('checkbox')).toHaveAttribute('type', 'checkbox');
     });
   });
 
@@ -70,5 +74,27 @@ describe('testing Card', () => {
       { initialState: data }
     );
     expect(spyTheme).toHaveBeenCalled();
+  });
+
+  it('should if iten in redux checkbox - checked', () => {
+    renderWithProvider(
+      <MemoryRouter>
+        <Card page={1} character={data[0]} />,
+      </MemoryRouter>,
+      { initialState: data }
+    );
+
+    expect(screen.getByRole('checkbox')).toBeChecked();
+  });
+
+  it('should if iten not in redux checkbox - not-checked', async () => {
+    renderWithProvider(
+      <MemoryRouter>
+        <Card page={1} character={data[0]} />,
+      </MemoryRouter>,
+      { initialState: data }
+    );
+    await userEvent.click(screen.getByRole('checkbox'));
+    expect(screen.getByRole('checkbox')).not.toBeChecked();
   });
 });

@@ -1,4 +1,4 @@
-import { it, expect, describe, afterEach, vi } from 'vitest';
+import { it, expect, describe, afterEach, vi, beforeEach } from 'vitest';
 
 import { cleanup, render, screen } from '@testing-library/react';
 
@@ -16,6 +16,10 @@ import type { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import store from '@/store';
 
 describe('testing CardList', () => {
+  beforeEach(() => {
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+  });
+
   describe('tests rendering', () => {
     const arrlength = 20;
     const mockFunc = vi.fn();

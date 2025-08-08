@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import type { MouseEvent } from 'react';
 
 import {
   addToSelectedCharacters,
@@ -31,7 +32,8 @@ function Card(props: TypePropsCard) {
     }
   };
 
-  const toggleCard = () => {
+  const toggleCard = (event: MouseEvent) => {
+    event.stopPropagation();
     if (character) {
       if (checked) {
         disapatch(removeFromSelectedCharacters(character.id));
@@ -43,11 +45,11 @@ function Card(props: TypePropsCard) {
 
   return (
     <div
-      className={`${darkTheme ? 'bg-blue-800 text-white' : 'bg-blue-600 text-black'} flex flex-col w-80 h-80 m-2.5 rounded-md`}
+      onClick={openModal}
+      className={`${darkTheme ? 'bg-blue-800 text-white' : 'bg-blue-600 text-black'} flex flex-col w-80 h-80 m-2.5 rounded-md cursor-pointer`}
     >
       <img
-        onClick={openModal}
-        className="object-cover h-52 rounded-t-md cursor-pointer"
+        className="object-cover h-52 rounded-t-md"
         src={character ? character.image : 'empty'}
         alt="rick&morty"
       ></img>
@@ -58,7 +60,7 @@ function Card(props: TypePropsCard) {
         <div className="flex items-center justify-between">
           <span>Favorite:</span>
           <input
-            onChange={toggleCard}
+            onClick={(e) => toggleCard(e)}
             type="checkbox"
             className="w-5 h-6 accent-blue-200 mr-2.5"
             checked={checked}
