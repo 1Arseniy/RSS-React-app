@@ -8,7 +8,7 @@ import { Modal } from '@/views';
 
 import '@testing-library/jest-dom/vitest';
 
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
@@ -37,10 +37,11 @@ describe('tests Modal', () => {
         </Provider>
       </MemoryRouter>
     );
-
-    expect(
-      await screen.findByText('Сharacter with this id not found')
-    ).toBeVisible();
+    await waitFor(() => {
+      expect(
+        screen.getByText('Сharacter with this id not found')
+      ).toBeVisible();
+    });
   });
 
   it('should show right card with data', async () => {
