@@ -11,6 +11,7 @@ export const api = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://rickandmortyapi.com/api/character/',
   }),
+  keepUnusedDataFor: 80,
   endpoints: (create) => ({
     getCharacters: create.query<TypeCharacter[], TypePropsGetCharacters>({
       query: ({ name, page = 1 }) =>

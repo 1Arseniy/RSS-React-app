@@ -16,7 +16,6 @@ export interface TypeCharacters {
 
 export interface TypeQueryResult {
   data: TypeCharacter[] | undefined;
-  isError: boolean;
   error: FetchBaseQueryError | SerializedError | undefined;
   isFetching: boolean;
   refetch: () => void;

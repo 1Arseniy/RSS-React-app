@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom';
-import type { MouseEvent } from 'react';
 
 import {
   addToSelectedCharacters,
@@ -32,8 +31,7 @@ function Card(props: TypePropsCard) {
     }
   };
 
-  const toggleCard = (event: MouseEvent) => {
-    event.stopPropagation();
+  const toggleCard = () => {
     if (character) {
       if (checked) {
         disapatch(removeFromSelectedCharacters(character.id));
@@ -60,7 +58,8 @@ function Card(props: TypePropsCard) {
         <div className="flex items-center justify-between">
           <span>Favorite:</span>
           <input
-            onClick={(e) => toggleCard(e)}
+            onClick={(e) => e.stopPropagation()}
+            onChange={toggleCard}
             type="checkbox"
             className="w-5 h-6 accent-blue-200 mr-2.5"
             checked={checked}

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { Header, Main } from '@/components';
 
@@ -11,21 +11,18 @@ import { useGetCharactersQuery } from '@/client/api';
 import useLocalStorage from '@/hooks/useLocalStorage';
 
 function HomeView() {
+  const [savedValue] = useLocalStorage('name', '');
   const [state, setState] = useState<TypeProps>({
     page: 1,
-    name: '',
+    name: savedValue || '',
   });
-  const [savedValue] = useLocalStorage('name', '');
 
-  const { data, isError, error, isFetching, refetch } = useGetCharactersQuery({
+  const { data, error, isFetching, refetch } = useGetCharactersQuery({
     name: state.name,
     page: state.page,
   });
-  const queryResult = { data, isError, error, isFetching, refetch };
 
-  useEffect(() => {
-    setState((prev) => ({ ...prev, name: savedValue || '' }));
-  }, [savedValue]);
+  const queryResult = { data, error, isFetching, refetch };
 
   return (
     <>

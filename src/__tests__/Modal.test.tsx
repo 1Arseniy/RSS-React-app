@@ -54,9 +54,10 @@ describe('tests Modal', () => {
         </Provider>
       </MemoryRouter>
     );
-
-    expect(await screen.findByText('Full name: Rick Sanchez')).toBeVisible();
-    expect(await screen.findByText('Gender: Male')).toBeVisible();
-    expect(await screen.findByText('Status: Alive')).toBeVisible();
+    await waitFor(() => {
+      expect(screen.getByText('Full name: Rick Sanchez')).toBeVisible();
+      expect(screen.getByText('Gender: Male')).toBeVisible();
+      expect(screen.getByText('Status: Alive')).toBeVisible();
+    });
   });
 });

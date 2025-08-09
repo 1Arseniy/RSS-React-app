@@ -42,7 +42,6 @@ describe('testing CardList', () => {
               }}
               queryResult={{
                 refetch: mockFunc,
-                isError: false,
                 error: undefined,
                 isFetching: false,
                 data: data,
@@ -65,7 +64,6 @@ describe('testing CardList', () => {
               }}
               queryResult={{
                 refetch: mockFunc,
-                isError: false,
                 error: undefined,
                 isFetching: false,
                 data: data,
@@ -89,7 +87,6 @@ describe('testing CardList', () => {
             }}
             queryResult={{
               refetch: mockFunc,
-              isError: false,
               error: error,
               isFetching: false,
               data: [],
@@ -111,7 +108,6 @@ describe('testing CardList', () => {
             }}
             queryResult={{
               refetch: mockFunc,
-              isError: false,
               error: undefined,
               isFetching: true,
               data: [],

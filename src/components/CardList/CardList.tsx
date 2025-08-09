@@ -38,11 +38,7 @@ function CardList(props: TypePropsCardList) {
     <>
       <div className={`flex flex-wrap justify-center`} data-testid="cardList">
         {data?.map((character) => (
-          <Card
-            key={crypto.randomUUID()}
-            page={props.page}
-            character={character}
-          />
+          <Card key={character.id} page={props.page} character={character} />
         ))}
       </div>
     </>

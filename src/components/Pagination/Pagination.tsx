@@ -4,11 +4,16 @@ import { useSearchParams } from 'react-router-dom';
 
 import { Button } from '@/components';
 
-import type { CharactersRequestProps } from '@/types/types';
+import type { TypeProps, TypeSetState } from '@/types/types';
 
-function Pagination(props: CharactersRequestProps) {
+interface TypePropsPagination {
+  states: TypeProps;
+  setState: TypeSetState;
+}
+
+function Pagination(props: TypePropsPagination) {
   const step = 1;
-  const { states, setState, queryResult } = props;
+  const { states, setState } = props;
   const { page } = states;
   const [param, setParam] = useSearchParams();
 
@@ -32,7 +37,6 @@ function Pagination(props: CharactersRequestProps) {
 
   return (
     <div className="flex justify-center items-center">
-      <Button onClick={() => queryResult.refetch()}>Refresh Call</Button>
       <Button onClick={handlePrevious} disabled={page <= step}>
         Prev
       </Button>

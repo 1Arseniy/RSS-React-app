@@ -13,8 +13,6 @@ import { render, screen } from '@testing-library/react';
 
 import App from '@/App';
 
-// import * as getData from '@/client/getCharacters';
-
 import { server } from '@/__tests__/mocks/node';
 import { http, HttpResponse } from 'msw';
 
