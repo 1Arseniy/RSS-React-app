@@ -14,7 +14,7 @@ import useTheme from '@/hooks/useTheme';
 function Card(props: TypePropsCard) {
   const navigate = useNavigate();
   const { darkTheme } = useTheme();
-  const { character, states } = props;
+  const { character, page } = props;
   const disapatch = useAppDispatch();
 
   const checked = useAppSelector((state) => {
@@ -27,7 +27,7 @@ function Card(props: TypePropsCard) {
 
   const openModal = () => {
     if (character) {
-      navigate(`details/${character.id}?page=${states.page}`);
+      navigate(`details/${character.id}?page=${page}`);
     }
   };
 
@@ -43,11 +43,11 @@ function Card(props: TypePropsCard) {
 
   return (
     <div
-      className={`${darkTheme ? 'bg-blue-800 text-white' : 'bg-blue-600 text-black'} flex flex-col w-80 h-80 m-2.5 rounded-md`}
+      onClick={openModal}
+      className={`${darkTheme ? 'bg-blue-800 text-white' : 'bg-blue-600 text-black'} flex flex-col w-80 h-80 m-2.5 rounded-md cursor-pointer`}
     >
       <img
-        onClick={openModal}
-        className="object-cover h-52 rounded-t-md cursor-pointer"
+        className="object-cover h-52 rounded-t-md"
         src={character ? character.image : 'empty'}
         alt="rick&morty"
       ></img>
@@ -58,6 +58,7 @@ function Card(props: TypePropsCard) {
         <div className="flex items-center justify-between">
           <span>Favorite:</span>
           <input
+            onClick={(e) => e.stopPropagation()}
             onChange={toggleCard}
             type="checkbox"
             className="w-5 h-6 accent-blue-200 mr-2.5"

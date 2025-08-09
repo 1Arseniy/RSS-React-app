@@ -2,36 +2,46 @@ import { LuLoaderCircle } from 'react-icons/lu';
 
 import { Card } from '@/components';
 
-import type { TypeProps } from '@/types/types';
+import type { TypeQueryResult } from '@/types/types';
 
-function CardList(props: TypeProps) {
-  const { loading, characterByRequest, error } = props;
+interface TypePropsCardList {
+  queryResult: TypeQueryResult;
+  page: number;
+}
+
+function CardList(props: TypePropsCardList) {
+  const { data, error, isFetching } = props.queryResult;
+
+  if (error) {
+    const statusNotfound = 404;
+    if ('status' in error) {
+      const errorMessage =
+        error.status === statusNotfound
+          ? 'Сharacter with this name not found'
+          : 'Server not responding, try later';
+      return (
+        <div className="flex h-[65vh] justify-center items-center">
+          <h1 className="text-3xl">{errorMessage}</h1>
+        </div>
+      );
+    }
+  }
+
+  if (isFetching)
+    return (
+      <div className="flex h-[65vh] justify-center items-center">
+        <LuLoaderCircle data-testid="loader" className="size-24 animate-spin" />
+      </div>
+    );
 
   return (
-    <div className={`flex flex-wrap justify-center`} data-testid="cardList">
-      {loading || !characterByRequest.length || error ? (
-        <div className={`flex items-center h-[76vh] text-3xl text-center`}>
-          {loading ? (
-            <LuLoaderCircle
-              data-testid="loader"
-              className="size-24 animate-spin"
-            />
-          ) : !error ? (
-            <h1>Сharacter with this name not found</h1>
-          ) : (
-            <h1>Server not responding, try later</h1>
-          )}
-        </div>
-      ) : (
-        characterByRequest.map((character) => (
-          <Card
-            key={crypto.randomUUID()}
-            states={props}
-            character={character}
-          />
-        ))
-      )}
-    </div>
+    <>
+      <div className={`flex flex-wrap justify-center`} data-testid="cardList">
+        {data?.map((character) => (
+          <Card key={character.id} page={props.page} character={character} />
+        ))}
+      </div>
+    </>
   );
 }
 export default CardList;

@@ -7,7 +7,6 @@ import useTheme from '@/hooks/useTheme';
 
 function Menu() {
   const { darkTheme, toggleTheme } = useTheme();
-
   return (
     <div
       className={`min-h-screen  ${darkTheme ? 'bg-blue-950 text-white' : 'bg-blue-300 text-black'}`}

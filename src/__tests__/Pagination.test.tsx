@@ -1,4 +1,4 @@
-import { it, expect, describe, vi, beforeEach } from 'vitest';
+import { it, expect, describe, beforeEach } from 'vitest';
 
 import { render, screen } from '@testing-library/react';
 
@@ -6,28 +6,29 @@ import { Pagination } from '@/components';
 
 import '@testing-library/jest-dom/vitest';
 
-import data from '@/__tests__/mocks/characters.json';
-
 import { MemoryRouter } from 'react-router-dom';
 
+import userEvent from '@testing-library/user-event';
+
+import type { TypeProps } from '@/types/types';
+
+import { useState } from 'react';
+
+function PaginationWrapper() {
+  const [state, setState] = useState<TypeProps>({
+    page: 1,
+    name: '',
+  });
+  return <Pagination states={state} setState={setState} />;
+}
+
 describe('tests Pagination', () => {
-  const mockFunc = vi.fn();
   let prevButton: HTMLButtonElement;
   let nextButton: HTMLButtonElement;
-
   beforeEach(() => {
     render(
       <MemoryRouter>
-        <Pagination
-          states={{
-            characterByRequest: data,
-            loading: false,
-            error: false,
-            page: 2,
-          }}
-          getByRequest={mockFunc}
-          setState={mockFunc}
-        />
+        <PaginationWrapper />
       </MemoryRouter>
     );
     prevButton = screen.getByRole('button', { name: 'Prev' });
@@ -37,6 +38,16 @@ describe('tests Pagination', () => {
   it('should show user buttons: prev, next and curent page', () => {
     expect(prevButton).toBeVisible();
     expect(nextButton).toBeVisible();
+    expect(screen.getByText('1')).toBeVisible();
+  });
+
+  it('page should be increased when user click "Next button"', async () => {
+    await userEvent.click(nextButton);
     expect(screen.getByText('2')).toBeVisible();
+  });
+
+  it('the page should shrink when the user clicks the "Prev button"', async () => {
+    await userEvent.click(prevButton);
+    expect(screen.getByText('1')).toBeVisible();
   });
 });

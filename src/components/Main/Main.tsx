@@ -1,17 +1,16 @@
-import { CardList, Pagination, Flyout } from '@/components';
+import { CardList, Flyout, Pagination, Button } from '@/components';
 
 import type { CharactersRequestProps } from '@/types/types';
 
 function Main(props: CharactersRequestProps) {
-  const { states, getByRequest, setState } = props;
+  const { states, setState, queryResult } = props;
   return (
     <main className="flex flex-col px-12">
-      <Pagination
-        setState={setState}
-        states={states}
-        getByRequest={getByRequest}
-      />
-      <CardList {...states} />
+      <div className="flex justify-center">
+        <Button onClick={() => queryResult.refetch()}>Refresh Call</Button>
+        <Pagination setState={setState} states={states} />
+      </div>
+      <CardList {...states} queryResult={queryResult} />
       <Flyout />
     </main>
   );

@@ -5,15 +5,14 @@ import useLocalStorage from '@/hooks/useLocalStorage';
 import { Button } from '@/components';
 import { InputSearch } from '@/components';
 
-import type { TypeGetByRequest, TypeSetUpdatePage } from '@/types/types';
+import type { TypeSetState } from '@/types/types';
 
 interface TypePropsHeader {
-  getByRequest: TypeGetByRequest;
-  setUpdatePage: TypeSetUpdatePage;
+  setState: TypeSetState;
 }
 
 function Header(props: TypePropsHeader) {
-  const { getByRequest, setUpdatePage } = props;
+  const { setState } = props;
 
   const [savedValue, setSavedValue] = useLocalStorage('name', '');
 
@@ -23,8 +22,7 @@ function Header(props: TypePropsHeader) {
     const trimmedText = inputValue.trim();
     setInputValue(trimmedText);
     setSavedValue(trimmedText);
-    setUpdatePage((prev) => ({ ...prev, page: 1 }));
-    await getByRequest(trimmedText);
+    setState((prev) => ({ ...prev, page: 1, name: trimmedText }));
   };
 
   const setText = (name: string) => {

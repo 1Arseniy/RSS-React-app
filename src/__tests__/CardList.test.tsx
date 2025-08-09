@@ -1,4 +1,4 @@
-import { it, expect, describe, afterEach } from 'vitest';
+import { it, expect, describe, afterEach, vi, beforeEach } from 'vitest';
 
 import { cleanup, render, screen } from '@testing-library/react';
 
@@ -11,12 +11,22 @@ import data from '@/__tests__/mocks/characters.json';
 import { MemoryRouter } from 'react-router-dom';
 
 import { Provider } from 'react-redux';
+import type { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 
 import store from '@/store';
 
 describe('testing CardList', () => {
+  beforeEach(() => {
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+  });
+
   describe('tests rendering', () => {
     const arrlength = 20;
+    const mockFunc = vi.fn();
+    const error: FetchBaseQueryError = {
+      status: 404,
+      data: '',
+    };
 
     afterEach(() => {
       cleanup();
@@ -28,10 +38,13 @@ describe('testing CardList', () => {
           <MemoryRouter>
             <CardList
               {...{
-                characterByRequest: data,
-                loading: false,
-                error: false,
                 page: 1,
+              }}
+              queryResult={{
+                refetch: mockFunc,
+                error: undefined,
+                isFetching: false,
+                data: data,
               }}
             />
           </MemoryRouter>
@@ -47,10 +60,13 @@ describe('testing CardList', () => {
           <MemoryRouter>
             <CardList
               {...{
-                characterByRequest: data,
-                loading: false,
-                error: false,
                 page: 1,
+              }}
+              queryResult={{
+                refetch: mockFunc,
+                error: undefined,
+                isFetching: false,
+                data: data,
               }}
             />
           </MemoryRouter>
@@ -67,10 +83,13 @@ describe('testing CardList', () => {
         <MemoryRouter>
           <CardList
             {...{
-              characterByRequest: [],
-              loading: false,
-              error: false,
               page: 1,
+            }}
+            queryResult={{
+              refetch: mockFunc,
+              error: error,
+              isFetching: false,
+              data: [],
             }}
           />
         </MemoryRouter>
@@ -85,10 +104,13 @@ describe('testing CardList', () => {
         <MemoryRouter>
           <CardList
             {...{
-              characterByRequest: [],
-              loading: true,
-              error: false,
               page: 1,
+            }}
+            queryResult={{
+              refetch: mockFunc,
+              error: undefined,
+              isFetching: true,
+              data: [],
             }}
           />
         </MemoryRouter>
