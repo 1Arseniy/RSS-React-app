@@ -33,7 +33,7 @@ function Pagination(props: TypePropsPagination) {
 
   useEffect(() => {
     setParam(`page=${page}`);
-  }, [page]);
+  }, [page, setParam]);
 
   return (
     <div className="flex justify-center items-center">

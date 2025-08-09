@@ -14,7 +14,9 @@ function Flyout() {
   );
   const dispatch = useAppDispatch();
   const { darkTheme } = useTheme();
-  const link = downloadFile(JSON.stringify(selectedCards));
+  const link = downloadFile(
+    selectedCards.map((el) => [el.name, el.gender, el.status, el.image])
+  );
 
   return (
     !!selectedCards.length && (
