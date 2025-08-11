@@ -1,4 +1,7 @@
+'use client';
+
 import useTheme from '@/hooks/useTheme';
+import '@/styles/index.css';
 
 function AboutView() {
   const { darkTheme } = useTheme();

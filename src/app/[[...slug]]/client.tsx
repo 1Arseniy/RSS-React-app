@@ -4,21 +4,18 @@ import dynamic from 'next/dynamic';
 
 import { ErrorBoundary } from '@/components';
 
-import { Provider } from 'react-redux';
+import StoreProvider from '@/app/StoreProvider';
 
-import store from '@/store';
-import { ThemeProvider } from '@/context/ThemeProvider';
+// import store from '@/store';
 
-const App = dynamic(() => import('@/App'), { ssr: false });
+const App = dynamic(() => import('@/views/HomeView/HomeView'), { ssr: false });
 
 export function ClientOnly() {
   return (
     <ErrorBoundary>
-      <Provider store={store}>
-        <ThemeProvider>
-          <App />
-        </ThemeProvider>
-      </Provider>
+      <StoreProvider>
+        <App />
+      </StoreProvider>
     </ErrorBoundary>
   );
 }

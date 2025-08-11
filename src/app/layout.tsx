@@ -1,9 +1,14 @@
 import type { Metadata } from 'next';
 
+import { Menu } from '@/components';
+import { ThemeProvider } from '@/context/ThemeProvider';
+
+// import { Provider } from 'react-redux';
+// import { store } from '@/store/index';
+
 // eslint-disable-next-line react-refresh/only-export-components
 export const metadata: Metadata = {
-  title: 'My App',
-  description: 'My App is a...',
+  title: 'Rick&Morty',
 };
 
 export default function RootLayout({
@@ -13,9 +18,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
-        <div id="root">{children}</div>
-      </body>
+      <ThemeProvider>
+        <body>
+          <div id="root">
+            <Menu>{children}</Menu>
+          </div>
+        </body>
+      </ThemeProvider>
     </html>
   );
 }

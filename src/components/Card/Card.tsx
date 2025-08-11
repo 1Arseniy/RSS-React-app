@@ -1,20 +1,23 @@
-import { useNavigate } from 'react-router-dom';
+'use client';
+
+// import { useNavigate } from 'react-router-dom';
 
 import {
   addToSelectedCharacters,
   removeFromSelectedCharacters,
 } from '@/store/characterSlice';
 
-import { useAppDispatch, useAppSelector } from '@/store';
+// import { useAppDispatch, useAppSelector } from '@/store';
 
 import type { TypePropsCard } from '@/types/types';
 
 import useTheme from '@/hooks/useTheme';
+import { useAppDispatch, useAppSelector } from '@/store';
 
 function Card(props: TypePropsCard) {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { darkTheme } = useTheme();
-  const { character, page } = props;
+  const { character } = props;
   const disapatch = useAppDispatch();
 
   const checked = useAppSelector((state) => {
@@ -25,11 +28,11 @@ function Card(props: TypePropsCard) {
     }
   });
 
-  const openModal = () => {
-    if (character) {
-      navigate(`details/${character.id}?page=${page}`);
-    }
-  };
+  // const openModal = () => {
+  //   if (character) {
+  //     navigate(`details/${character.id}?page=${page}`);
+  //   }
+  // };
 
   const toggleCard = () => {
     if (character) {
@@ -43,7 +46,7 @@ function Card(props: TypePropsCard) {
 
   return (
     <div
-      onClick={openModal}
+      // onClick={openModal}
       className={`${darkTheme ? 'bg-blue-800 text-white' : 'bg-blue-600 text-black'} flex flex-col w-80 h-80 m-2.5 rounded-md cursor-pointer`}
     >
       <img

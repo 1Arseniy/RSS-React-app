@@ -1,6 +1,8 @@
-import { useEffect } from 'react';
+'use client';
 
-import { useSearchParams } from 'react-router-dom';
+// import { useEffect } from 'react';
+
+// import { useSearchParams } from 'react-router-dom';
 
 import { Button } from '@/components';
 
@@ -15,7 +17,7 @@ function Pagination(props: TypePropsPagination) {
   const step = 1;
   const { states, setState } = props;
   const { page } = states;
-  const [param, setParam] = useSearchParams();
+  // const [param, setParam] = useSearchParams();
 
   const handleNext = () => {
     setState((prev) => ({ ...prev, page: prev.page + step }));
@@ -25,15 +27,15 @@ function Pagination(props: TypePropsPagination) {
     setState((prev) => ({ ...prev, page: prev.page - step }));
   };
 
-  useEffect(() => {
-    const currentPage = param.get('page') || 1;
-    const revertToNumber = Number(currentPage);
-    setState((prev) => ({ ...prev, page: revertToNumber }));
-  }, []);
+  // useEffect(() => {
+  //   const currentPage = param.get('page') || 1;
+  //   const revertToNumber = Number(currentPage);
+  //   setState((prev) => ({ ...prev, page: revertToNumber }));
+  // }, []);
 
-  useEffect(() => {
-    setParam(`page=${page}`);
-  }, [page, setParam]);
+  // useEffect(() => {
+  //   setParam(`page=${page}`);
+  // }, [page, setParam]);
 
   return (
     <div className="flex justify-center items-center">

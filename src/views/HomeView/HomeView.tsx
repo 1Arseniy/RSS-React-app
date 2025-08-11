@@ -1,10 +1,9 @@
+'use client';
 import { useState } from 'react';
 
 import { Header, Main } from '@/components';
 
 import type { TypeProps } from '@/types/types';
-
-import { Outlet } from 'react-router-dom';
 
 import { useGetCharactersQuery } from '@/client/api';
 
@@ -26,7 +25,6 @@ function HomeView() {
 
   return (
     <>
-      <Outlet />
       <Header setState={setState} />
       <Main setState={setState} states={state} queryResult={queryResult} />
     </>
