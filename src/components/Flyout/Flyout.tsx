@@ -8,6 +8,8 @@ import useTheme from '@/hooks/useTheme';
 
 import { useAppDispatch, useAppSelector } from '@/store';
 
+import { useTranslations } from 'next-intl';
+
 function Flyout() {
   const selectedCards = useAppSelector(
     (state) => state.selectedCharacters.results
@@ -17,14 +19,19 @@ function Flyout() {
   const link = downloadFile(
     selectedCards.map((el) => [el.name, el.gender, el.status, el.image])
   );
+  const t = useTranslations('HomeView');
 
   return (
     !!selectedCards.length && (
       <div
         className={`${darkTheme ? 'bg-blue-900' : 'bg-blue-600'} flex justify-center items-center rounded-t-2xl flyout`}
       >
-        <span className="text-2xl">selected {selectedCards.length} items</span>
-        <Button onClick={() => dispatch(clearAllItems())}>Unselect all</Button>
+        <span className="text-2xl">
+          {t('Main.Flyout.selectedItems')}: {selectedCards.length}
+        </span>
+        <Button onClick={() => dispatch(clearAllItems())}>
+          {t('Main.Flyout.unselectButton')}
+        </Button>
         <a
           className={`px-7 rounded-sm py-2 cursor-pointer m-5 ${
             darkTheme
@@ -35,7 +42,7 @@ function Flyout() {
           download={`${selectedCards.length}_items.csv`}
           href={link}
         >
-          Download
+          {t('Main.Flyout.downloadButton')}
         </a>
       </div>
     )

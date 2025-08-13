@@ -1,12 +1,14 @@
 'use client';
 
-// import { useEffect } from 'react';
-
-// import { useSearchParams } from 'react-router-dom';
-
 import { Button } from '@/components';
 
 import type { TypeProps, TypeSetState } from '@/types/types';
+
+import { useSearchParams, useRouter } from 'next/navigation';
+
+import { useTranslations } from 'next-intl';
+
+import { useEffect } from 'react';
 
 interface TypePropsPagination {
   states: TypeProps;
@@ -17,7 +19,9 @@ function Pagination(props: TypePropsPagination) {
   const step = 1;
   const { states, setState } = props;
   const { page } = states;
-  // const [param, setParam] = useSearchParams();
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const t = useTranslations('HomeView');
 
   const handleNext = () => {
     setState((prev) => ({ ...prev, page: prev.page + step }));
@@ -27,23 +31,23 @@ function Pagination(props: TypePropsPagination) {
     setState((prev) => ({ ...prev, page: prev.page - step }));
   };
 
-  // useEffect(() => {
-  //   const currentPage = param.get('page') || 1;
-  //   const revertToNumber = Number(currentPage);
-  //   setState((prev) => ({ ...prev, page: revertToNumber }));
-  // }, []);
+  useEffect(() => {
+    const currentPage = searchParams.get('page') || 1;
+    const revertToNumber = Number(currentPage);
+    setState((prev) => ({ ...prev, page: revertToNumber }));
+  }, []);
 
-  // useEffect(() => {
-  //   setParam(`page=${page}`);
-  // }, [page, setParam]);
+  useEffect(() => {
+    router.push(`?page=${page}`);
+  }, [searchParams, page, router]);
 
   return (
     <div className="flex justify-center items-center">
       <Button onClick={handlePrevious} disabled={page <= step}>
-        Prev
+        {t('Main.Pagination.prevButton')}
       </Button>
       <span className="text-white text-2xl">{page}</span>
-      <Button onClick={handleNext}>Next</Button>
+      <Button onClick={handleNext}>{t('Main.Pagination.nextButton')}</Button>
     </div>
   );
 }

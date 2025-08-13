@@ -1,10 +1,6 @@
 // import type { Metadata } from 'next';
 
-import Link from 'next/link';
-
-// export const metadata: Metadata = {
-//   title: 'Not Found Page',
-// };
+import { Link } from '@/i18n/navigation';
 
 export default function NotFound() {
   return (

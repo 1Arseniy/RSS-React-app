@@ -1,0 +1,61 @@
+import type { Metadata } from 'next';
+
+import { ErrorBoundary, Menu } from '@/components';
+
+import { ThemeProvider } from '@/context/ThemeProvider';
+import StoreProvider from '@/app/[locale]/StoreProvider';
+import { NextIntlClientProvider, hasLocale } from 'next-intl';
+import { routing } from '@/i18n/routing';
+import { notFound } from 'next/navigation';
+import { setRequestLocale } from 'next-intl/server';
+
+// import Modal from './@details/[id]/page';
+
+// import { Provider } from 'react-redux';
+// import { store } from '@/store/index';
+
+// eslint-disable-next-line react-refresh/only-export-components
+export const metadata: Metadata = {
+  title: 'Rick&Morty',
+};
+
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
+
+export default async function RootLayout({
+  children,
+  params,
+}: {
+  children: React.ReactNode;
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  if (!hasLocale(routing.locales, locale)) {
+    notFound();
+  }
+  setRequestLocale(locale);
+
+  return (
+    <html lang={locale}>
+      <body>
+        <ErrorBoundary>
+          <NextIntlClientProvider>
+            <ThemeProvider>
+              <StoreProvider>
+                <div id="root">
+                  <Menu>
+                    {children}
+                    {/* {modal} */}
+                    {/* {details} */}
+                  </Menu>
+                  {/* <Modal /> */}
+                </div>
+              </StoreProvider>
+            </ThemeProvider>
+          </NextIntlClientProvider>
+        </ErrorBoundary>
+      </body>
+    </html>
+  );
+}

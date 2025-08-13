@@ -1,0 +1,35 @@
+{
+  "HomeView": {
+    "Menu": {
+      "homeLink": "Home",
+      "aboutLink": "About",
+      "language": "EN"
+    },
+    "Header": {
+      "inputPlaceholder": "Search by name...",
+      "searchButton": "Search"
+    },
+    "Main": {
+      "RefreshCallButton": "Refresh Call",
+      "Pagination": {
+        "prevButton": "Prev",
+        "nextButton": "Next"
+      },
+      "Flyout": {
+        "selectedItems": "Selected items",
+        "unselectButton": "Unselect all",
+        "downloadButton": "Download"
+      },
+      "Card": {
+        "fullName": "FullName",
+        "gender": "Gender",
+        "status": "Status",
+        "favorute": "Favorute"
+      }
+    }
+  },
+  "AboutView": {
+    "description": "Hello my name is Arseniy. Successfully completed the main course. Learned a lot during the RS School course.",
+    "link": "RSS React"
+  }
+}
