@@ -1,3 +1,5 @@
+'use client';
+
 import { clearAllItems } from '@/store/characterSlice';
 
 import downloadFile from '@/utils/downloadFile';

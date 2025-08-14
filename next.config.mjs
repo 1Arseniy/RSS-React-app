@@ -7,7 +7,10 @@ const nextConfig = {
   experimental: {
     globalNotFound: true,
   },
-  images: { unoptimized: true },
+  images: {
+    unoptimized: true,
+    remotePatterns: [new URL('https://rickandmortyapi.com/api/character/**')],
+  },
 };
 
 const withNextIntl = createNextIntlPlugin();

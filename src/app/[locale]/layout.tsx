@@ -26,9 +26,11 @@ export function generateStaticParams() {
 export default async function RootLayout({
   children,
   params,
+  modal,
 }: {
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
+  modal: React.ReactNode;
 }) {
   const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) {
@@ -46,7 +48,7 @@ export default async function RootLayout({
                 <div id="root">
                   <Menu>
                     {children}
-                    {/* {modal} */}
+                    {modal}
                     {/* {details} */}
                   </Menu>
                   {/* <Modal /> */}
