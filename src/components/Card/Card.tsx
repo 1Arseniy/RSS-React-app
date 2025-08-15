@@ -44,7 +44,7 @@ function Card(props: TypePropsCard) {
     character && (
       <Link
         scroll={false}
-        href={`/${character.id}?page=${page}`}
+        href={`/details/${character.id}?page=${page}`}
         className={`${darkTheme ? 'bg-blue-800 text-white' : 'bg-blue-600 text-black'} flex flex-col w-80 h-80 m-2.5 rounded-md cursor-pointer`}
       >
         <Image

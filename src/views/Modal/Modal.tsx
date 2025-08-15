@@ -1,5 +1,4 @@
 'use client';
-// import { useNavigate, useParams } from 'react-router-dom';
 import { LuLoaderCircle } from 'react-icons/lu';
 
 import { useGetCharacterByIdQuery } from '@/client/api';
@@ -7,6 +6,7 @@ import { useGetCharacterByIdQuery } from '@/client/api';
 import useTheme from '@/hooks/useTheme';
 
 import { Button } from '@/components';
+
 import { useRouter } from 'next/navigation';
 
 function Modal({ id }: { id: string }) {

@@ -11,6 +11,7 @@ import useLocalStorage from '@/hooks/useLocalStorage';
 
 function HomeView() {
   const [savedValue] = useLocalStorage('name', '');
+
   const [state, setState] = useState<TypeProps>({
     page: 1,
     name: savedValue || '',
@@ -22,7 +23,6 @@ function HomeView() {
   });
 
   const queryResult = { data, error, isFetching, refetch };
-
   return (
     <>
       <Header setState={setState} />

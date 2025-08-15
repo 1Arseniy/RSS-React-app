@@ -9,11 +9,6 @@ import { routing } from '@/i18n/routing';
 import { notFound } from 'next/navigation';
 import { setRequestLocale } from 'next-intl/server';
 
-// import Modal from './@details/[id]/page';
-
-// import { Provider } from 'react-redux';
-// import { store } from '@/store/index';
-
 // eslint-disable-next-line react-refresh/only-export-components
 export const metadata: Metadata = {
   title: 'Rick&Morty',
@@ -49,9 +44,7 @@ export default async function RootLayout({
                   <Menu>
                     {children}
                     {modal}
-                    {/* {details} */}
                   </Menu>
-                  {/* <Modal /> */}
                 </div>
               </StoreProvider>
             </ThemeProvider>
