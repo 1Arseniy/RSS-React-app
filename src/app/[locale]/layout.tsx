@@ -8,6 +8,7 @@ import { NextIntlClientProvider, hasLocale } from 'next-intl';
 import { routing } from '@/i18n/routing';
 import { notFound } from 'next/navigation';
 import { setRequestLocale } from 'next-intl/server';
+import React from 'react';
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const metadata: Metadata = {
@@ -21,7 +22,6 @@ export function generateStaticParams() {
 export default async function RootLayout({
   children,
   params,
-  modal,
 }: {
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
@@ -41,10 +41,7 @@ export default async function RootLayout({
             <ThemeProvider>
               <StoreProvider>
                 <div id="root">
-                  <Menu>
-                    {children}
-                    {modal}
-                  </Menu>
+                  <Menu>{children}</Menu>
                 </div>
               </StoreProvider>
             </ThemeProvider>

@@ -24,6 +24,7 @@ export interface TypeQueryResult {
 export interface TypeProps {
   page: number;
   name: string;
+  characters: TypeCharacter[] | undefined;
 }
 
 export type TypeGetByRequest = (name?: string, page?: number) => Promise<void>;
@@ -34,6 +35,7 @@ export interface CharactersRequestProps {
   states: TypeProps;
   queryResult: TypeQueryResult;
   setState: TypeSetState;
+  // initialData: TypeCharacters;
 }
 
 export interface TypeModalStates {

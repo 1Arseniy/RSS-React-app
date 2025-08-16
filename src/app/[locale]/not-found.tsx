@@ -1,4 +1,5 @@
 import { Link } from '@/i18n/navigation';
+import '@/styles/index.css';
 
 export default function NotFound() {
   return (

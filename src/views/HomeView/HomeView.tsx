@@ -1,26 +1,31 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Header, Main } from '@/components';
 
-import type { TypeProps } from '@/types/types';
+import type { TypeCharacter, TypeProps } from '@/types/types';
 
 import { useGetCharactersQuery } from '@/client/api';
 
 import useLocalStorage from '@/hooks/useLocalStorage';
 
-function HomeView() {
+function HomeView({ initialData }: { initialData: TypeCharacter[] }) {
   const [savedValue] = useLocalStorage('name', '');
 
   const [state, setState] = useState<TypeProps>({
     page: 1,
-    name: savedValue || '',
+    name: savedValue,
+    characters: initialData,
   });
 
   const { data, error, isFetching, refetch } = useGetCharactersQuery({
     name: state.name,
     page: state.page,
   });
+
+  useEffect(() => {
+    setState((prev) => ({ ...prev, characters: data }));
+  }, [data, setState]);
 
   const queryResult = { data, error, isFetching, refetch };
   return (

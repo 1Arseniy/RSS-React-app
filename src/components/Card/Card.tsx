@@ -14,13 +14,14 @@ import Image from 'next/image';
 
 import { useTranslations } from 'next-intl';
 
-import { Link } from '@/i18n/navigation';
+import { Link, usePathname } from '@/i18n/navigation';
 
 function Card(props: TypePropsCard) {
   const { darkTheme } = useTheme();
   const { character, page } = props;
   const disapatch = useAppDispatch();
   const t = useTranslations('HomeView');
+  const pathname = usePathname();
 
   const checked = useAppSelector((state) => {
     if (character) {
@@ -44,7 +45,10 @@ function Card(props: TypePropsCard) {
     character && (
       <Link
         scroll={false}
-        href={`/details/${character.id}?page=${page}`}
+        href={{
+          pathname: pathname,
+          query: { details: character.id, page: page },
+        }}
         className={`${darkTheme ? 'bg-blue-800 text-white' : 'bg-blue-600 text-black'} flex flex-col w-80 h-80 m-2.5 rounded-md cursor-pointer`}
       >
         <Image
