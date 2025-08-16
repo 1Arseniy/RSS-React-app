@@ -8,27 +8,31 @@ import useTheme from '@/hooks/useTheme';
 import { Button } from '@/components';
 
 import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 
 function Modal({ id }: { id: string }) {
   const router = useRouter();
   const statusNotfound = 404;
+  const t = useTranslations('HomeView');
   const { data, isFetching, refetch, error } = useGetCharacterByIdQuery(id);
   const { darkTheme } = useTheme();
 
   const closeModal = () => {
-    router.back();
+    router.push(`/`);
   };
 
   return (
-    <div className="fixed">
+    <>
       <div onClick={closeModal} className="h-full w-full fixed top-0"></div>
       <div className="absolute right-0 h-screen">
         <div
           className={`${darkTheme ? 'bg-blue-900 text-white' : 'bg-blue-600 text-black'}  fixed h-screen z-10  inset-y-0 right-0  w-80 flex flex-col justify-center items-center `}
         >
           <div className="h-full w-full absolute flex items-start justify-end">
-            <Button onClick={() => refetch()}>Refresh call</Button>
-            <Button onClick={closeModal}>Close</Button>
+            <Button onClick={() => refetch()}>
+              {t('Main.RefreshCallButton')}
+            </Button>
+            <Button onClick={closeModal}>{t('Main.CloseButton')}</Button>
           </div>
           {isFetching ? (
             <LuLoaderCircle
@@ -51,16 +55,22 @@ function Modal({ id }: { id: string }) {
                   data-testid="img"
                 ></img>
                 <div className="flex flex-col justify-center p-2.5">
-                  <span>Full name: {data.name}</span>
-                  <span>Gender: {data.gender}</span>
-                  <span>Status: {data.status}</span>
+                  <span>
+                    {t('Main.Card.fullName')}: {data.name}
+                  </span>
+                  <span>
+                    {t('Main.Card.gender')}: {data.gender}
+                  </span>
+                  <span>
+                    {t('Main.Card.status')}: {data.status}
+                  </span>
                 </div>
               </>
             )
           )}
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

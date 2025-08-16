@@ -1,11 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import selectedReducer from '@/store/characterSlice';
-import {
-  useDispatch,
-  useSelector,
-  type TypedUseSelectorHook,
-} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { api } from '@/client/api';
 
@@ -27,9 +23,5 @@ export type AppStore = ReturnType<typeof makeStore>;
 export type RootState = ReturnType<AppStore['getState']>;
 export type AppDispatch = AppStore['dispatch'];
 
-export const useAppDispatch = () => useDispatch<AppDispatch>();
-export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
-
-// export const useAppDispatch = useDispatch.withTypes<AppDispatch>();
-// export const useAppSelector = useSelector.withTypes<RootState>();
-// export const useAppStore = useStore.withTypes<AppStore>();
+export const useAppDispatch = useDispatch.withTypes<AppDispatch>();
+export const useAppSelector = useSelector.withTypes<RootState>();

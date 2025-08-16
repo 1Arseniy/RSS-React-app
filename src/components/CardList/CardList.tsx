@@ -13,6 +13,7 @@ interface TypePropsCardList {
 function CardList(props: TypePropsCardList) {
   const { error, isFetching } = props.queryResult;
   const { characters } = props;
+
   if (error) {
     const statusNotfound = 404;
     if ('status' in error) {

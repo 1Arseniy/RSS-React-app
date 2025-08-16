@@ -9,19 +9,25 @@ import { useGetCharactersQuery } from '@/client/api';
 
 import useLocalStorage from '@/hooks/useLocalStorage';
 
+import { useSearchParams } from 'next/navigation';
+
 function HomeView({ initialData }: { initialData: TypeCharacter[] }) {
   const [savedValue] = useLocalStorage('name', '');
+  const searchParams = useSearchParams();
 
   const [state, setState] = useState<TypeProps>({
-    page: 1,
-    name: savedValue,
+    page: Number(searchParams.get('page')) || 1,
+    name: savedValue || '',
     characters: initialData,
   });
-
-  const { data, error, isFetching, refetch } = useGetCharactersQuery({
-    name: state.name,
-    page: state.page,
-  });
+  // const skipQuery = state.name !== '' || state.page > 0;
+  const { data, error, isFetching, refetch } = useGetCharactersQuery(
+    {
+      name: state.name,
+      page: state.page,
+    }
+    // { skip: !skipQuery }
+  );
 
   useEffect(() => {
     setState((prev) => ({ ...prev, characters: data }));

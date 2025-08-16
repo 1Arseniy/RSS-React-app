@@ -35,7 +35,6 @@ export interface CharactersRequestProps {
   states: TypeProps;
   queryResult: TypeQueryResult;
   setState: TypeSetState;
-  // initialData: TypeCharacters;
 }
 
 export interface TypeModalStates {

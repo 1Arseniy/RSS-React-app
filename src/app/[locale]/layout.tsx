@@ -41,7 +41,7 @@ export default async function RootLayout({
             <ThemeProvider>
               <StoreProvider>
                 <div id="root">
-                  <Menu>{children}</Menu>
+                  <Menu> {children}</Menu>
                 </div>
               </StoreProvider>
             </ThemeProvider>

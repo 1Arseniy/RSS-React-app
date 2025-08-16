@@ -11,6 +11,7 @@
     },
     "Main": {
       "RefreshCallButton": "Refresh Call",
+      "CloseButton": "Close",
       "Pagination": {
         "prevButton": "Prev",
         "nextButton": "Next"
@@ -31,5 +32,9 @@
   "AboutView": {
     "description": "Hello my name is Arseniy. Successfully completed the main course. Learned a lot during the RS School course.",
     "link": "RSS React"
+  },
+  "PageNotFound": {
+    "text": "Page is not found",
+    "backButton": "Go to Home"
   }
 }

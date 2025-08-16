@@ -11,6 +11,7 @@
     },
     "Main": {
       "RefreshCallButton": "Сделать запрос",
+      "CloseButton": "закрыть",
       "Pagination": {
         "prevButton": "пребедущая",
         "nextButton": "следующая"
@@ -31,5 +32,9 @@
   "AboutView": {
     "description": "Здравствуйте, меня зовут Арсений. Успешно прошёл основной курс. Многому научился на курсе RS School.",
     "link": "RSS React"
+  },
+  "PageNotFound": {
+    "text": "Страница не найдена",
+    "backButton": "Вернутся на главную страницу"
   }
 }
