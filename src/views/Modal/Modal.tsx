@@ -9,6 +9,7 @@ import { Button } from '@/components';
 
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
+import Image from 'next/image';
 
 function Modal({ id }: { id: string }) {
   const router = useRouter();
@@ -48,12 +49,15 @@ function Modal({ id }: { id: string }) {
           ) : (
             data && (
               <>
-                <img
-                  className="object-cover h-52"
+                <Image
+                  height={208}
+                  width={208}
+                  priority={true}
+                  className="object-cover"
                   src={data.image}
                   alt="rick&morty"
                   data-testid="img"
-                ></img>
+                ></Image>
                 <div className="flex flex-col justify-center p-2.5">
                   <span>
                     {t('Main.Card.fullName')}: {data.name}
