@@ -20,14 +20,11 @@ function HomeView({ initialData }: { initialData: TypeCharacter[] }) {
     name: savedValue || '',
     characters: initialData,
   });
-  // const skipQuery = state.name !== '' || state.page > 0;
-  const { data, error, isFetching, refetch } = useGetCharactersQuery(
-    {
-      name: state.name,
-      page: state.page,
-    }
-    // { skip: !skipQuery }
-  );
+
+  const { data, error, isFetching, refetch } = useGetCharactersQuery({
+    name: state.name,
+    page: state.page,
+  });
 
   useEffect(() => {
     setState((prev) => ({ ...prev, characters: data }));

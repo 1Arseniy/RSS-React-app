@@ -24,7 +24,6 @@ function Pagination(props: TypePropsPagination) {
   const t = useTranslations('HomeView');
 
   const handleNext = () => {
-    console.log(states.page);
     setState((prev) => ({
       ...prev,
       page: prev.page + step,

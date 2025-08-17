@@ -15,6 +15,7 @@ export const metadata: Metadata = {
   title: 'Rick&Morty',
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
