@@ -1,6 +1,6 @@
-import { clearAllItems } from '@/store/characterSlice';
+'use client';
 
-import downloadFile from '@/utils/downloadFile';
+import { clearAllItems } from '@/store/characterSlice';
 
 import Button from '../Button/Button';
 
@@ -8,35 +8,57 @@ import useTheme from '@/hooks/useTheme';
 
 import { useAppDispatch, useAppSelector } from '@/store';
 
+import { useTranslations } from 'next-intl';
+import { useRef } from 'react';
+
 function Flyout() {
+  const t = useTranslations('HomeView');
+  const link = useRef<HTMLAnchorElement>(null);
   const selectedCards = useAppSelector(
     (state) => state.selectedCharacters.results
   );
   const dispatch = useAppDispatch();
   const { darkTheme } = useTheme();
-  const link = downloadFile(
-    selectedCards.map((el) => [el.name, el.gender, el.status, el.image])
-  );
+
+  const createFile = async () => {
+    const response = await fetch('utils/', {
+      method: 'POST',
+      body: JSON.stringify({ result: selectedCards }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (response.ok) {
+      const blob = await response.blob();
+      if (link.current) {
+        const url = URL.createObjectURL(blob);
+        link.current.href = url;
+        link.current.download = `${selectedCards.length}_items.csv`;
+        link.current.click();
+      }
+    } else {
+      console.log('error');
+    }
+  };
 
   return (
     !!selectedCards.length && (
       <div
         className={`${darkTheme ? 'bg-blue-900' : 'bg-blue-600'} flex justify-center items-center rounded-t-2xl flyout`}
       >
-        <span className="text-2xl">selected {selectedCards.length} items</span>
-        <Button onClick={() => dispatch(clearAllItems())}>Unselect all</Button>
+        <span className="text-2xl">
+          {t('Main.Flyout.selectedItems')}: {selectedCards.length}
+        </span>
+        <Button onClick={() => dispatch(clearAllItems())}>
+          {t('Main.Flyout.unselectButton')}
+        </Button>
+        <Button onClick={createFile}>{t('Main.Flyout.downloadButton')}</Button>
         <a
-          className={`px-7 rounded-sm py-2 cursor-pointer m-5 ${
-            darkTheme
-              ? 'bg-blue-800 text-white hover:bg-blue-700 m-5 disabled:bg-blue-900'
-              : 'bg-blue-400  text-black hover:bg-blue-500 m-5 disabled:bg-blue-800'
-          }`}
-          data-testid="link"
+          ref={link}
+          className="hidden"
           download={`${selectedCards.length}_items.csv`}
-          href={link}
-        >
-          Download
-        </a>
+        ></a>
       </div>
     )
   );

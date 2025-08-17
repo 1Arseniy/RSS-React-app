@@ -1,20 +1,24 @@
-import { useState } from 'react';
+'use client';
+import { useEffect, useState } from 'react';
 
 import { Header, Main } from '@/components';
 
-import type { TypeProps } from '@/types/types';
-
-import { Outlet } from 'react-router-dom';
+import type { TypeCharacter, TypeProps } from '@/types/types';
 
 import { useGetCharactersQuery } from '@/client/api';
 
 import useLocalStorage from '@/hooks/useLocalStorage';
 
-function HomeView() {
+import { useSearchParams } from 'next/navigation';
+
+function HomeView({ initialData }: { initialData: TypeCharacter[] }) {
   const [savedValue] = useLocalStorage('name', '');
+  const searchParams = useSearchParams();
+
   const [state, setState] = useState<TypeProps>({
-    page: 1,
+    page: Number(searchParams.get('page')) || 1,
     name: savedValue || '',
+    characters: initialData,
   });
 
   const { data, error, isFetching, refetch } = useGetCharactersQuery({
@@ -22,11 +26,13 @@ function HomeView() {
     page: state.page,
   });
 
-  const queryResult = { data, error, isFetching, refetch };
+  useEffect(() => {
+    setState((prev) => ({ ...prev, characters: data }));
+  }, [data, setState]);
 
+  const queryResult = { data, error, isFetching, refetch };
   return (
     <>
-      <Outlet />
       <Header setState={setState} />
       <Main setState={setState} states={state} queryResult={queryResult} />
     </>

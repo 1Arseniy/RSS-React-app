@@ -1,3 +1,4 @@
+'use client';
 import { useEffect, useState } from 'react';
 
 import type { Dispatch } from 'react';
@@ -7,12 +8,13 @@ function useLocalStorage(
   str: string
 ): [string, Dispatch<React.SetStateAction<string>>] {
   const [value, setValue] = useState(() => {
-    const savedValue = localStorage.getItem(key);
+    const savedValue =
+      typeof window !== 'undefined' && window.localStorage.getItem(key);
     return savedValue ? savedValue : str;
   });
 
   useEffect(() => {
-    localStorage.setItem(key, value);
+    window.localStorage.setItem(key, value);
   }, [key, value]);
 
   return [value, setValue];

@@ -1,0 +1,40 @@
+{
+  "HomeView": {
+    "Menu": {
+      "homeLink": "Главная",
+      "aboutLink": "О нас",
+      "language": "РУ"
+    },
+    "Header": {
+      "inputPlaceholder": "Искать по имени",
+      "searchButton": "Искать"
+    },
+    "Main": {
+      "RefreshCallButton": "Сделать запрос",
+      "CloseButton": "закрыть",
+      "Pagination": {
+        "prevButton": "пребедущая",
+        "nextButton": "следующая"
+      },
+      "Flyout": {
+        "selectedItems": "Выбранные элементы",
+        "unselectButton": "Отменить выбор всех",
+        "downloadButton": "Загрузить"
+      },
+      "Card": {
+        "fullName": "Полное имя",
+        "gender": "Гедер",
+        "status": "Статус",
+        "favorute": "Избранный"
+      }
+    }
+  },
+  "AboutView": {
+    "description": "Здравствуйте, меня зовут Арсений. Успешно прошёл основной курс. Многому научился на курсе RS School.",
+    "link": "RSS React"
+  },
+  "PageNotFound": {
+    "text": "Страница не найдена",
+    "backButton": "Вернутся на главную страницу"
+  }
+}

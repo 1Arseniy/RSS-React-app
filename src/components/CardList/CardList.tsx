@@ -2,15 +2,17 @@ import { LuLoaderCircle } from 'react-icons/lu';
 
 import { Card } from '@/components';
 
-import type { TypeQueryResult } from '@/types/types';
+import type { TypeCharacter, TypeQueryResult } from '@/types/types';
 
 interface TypePropsCardList {
   queryResult: TypeQueryResult;
   page: number;
+  characters: TypeCharacter[] | undefined;
 }
 
 function CardList(props: TypePropsCardList) {
-  const { data, error, isFetching } = props.queryResult;
+  const { error, isFetching } = props.queryResult;
+  const { characters } = props;
 
   if (error) {
     const statusNotfound = 404;
@@ -37,7 +39,7 @@ function CardList(props: TypePropsCardList) {
   return (
     <>
       <div className={`flex flex-wrap justify-center`} data-testid="cardList">
-        {data?.map((character) => (
+        {characters?.map((character) => (
           <Card key={character.id} page={props.page} character={character} />
         ))}
       </div>

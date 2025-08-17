@@ -14,8 +14,7 @@ export const api = createApi({
   keepUnusedDataFor: 80,
   endpoints: (create) => ({
     getCharacters: create.query<TypeCharacter[], TypePropsGetCharacters>({
-      query: ({ name, page = 1 }) =>
-        `?page=${page}${name ? `&name=${name}` : ''}`,
+      query: ({ name, page }) => `?page=${page}${name && `&name=${name}`}`,
       transformResponse: (response: TypeCharacters) => response.results,
     }),
     getCharacterById: create.query<TypeCharacter, string>({

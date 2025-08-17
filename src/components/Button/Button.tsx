@@ -1,3 +1,5 @@
+'use client';
+
 import useTheme from '@/hooks/useTheme';
 import type { ReactNode } from 'react';
 interface TypePropsButton {

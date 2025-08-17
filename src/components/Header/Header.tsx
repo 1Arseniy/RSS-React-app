@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 
 import useLocalStorage from '@/hooks/useLocalStorage';
@@ -7,12 +9,15 @@ import { InputSearch } from '@/components';
 
 import type { TypeSetState } from '@/types/types';
 
+import { useTranslations } from 'next-intl';
+
 interface TypePropsHeader {
   setState: TypeSetState;
 }
 
 function Header(props: TypePropsHeader) {
   const { setState } = props;
+  const t = useTranslations('HomeView');
 
   const [savedValue, setSavedValue] = useLocalStorage('name', '');
 
@@ -32,7 +37,7 @@ function Header(props: TypePropsHeader) {
   return (
     <header className="h-[10vh] flex justify-center items-center">
       <InputSearch setText={setText} inputValue={inputValue} />
-      <Button onClick={trimText}>Search</Button>
+      <Button onClick={trimText}>{t('Header.searchButton')}</Button>
     </header>
   );
 }
