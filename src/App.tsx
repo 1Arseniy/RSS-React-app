@@ -1,18 +1,22 @@
+import { useState } from 'react';
+
+import { Button, Modal, UncontrolledForm, UsersList } from '@/components';
+
+// import useUsers from './store/store';
+
 function App() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const openModal = () => setIsOpen(true);
+  const closeModal = () => setIsOpen(false);
+
   return (
     <>
-      <div>
-        <a href="https://vite.dev">
-          <img className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev">
-          <img className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Button onClick={openModal}>Open first modal</Button>
+      <Modal isOpen={isOpen} closeModal={closeModal}>
+        <UncontrolledForm onClose={closeModal} />
+      </Modal>
+      <UsersList />
     </>
   );
 }
