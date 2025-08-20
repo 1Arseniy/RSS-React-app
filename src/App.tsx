@@ -1,20 +1,34 @@
 import { useState } from 'react';
 
-import { Button, Modal, UncontrolledForm, UsersList } from '@/components';
+import {
+  Button,
+  Modal,
+  UncontrolledForm,
+  UsersList,
+  ControlledForm,
+} from '@/components';
 
 // import useUsers from './store/store';
 
 function App() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<null | 'firstActive' | 'secondActive'>(
+    null
+  );
 
-  const openModal = () => setIsOpen(true);
-  const closeModal = () => setIsOpen(false);
+  const openModal = (name: 'firstActive' | 'secondActive') => setIsOpen(name);
+  const closeModal = () => setIsOpen(null);
 
   return (
     <>
-      <Button onClick={openModal}>Open first modal</Button>
-      <Modal isOpen={isOpen} closeModal={closeModal}>
+      <Button onClick={() => openModal('firstActive')}>Open first modal</Button>
+      <Button onClick={() => openModal('secondActive')}>
+        Open second modal
+      </Button>
+      <Modal isOpen={isOpen === 'firstActive'} closeModal={closeModal}>
         <UncontrolledForm onClose={closeModal} />
+      </Modal>
+      <Modal isOpen={isOpen === 'secondActive'} closeModal={closeModal}>
+        <ControlledForm />
       </Modal>
       <UsersList />
     </>
