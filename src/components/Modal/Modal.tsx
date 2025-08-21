@@ -25,12 +25,12 @@ function Modal({
       <>
         <div
           onClick={closeModal}
-          className="absolute w-full h-full top-0 left-0 bg-black/30 p-2.5"
+          className="absolute w-full h-full top-0 left-0 bg-black/30"
         >
           <div className="flex min-h-full flex-col  items-center">
             <div
               onClick={(e) => e.stopPropagation()}
-              className="w-96  bg-neutral-500"
+              className="w-96 bg-neutral-500"
             >
               <div className="flex justify-end">
                 <Button onClick={closeModal} styles={['hover:bg-blue-900']}>

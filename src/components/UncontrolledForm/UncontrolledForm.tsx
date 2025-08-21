@@ -4,7 +4,7 @@ import type z from 'zod';
 
 import randomHEX from '@/utils/randomHEX';
 
-import useUsers from '@/store/store';
+import useUsers, { useCountries } from '@/store/store';
 
 import { Button, InputField } from '@/components';
 
@@ -13,12 +13,10 @@ import formSchema from '@/validation/formSchema';
 interface TypePropsUncontrolledForm {
   onClose: () => void;
 }
-// const inputName = useRef<HTMLInputElement>(null);
-// const inputGenderMale = useRef<HTMLInputElement>(null);
-// const inputGenderFemale = useRef<HTMLInputElement>(null);
 
 function UncontrolledForm({ onClose }: TypePropsUncontrolledForm) {
   const addUser = useUsers((state) => state.addUser);
+  const countries = useCountries();
 
   const [errors, setError] = useState<
     z.core.$ZodFormattedError<
@@ -28,6 +26,10 @@ function UncontrolledForm({ onClose }: TypePropsUncontrolledForm) {
         age: number;
         password: string;
         confirmPassword: string;
+        select: 'Male' | 'Female';
+        checkbox: 'on';
+        country: unknown;
+        file: File;
       },
       string
     >
@@ -44,10 +46,15 @@ function UncontrolledForm({ onClose }: TypePropsUncontrolledForm) {
       setError(errors);
     } else {
       setError({ _errors: [] });
+      console.log(formData);
       addUser({
         name: formData.name.toString(),
         age: formData.age.toString(),
         password: formData.password.toString(),
+        gender: formData.select.toString(),
+        accept: formData.checkbox.toString(),
+        country: formData.country.toString(),
+        img: formData.file.toString(),
         colorCard: randomHEX(),
       });
       onClose();
@@ -91,29 +98,42 @@ function UncontrolledForm({ onClose }: TypePropsUncontrolledForm) {
           errors.confirmPassword && errors.confirmPassword._errors.join(',')
         }
       />
-      <div className="text-white flex items-center">
-        Gender:
-        <div>
-          <input id="Male" type="radio" name="gender" value="Male" />
-          <label htmlFor="Male">Male</label>
-        </div>
-        <div>
-          <input type="radio" id="Female" name="gender" value="Female" />
-          <label htmlFor="Female">Female</label>
-        </div>
-      </div>
       <div>
-        <input type="checkbox" id="scales" name="checkbox" />
-        <label htmlFor="scales">Accept Terms and Conditions agreement </label>
+        Gender:
+        <select name="select">
+          <option value="select" selected>
+            select
+          </option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
       </div>
-      <input
+      <span className="text-red-500 h-10 text-[14px]">
+        {errors.select && errors.select._errors.join(', ')}
+      </span>
+      <div className="flex flex-col">
+        <InputField
+          type="checkbox"
+          name="checkbox"
+          label="scales"
+          error={errors.checkbox && errors.checkbox._errors.join(', ')}
+        />
+      </div>
+      <InputField
         type="file"
-        accept="image/png, image/jpeg"
-        id="file"
-        className="hidden"
+        name="file"
+        label="file"
+        error={errors.file && errors.file._errors.join(', ')}
       />
-      <label htmlFor="file">Choose file</label>
-      <input type="text" placeholder="Country" />
+      <input type="text" name="country" list="country" placeholder="Country" />
+      <datalist id="country">
+        {countries.countries.map((country, index) => (
+          <option key={index}>{country}</option>
+        ))}
+      </datalist>
+      <span className="text-red-500 h-10 text-[14px]">
+        {errors.country && errors.country._errors.join(', ')}
+      </span>
       <Button styles={['hover:bg-blue-900']} type="submit">
         Submit
       </Button>

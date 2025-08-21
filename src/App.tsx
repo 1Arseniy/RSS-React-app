@@ -8,8 +8,6 @@ import {
   ControlledForm,
 } from '@/components';
 
-// import useUsers from './store/store';
-
 function App() {
   const [isOpen, setIsOpen] = useState<null | 'firstActive' | 'secondActive'>(
     null
@@ -28,7 +26,7 @@ function App() {
         <UncontrolledForm onClose={closeModal} />
       </Modal>
       <Modal isOpen={isOpen === 'secondActive'} closeModal={closeModal}>
-        <ControlledForm />
+        <ControlledForm onClose={closeModal} />
       </Modal>
       <UsersList />
     </>

@@ -1,5 +1,7 @@
 import z from 'zod';
 
+const typeFiles = ['image/jpeg', 'image/png'];
+
 const formSchema = z
   .object({
     name: z.string().refine((value) => /^[A-Z]/.test(value), {
@@ -27,6 +29,12 @@ const formSchema = z
         }
       ),
     confirmPassword: z.string(),
+    select: z.enum(['Male', 'Female'], { message: 'field is required' }),
+    checkbox: z.enum(['on'], { message: 'flag must be checked' }),
+    country: z.string().min(1, { message: 'field is required' }),
+    file: z.instanceof(File).refine((img) => typeFiles.includes(img.type), {
+      message: 'must be image .png or .jpg',
+    }),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: 'Passwords do not match',
