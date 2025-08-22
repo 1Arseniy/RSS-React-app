@@ -40,7 +40,6 @@ function InputField({
           <>
             <input
               type={type}
-              //   accept="image/png, image/jpeg"
               id={label}
               name={name}
               className="hidden"
@@ -51,14 +50,6 @@ function InputField({
             </label>
           </>
         );
-
-      //   case 'radio':
-      //     return (
-      //       <>
-      //         <label htmlFor={label}>{label}</label>
-      //         <input id={label} type={type} name={name} value={label} />
-      //       </>
-      //     );
 
       default:
         return (

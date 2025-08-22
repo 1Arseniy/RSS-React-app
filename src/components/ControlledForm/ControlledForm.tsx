@@ -2,7 +2,7 @@ import { useForm, type SubmitHandler } from 'react-hook-form';
 
 import { Button, InputField } from '@/components';
 
-import formSchema from '@/validation/formSchema';
+import { controlledSchema } from '@/validation/formSchema';
 
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -10,15 +10,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import useUsers, { useCountries } from '@/store/store';
 
 import randomHEX from '@/utils/randomHEX';
-// interface TypeControlledForm {
-
-// }
+import { toBase64 } from '@/utils/toBase64';
 
 interface TypePropsControlledForm {
   onClose: () => void;
 }
 
-type fields = z.infer<typeof formSchema>;
+type fields = z.infer<typeof controlledSchema>;
 
 function ControlledForm({ onClose }: TypePropsControlledForm) {
   const addUser = useUsers((state) => state.addUser);
@@ -28,17 +26,18 @@ function ControlledForm({ onClose }: TypePropsControlledForm) {
     handleSubmit,
     formState: { errors },
   } = useForm<fields>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(controlledSchema),
   });
 
-  const submitForm: SubmitHandler<fields> = (data) => {
+  const submitForm: SubmitHandler<fields> = async (data) => {
+    const file = await toBase64(data.fileControlled[0]);
     addUser({
       name: data.name,
       age: data.age,
       password: data.password,
       gender: data.select,
-      accept: data.checkbox,
-      img: '',
+      accept: String(data.checkboxControlled),
+      img: file,
       country: data.country,
       colorCard: randomHEX(),
     });
@@ -95,7 +94,7 @@ function ControlledForm({ onClose }: TypePropsControlledForm) {
           <option value="Female">Female</option>
         </select>
       </div>
-      <span className="text-red-500 h-10">
+      <span className="text-red-500 h-10 text-[14px]">
         {errors.select && errors.select.message}
       </span>
       <div className="flex flex-col">
@@ -103,16 +102,18 @@ function ControlledForm({ onClose }: TypePropsControlledForm) {
           type="checkbox"
           name="checkbox"
           label="scales"
-          register={register('checkbox')}
-          error={errors.checkbox && errors.checkbox.message}
+          register={register('checkboxControlled')}
+          error={errors.checkboxControlled && errors.checkboxControlled.message}
         />
       </div>
       <InputField
         type="file"
         name="file"
         label="file"
-        register={register('file')}
-        error={errors.file && errors.file.message}
+        register={register('fileControlled')}
+        error={
+          errors.fileControlled && errors.fileControlled.message?.toString()
+        }
       />
       <input
         type="text"
@@ -128,7 +129,11 @@ function ControlledForm({ onClose }: TypePropsControlledForm) {
       <span className="text-red-500 h-10 text-[14px]">
         {errors.country && errors.country.message}
       </span>
-      <Button styles={['hover:bg-blue-900']} type="submit">
+      <Button
+        styles={['hover:bg-blue-900']}
+        type="submit"
+        disabled={Object.keys(errors).length > 0}
+      >
         Submit
       </Button>
     </form>

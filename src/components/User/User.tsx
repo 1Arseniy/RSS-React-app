@@ -10,19 +10,20 @@ function User({
   country,
   img,
 }: TypeUser) {
-  console.log(img);
   return (
     <div
-      className="flex flex-col h-[200px] w-80 m-2.5 rounded-xl"
+      className="flex flex-col  w-80 m-2.5 rounded-xl"
       style={{ backgroundColor: colorCard }}
     >
-      {/* <img src="" /> */}
-      <span>Name: {name}</span>
-      <span>Age: {age}</span>
-      <span>password: {password}</span>
-      <span>gender: {gender}</span>
-      <span>Accept Terms and Conditions agreement: {accept}</span>
-      <span>Country: {country}</span>
+      {<img src={img} className="object-cover h-52 rounded-t-md" />}
+      <div className="p-3.5 flex flex-col">
+        <span>Name: {name}</span>
+        <span>Age: {age}</span>
+        <span>password: {password}</span>
+        <span>gender: {gender}</span>
+        <span>Accept Terms and Conditions agreement: {accept}</span>
+        <span>Country: {country}</span>
+      </div>
     </div>
   );
 }

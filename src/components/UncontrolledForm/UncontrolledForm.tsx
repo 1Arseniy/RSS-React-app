@@ -8,7 +8,8 @@ import useUsers, { useCountries } from '@/store/store';
 
 import { Button, InputField } from '@/components';
 
-import formSchema from '@/validation/formSchema';
+import { nonControlledSchema } from '@/validation/formSchema';
+import { toBase64 } from '@/utils/toBase64';
 
 interface TypePropsUncontrolledForm {
   onClose: () => void;
@@ -17,7 +18,6 @@ interface TypePropsUncontrolledForm {
 function UncontrolledForm({ onClose }: TypePropsUncontrolledForm) {
   const addUser = useUsers((state) => state.addUser);
   const countries = useCountries();
-
   const [errors, setError] = useState<
     z.core.$ZodFormattedError<
       {
@@ -28,33 +28,33 @@ function UncontrolledForm({ onClose }: TypePropsUncontrolledForm) {
         confirmPassword: string;
         select: 'Male' | 'Female';
         checkbox: 'on';
+        checkboxNonControlled: 'on';
         country: unknown;
-        file: File;
+        fileNonControlled: File;
       },
       string
     >
   >({ _errors: [] });
 
-  const submitForm = (event: FormEvent<HTMLFormElement>) => {
+  const submitForm = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
     const formData = Object.fromEntries(form.entries());
-    const validation = formSchema.safeParse(formData);
-
+    const validation = nonControlledSchema.safeParse(formData);
+    const file = await toBase64(formData.fileNonControlled as File);
     if (!validation.success) {
       const errors = validation.error.format();
       setError(errors);
     } else {
       setError({ _errors: [] });
-      console.log(formData);
       addUser({
         name: formData.name.toString(),
         age: formData.age.toString(),
         password: formData.password.toString(),
         gender: formData.select.toString(),
-        accept: formData.checkbox.toString(),
+        accept: formData.checkboxNonControlled.toString(),
         country: formData.country.toString(),
-        img: formData.file.toString(),
+        img: file,
         colorCard: randomHEX(),
       });
       onClose();
@@ -114,16 +114,22 @@ function UncontrolledForm({ onClose }: TypePropsUncontrolledForm) {
       <div className="flex flex-col">
         <InputField
           type="checkbox"
-          name="checkbox"
+          name="checkboxNonControlled"
           label="scales"
-          error={errors.checkbox && errors.checkbox._errors.join(', ')}
+          error={
+            errors.checkboxNonControlled &&
+            errors.checkboxNonControlled._errors.join(', ')
+          }
         />
       </div>
       <InputField
         type="file"
-        name="file"
+        name="fileNonControlled"
         label="file"
-        error={errors.file && errors.file._errors.join(', ')}
+        error={
+          errors.fileNonControlled &&
+          errors.fileNonControlled._errors.join(', ')
+        }
       />
       <input type="text" name="country" list="country" placeholder="Country" />
       <datalist id="country">
