@@ -1,6 +1,6 @@
 import { useForm, type SubmitHandler } from 'react-hook-form';
 
-import { Button, InputField } from '@/components';
+import { Button, InputField, PasswordStrength } from '@/components';
 
 import { controlledSchema } from '@/validation/formSchema';
 
@@ -25,10 +25,12 @@ function ControlledForm({ onClose }: TypePropsControlledForm) {
     register,
     handleSubmit,
     formState: { errors },
+    watch,
   } = useForm<fields>({
     resolver: zodResolver(controlledSchema),
   });
 
+  const password = watch('password');
   const submitForm: SubmitHandler<fields> = async (data) => {
     const file = await toBase64(data.fileControlled[0]);
     addUser({
@@ -70,6 +72,7 @@ function ControlledForm({ onClose }: TypePropsControlledForm) {
         register={register('email')}
         error={errors.email && errors.email.message}
       />
+      <PasswordStrength strLength={password ? password.length : 0} />
       <InputField
         type="password"
         name="password"
@@ -130,7 +133,7 @@ function ControlledForm({ onClose }: TypePropsControlledForm) {
         {errors.country && errors.country.message}
       </span>
       <Button
-        styles={['hover:bg-blue-900']}
+        styles={'hover:bg-blue-900'}
         type="submit"
         disabled={Object.keys(errors).length > 0}
       >

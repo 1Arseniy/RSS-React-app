@@ -27,7 +27,7 @@ const basicSchema = z.object({
     }),
   confirmPassword: z.string(),
   select: z.enum(['Male', 'Female'], { message: 'field is required' }),
-  country: z.string().min(1, { message: 'field is required' }),
+  country: z.string().min(1, { message: 'country is required field' }),
 });
 
 const nonControlledFields = z.object({

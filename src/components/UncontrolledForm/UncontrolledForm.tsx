@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from 'react';
+import { useRef, useState, type FormEvent } from 'react';
 
 import type z from 'zod';
 
@@ -6,7 +6,7 @@ import randomHEX from '@/utils/randomHEX';
 
 import useUsers, { useCountries } from '@/store/store';
 
-import { Button, InputField } from '@/components';
+import { Button, InputField, PasswordStrength } from '@/components';
 
 import { nonControlledSchema } from '@/validation/formSchema';
 import { toBase64 } from '@/utils/toBase64';
@@ -17,6 +17,7 @@ interface TypePropsUncontrolledForm {
 
 function UncontrolledForm({ onClose }: TypePropsUncontrolledForm) {
   const addUser = useUsers((state) => state.addUser);
+  const passwordRef = useRef<HTMLInputElement>(null);
   const countries = useCountries();
   const [errors, setError] = useState<
     z.core.$ZodFormattedError<
@@ -84,12 +85,18 @@ function UncontrolledForm({ onClose }: TypePropsUncontrolledForm) {
         placeholder="Email"
         error={errors.email && errors.email._errors.join(',')}
       />
-      <InputField
+      <PasswordStrength
+        strLength={passwordRef.current ? passwordRef.current.value.length : 0}
+      />
+      <input
         type="password"
         name="password"
+        ref={passwordRef}
         placeholder="Password"
-        error={errors.password && errors.password._errors.join(',')}
       />
+      <span className="text-red-500 h-10 text-[14px] text-center">
+        {errors.password && errors.password._errors.join(', ')}
+      </span>
       <InputField
         type="password"
         name="confirmPassword"
@@ -140,7 +147,7 @@ function UncontrolledForm({ onClose }: TypePropsUncontrolledForm) {
       <span className="text-red-500 h-10 text-[14px]">
         {errors.country && errors.country._errors.join(', ')}
       </span>
-      <Button styles={['hover:bg-blue-900']} type="submit">
+      <Button styles={'hover:bg-blue-900'} type="submit">
         Submit
       </Button>
     </form>
