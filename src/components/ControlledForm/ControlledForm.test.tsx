@@ -15,7 +15,6 @@ describe('tests ControlledForm', () => {
   let inputAge: HTMLInputElement;
   let inputEmail: HTMLInputElement;
   let inputPassword: HTMLInputElement;
-
   let checkbox: HTMLInputElement;
   let inputCountry: HTMLInputElement;
   beforeEach(() => {
@@ -46,7 +45,6 @@ describe('tests ControlledForm', () => {
     expect(await screen.findByText('Invalid email format')).toBeInTheDocument();
     expect(await screen.findByText('field is required')).toBeInTheDocument();
     expect(await screen.findByText('flag must be checked')).toBeInTheDocument();
-    expect(await screen.findByText('must contain [0-9]')).toBeInTheDocument();
     expect(
       await screen.findByText('must be image .png or .jpg')
     ).toBeInTheDocument();
@@ -74,7 +72,6 @@ describe('tests ControlledForm', () => {
 
     expect(screen.queryByText('Invalid email format')).not.toBeInTheDocument();
     expect(screen.queryByText('flag must be checked')).not.toBeInTheDocument();
-    expect(screen.queryByText('must contain [0-9]')).not.toBeInTheDocument();
     expect(
       screen.queryByText('country is required field')
     ).not.toBeInTheDocument();

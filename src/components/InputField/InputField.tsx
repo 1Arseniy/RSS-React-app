@@ -45,7 +45,10 @@ function InputField({
               className="hidden"
               {...register}
             />
-            <label htmlFor={label} className="cursor-pointer">
+            <label
+              htmlFor={label}
+              className="bg-neutral-700 text-white px-7 rounded-sm py-2 cursor-pointer hover:bg-neutral-800 m-5 disabled:cursor-default"
+            >
               Choose file
             </label>
           </>

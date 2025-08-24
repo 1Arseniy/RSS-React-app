@@ -25,7 +25,20 @@ const basicSchema = z.object({
     .refine((password) => /[!@#$%^&*()_+\-=[\]{};':"|,.<>/?]/.test(password), {
       message: 'must contain one special character',
     }),
-  confirmPassword: z.string(),
+  confirmPassword: z
+    .string()
+    .refine((password) => /[0-9]/.test(password), {
+      message: 'must contain [0-9]',
+    })
+    .refine((password) => /[A-Z]/.test(password), {
+      message: 'must contain [A-Z]',
+    })
+    .refine((password) => /[a-z]/.test(password), {
+      message: 'must contain [a-z]',
+    })
+    .refine((password) => /[!@#$%^&*()_+\-=[\]{};':"|,.<>/?]/.test(password), {
+      message: 'must contain one special character',
+    }),
   select: z.enum(['Male', 'Female'], { message: 'field is required' }),
   country: z.string().min(1, { message: 'country is required field' }),
 });

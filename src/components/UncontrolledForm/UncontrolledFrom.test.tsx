@@ -15,7 +15,6 @@ describe('tests UncontrolledForm', () => {
   let inputAge: HTMLInputElement;
   let inputEmail: HTMLInputElement;
   let inputPassword: HTMLInputElement;
-
   let checkbox: HTMLInputElement;
   let inputCountry: HTMLInputElement;
   beforeEach(() => {

@@ -19,7 +19,7 @@ function Button({
       disabled={disabled}
       type={type}
       onClick={onClick}
-      className={`bg-blue-800 text-white px-7 rounded-sm py-2 cursor-pointer hover:bg-blue-700 m-5 disabled:bg-blue-900 disabled:cursor-default  ${styles ? styles : ''}`}
+      className={`bg-neutral-700 text-white px-7 rounded-sm py-2 cursor-pointer hover:bg-neutral-800 m-5 disabled:bg-neutral-600 disabled:cursor-default  ${styles ? styles : ''}`}
     >
       {children}
     </button>
