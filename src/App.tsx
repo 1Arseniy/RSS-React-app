@@ -18,10 +18,16 @@ function App() {
 
   return (
     <>
-      <Button onClick={() => openModal('firstActive')}>
+      <Button
+        onClick={() => openModal('firstActive')}
+        disabled={isOpen === 'firstActive' || isOpen === 'secondActive'}
+      >
         Show uncontrolled form
       </Button>
-      <Button onClick={() => openModal('secondActive')}>
+      <Button
+        onClick={() => openModal('secondActive')}
+        disabled={isOpen === 'secondActive' || isOpen === 'firstActive'}
+      >
         Show controlled form
       </Button>
       <Modal isOpen={isOpen === 'firstActive'} closeModal={closeModal}>

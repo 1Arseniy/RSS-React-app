@@ -5,6 +5,7 @@ interface TypePropsButton {
   styles?: string;
   disabled?: boolean;
   type?: 'submit' | 'reset' | 'button' | undefined;
+  tabIndex?: number;
 }
 
 function Button({
@@ -13,9 +14,11 @@ function Button({
   styles,
   disabled,
   type,
+  tabIndex,
 }: PropsWithChildren<TypePropsButton>) {
   return (
     <button
+      tabIndex={tabIndex}
       disabled={disabled}
       type={type}
       onClick={onClick}
