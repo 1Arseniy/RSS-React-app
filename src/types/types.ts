@@ -7,4 +7,5 @@ export interface TypeUser {
   country: string;
   img: string;
   colorCard: string;
+  email: string;
 }

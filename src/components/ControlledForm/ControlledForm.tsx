@@ -42,6 +42,7 @@ function ControlledForm({ onClose }: TypePropsControlledForm) {
       img: file,
       country: data.country,
       colorCard: randomHEX(),
+      email: data.email,
     });
     onClose();
   };

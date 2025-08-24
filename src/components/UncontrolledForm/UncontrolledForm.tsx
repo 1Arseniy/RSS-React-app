@@ -57,6 +57,7 @@ function UncontrolledForm({ onClose }: TypePropsUncontrolledForm) {
         country: formData.country.toString(),
         img: file,
         colorCard: randomHEX(),
+        email: formData.email.toString(),
       });
       onClose();
     }

@@ -18,6 +18,7 @@ describe('tests User', () => {
     country: 'Belarus',
     img: 'none',
     colorCard: randomHEX(),
+    email: 'krutoi333333.arseniy@gmail.com',
   };
 
   it('should show right data', () => {
@@ -30,5 +31,9 @@ describe('tests User', () => {
       screen.getByText('Accept Terms and Conditions agreement: on')
     ).toBeInTheDocument();
     expect(screen.getByText('Country: Belarus')).toBeInTheDocument();
+    expect(
+      screen.getByText('Email: krutoi333333.arseniy@gmail.com')
+    ).toBeInTheDocument();
+    screen.debug();
   });
 });

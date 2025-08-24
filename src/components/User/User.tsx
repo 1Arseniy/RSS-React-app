@@ -9,6 +9,7 @@ function User({
   accept,
   country,
   img,
+  email,
 }: TypeUser) {
   return (
     <div
@@ -19,6 +20,7 @@ function User({
       <div className="p-3.5 flex flex-col">
         <span>Name: {name}</span>
         <span>Age: {age}</span>
+        <span>Email: {email}</span>
         <span>password: {password}</span>
         <span>gender: {gender}</span>
         <span>Accept Terms and Conditions agreement: {accept}</span>
