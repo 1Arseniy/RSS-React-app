@@ -5,6 +5,5 @@ export async function getData(): Promise<TypeCountry> {
     'https://1arseniy.github.io/dataCountries/co2-data.json'
   );
   const data: TypeCountry = await response.json();
-  console.log(data);
   return data;
 }

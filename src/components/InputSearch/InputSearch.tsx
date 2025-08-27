@@ -18,7 +18,11 @@ function InputSearch({
   styles,
 }: typePropsInputSearch) {
   const setValue = (event: ChangeEvent<HTMLInputElement>) => {
-    setState((prev) => ({ ...prev, year: Number(event.target.value) }));
+    if (type === 'number') {
+      setState((prev) => ({ ...prev, year: Number(event.target.value) }));
+    } else if (type === 'text') {
+      setState((prev) => ({ ...prev, name: event.target.value }));
+    }
   };
 
   return (
@@ -27,7 +31,7 @@ function InputSearch({
       value={inputValue}
       onChange={(e) => setValue(e)}
       placeholder={placeholder}
-      name="search"
+      name={type}
       className={`border-2 border-t-gray-600 h-9 bg-white rounded-sm pl-2 focus-within:outline-2 ${styles}`}
     />
   );

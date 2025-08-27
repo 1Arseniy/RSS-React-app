@@ -13,12 +13,6 @@ export interface TypeCountry {
 export type TypeCountries = TypeCountry[];
 
 export interface BaseFields {
-  //   year: number;
-  //   Population?: number;
-  //   CO2?: number;
-  //   'CO2 per capita'?: number;
-  //   ISO: string;
-  //   Country: string;
   [key: string]: string | number | undefined;
 }
 
@@ -27,6 +21,8 @@ export interface TypeAppState {
   columns: string[];
   year: number;
   rows: BaseFields[];
+  sort: boolean;
+  name: string;
 }
 
 export type TypeAppSetState = React.Dispatch<

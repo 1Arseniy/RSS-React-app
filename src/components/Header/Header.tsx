@@ -11,16 +11,15 @@ interface TypePropsHeader {
 function Header({ state, setState }: TypePropsHeader) {
   const [isOpen, setIsOpen] = useState(false);
   const closeModal = () => setIsOpen(false);
-  //   console.log(state.year);
   return (
     <div>
-      {/*   <InputSearch
+      <InputSearch
         type="text"
         placeholder="Search by name..."
-        // inputValue={name}
-        // setState={setState}
+        inputValue={state.name}
+        setState={setState}
         styles="mr-2"
-      /> */}
+      />
       <InputSearch
         type="number"
         placeholder="Select year"
@@ -30,8 +29,9 @@ function Header({ state, setState }: TypePropsHeader) {
       <Button onClick={() => setIsOpen(true)}>add column</Button>
       <>
         <span>Sort by Name: </span>
-        <select>
-          <option>Select</option>
+        <select
+          onChange={() => setState((prev) => ({ ...prev, sort: !prev.sort }))}
+        >
           <option>ASC</option>
           <option>DESC</option>
         </select>
@@ -39,7 +39,19 @@ function Header({ state, setState }: TypePropsHeader) {
       <Modal isOpen={isOpen} closeModal={closeModal}>
         <div className="flex flex-col items-center">
           <div>
-            <input type="checkbox" id="methane" />
+            <input
+              onChange={() =>
+                setState((prev) => ({
+                  ...prev,
+                  columns: prev.columns.includes('methane')
+                    ? prev.columns.filter((col) => col !== 'methane')
+                    : [...prev.columns, 'methane'],
+                }))
+              }
+              type="checkbox"
+              id="methane"
+              checked={state.columns.includes('methane')}
+            />
             <label htmlFor="methane">Methane</label>
           </div>
           <div>
