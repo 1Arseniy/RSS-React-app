@@ -1,4 +1,4 @@
-import { Table } from '@/components';
+import { Header, Table } from '@/components';
 import { use, useEffect, useState } from 'react';
 import type { TypeCountry, TypeAppState } from './types/types';
 
@@ -8,6 +8,7 @@ interface TypePropsApp {
 
 function App({ promise }: TypePropsApp) {
   const data = use(promise);
+
   const [state, setState] = useState<TypeAppState>({
     countries: {},
     columns: ['Country', 'ISO', 'Population', 'CO2', 'CO2 per capita'],
@@ -31,10 +32,12 @@ function App({ promise }: TypePropsApp) {
 
   return (
     <div className="h-screen">
+      <Header state={state} setState={setState} />
       <Table
         countries={state.countries}
         rows={state.rows}
         columns={state.columns}
+        year={state.year}
       />
     </div>
   );
