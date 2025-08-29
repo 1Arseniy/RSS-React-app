@@ -1,4 +1,5 @@
 import type { TypeCountry, BaseFields } from '@/types/types';
+import { memo, useEffect, useState } from 'react';
 
 interface TypePropsTable {
   countries: TypeCountry;
@@ -7,7 +8,17 @@ interface TypePropsTable {
   year: number;
 }
 
-function Table({ columns, rows, year }: TypePropsTable) {
+const Table = ({ columns, rows, year }: TypePropsTable) => {
+  const [isActive, setIsActive] = useState(false);
+
+  useEffect(() => {
+    setIsActive(true);
+
+    setTimeout(() => {
+      setIsActive(false);
+    }, 500);
+  }, [year]);
+
   return (
     <div className="flex items-center justify-center">
       <div className="border border-black w-screen">
@@ -32,13 +43,18 @@ function Table({ columns, rows, year }: TypePropsTable) {
               }}
             >
               {columns.map((el2, index2) => (
-                <div key={index2}>{el1[el2] ?? 'N/A'}</div>
+                <div
+                  className={`${isActive && index2 >= 2 && 'text-amber-600 transition-[text-amber-600]'}`}
+                  key={index2}
+                >
+                  {el1[el2] ?? 'N/A'}
+                </div>
               ))}
             </div>
           ))}
       </div>
     </div>
   );
-}
+};
 
-export default Table;
+export default memo(Table);

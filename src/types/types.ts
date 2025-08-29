@@ -5,6 +5,8 @@ export interface TypeCountry {
       population: number;
       co2: number;
       co2_per_capita: number;
+      methane: number;
+      oil_co2: number;
     }[];
     iso_code: string;
   };
