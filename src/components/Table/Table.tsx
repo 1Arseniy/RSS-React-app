@@ -1,8 +1,7 @@
-import type { TypeCountry, BaseFields } from '@/types/types';
+import type { BaseFields } from '@/types/types';
 import { memo, useEffect, useState } from 'react';
 
 interface TypePropsTable {
-  countries: TypeCountry;
   columns: string[];
   rows: BaseFields[];
   year: number;
@@ -27,7 +26,7 @@ const Table = ({ columns, rows, year }: TypePropsTable) => {
           style={{ gridTemplateColumns: `repeat(${columns.length}, 1fr)` }}
         >
           {columns.map((column, index) => (
-            <div key={index}>
+            <div key={column}>
               {column}
               {index === 0 && `(${year})`}
             </div>

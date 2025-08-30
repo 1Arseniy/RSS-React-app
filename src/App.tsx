@@ -11,7 +11,6 @@ function App({ promise }: TypePropsApp) {
   const countries = Object.entries(data);
 
   const [state, setState] = useState<TypeAppState>({
-    countries: {},
     columns: ['Country', 'ISO', 'Population', 'CO2', 'CO2 per capita'],
     year: 2023,
     rows: [],
@@ -49,16 +48,10 @@ function App({ promise }: TypePropsApp) {
   useEffect(() => {
     setState((prev) => ({ ...prev, rows: filtersData }));
   }, [data, setState, state.year, state.name, state.sort]);
-
   return (
     <div className="h-screen">
       <Header state={state} setState={setState} />
-      <Table
-        countries={state.countries}
-        rows={state.rows}
-        columns={state.columns}
-        year={state.year}
-      />
+      <Table rows={state.rows} columns={state.columns} year={state.year} />
     </div>
   );
 }

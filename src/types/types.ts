@@ -19,7 +19,6 @@ export interface BaseFields {
 }
 
 export interface TypeAppState {
-  countries: TypeCountry;
   columns: string[];
   year: number;
   rows: BaseFields[];
