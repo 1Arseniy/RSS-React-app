@@ -9,31 +9,36 @@ import {
 } from '@/components';
 
 function App() {
-  const [isOpen, setIsOpen] = useState<null | 'firstActive' | 'secondActive'>(
-    null
-  );
+  const [currentFormId, setCurrentFormId] = useState<
+    null | 'firstActive' | 'secondActive'
+  >(null);
 
-  const openModal = (name: 'firstActive' | 'secondActive') => setIsOpen(name);
-  const closeModal = () => setIsOpen(null);
+  const openModal = (name: 'firstActive' | 'secondActive') =>
+    setCurrentFormId(name);
+  const closeModal = () => setCurrentFormId(null);
 
   return (
     <>
       <Button
         onClick={() => openModal('firstActive')}
-        disabled={isOpen === 'firstActive' || isOpen === 'secondActive'}
+        disabled={
+          currentFormId === 'firstActive' || currentFormId === 'secondActive'
+        }
       >
         Show uncontrolled form
       </Button>
       <Button
         onClick={() => openModal('secondActive')}
-        disabled={isOpen === 'secondActive' || isOpen === 'firstActive'}
+        disabled={
+          currentFormId === 'secondActive' || currentFormId === 'firstActive'
+        }
       >
         Show controlled form
       </Button>
-      <Modal isOpen={isOpen === 'firstActive'} closeModal={closeModal}>
+      <Modal isOpen={currentFormId === 'firstActive'} closeModal={closeModal}>
         <UncontrolledForm onClose={closeModal} />
       </Modal>
-      <Modal isOpen={isOpen === 'secondActive'} closeModal={closeModal}>
+      <Modal isOpen={currentFormId === 'secondActive'} closeModal={closeModal}>
         <ControlledForm onClose={closeModal} />
       </Modal>
       <UsersList />

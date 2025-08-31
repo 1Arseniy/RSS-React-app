@@ -34,6 +34,5 @@ describe('tests User', () => {
     expect(
       screen.getByText('Email: krutoi333333.arseniy@gmail.com')
     ).toBeInTheDocument();
-    screen.debug();
   });
 });

@@ -44,12 +44,7 @@ describe('tests App', () => {
     );
 
     await userEvent.click(screen.getByRole('button', { name: 'Close' }));
-    expect(
-      screen.getByRole('button', { name: 'Show uncontrolled form' })
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole('button', { name: 'Show controlled form' })
-    ).toBeInTheDocument();
+    expect(screen.queryByTestId('close-modal')).not.toBeInTheDocument();
   });
 
   it('should close modal if click - outside the modal', async () => {

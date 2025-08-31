@@ -95,7 +95,7 @@ describe('tests UncontrolledForm', () => {
     expect(await screen.findByText('flag must be checked')).toBeInTheDocument();
   });
 
-  it('should show hidden error if flag checked', async () => {
+  it('should not show error if flag checked', async () => {
     userEvent.click(checkbox);
     await userEvent.click(submitButton);
     expect(screen.queryByText('flag must be checked')).not.toBeInTheDocument();
@@ -108,7 +108,7 @@ describe('tests UncontrolledForm', () => {
     ).toBeInTheDocument();
   });
 
-  it('should show hidden error if country selected', async () => {
+  it('should not show error if country selected', async () => {
     await userEvent.type(inputCountry, 'Belarus');
     await userEvent.click(submitButton);
 

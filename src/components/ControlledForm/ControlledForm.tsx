@@ -105,7 +105,7 @@ function ControlledForm({ onClose }: TypePropsControlledForm) {
         <InputField
           type="checkbox"
           name="checkbox"
-          label="scales"
+          label="checkbox"
           register={register('checkboxControlled')}
           error={errors.checkboxControlled && errors.checkboxControlled.message}
         />

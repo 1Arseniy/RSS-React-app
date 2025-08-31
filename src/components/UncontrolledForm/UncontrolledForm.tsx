@@ -28,7 +28,6 @@ function UncontrolledForm({ onClose }: TypePropsUncontrolledForm) {
         password: string;
         confirmPassword: string;
         select: 'Male' | 'Female';
-        checkbox: 'on';
         checkboxNonControlled: 'on';
         country: unknown;
         fileNonControlled: File;
