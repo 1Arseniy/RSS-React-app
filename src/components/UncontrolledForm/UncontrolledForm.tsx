@@ -1,0 +1,157 @@
+import { useRef, useState, type FormEvent } from 'react';
+
+import type z from 'zod';
+
+import randomHEX from '@/utils/randomHEX';
+
+import useUsers, { useCountries } from '@/store/store';
+
+import { Button, InputField, PasswordStrength } from '@/components';
+
+import { nonControlledSchema } from '@/validation/formSchema';
+import { toBase64 } from '@/utils/toBase64';
+
+interface TypePropsUncontrolledForm {
+  onClose: () => void;
+}
+
+function UncontrolledForm({ onClose }: TypePropsUncontrolledForm) {
+  const addUser = useUsers((state) => state.addUser);
+  const passwordRef = useRef<HTMLInputElement>(null);
+  const countries = useCountries();
+  const [errors, setError] = useState<
+    z.core.$ZodFormattedError<
+      {
+        name: string;
+        email: string;
+        age: number;
+        password: string;
+        confirmPassword: string;
+        select: 'Male' | 'Female';
+        checkboxNonControlled: 'on';
+        country: unknown;
+        fileNonControlled: File;
+      },
+      string
+    >
+  >({ _errors: [] });
+
+  const submitForm = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const form = new FormData(event.currentTarget);
+    const formData = Object.fromEntries(form.entries());
+    const validation = nonControlledSchema.safeParse(formData);
+    const file = await toBase64(formData.fileNonControlled as File);
+    if (!validation.success) {
+      const errors = validation.error.format();
+      setError(errors);
+    } else {
+      setError({ _errors: [] });
+      addUser({
+        name: formData.name.toString(),
+        age: formData.age.toString(),
+        password: formData.password.toString(),
+        gender: formData.select.toString(),
+        accept: formData.checkboxNonControlled.toString(),
+        country: formData.country.toString(),
+        img: file,
+        colorCard: randomHEX(),
+        email: formData.email.toString(),
+      });
+      onClose();
+    }
+  };
+
+  return (
+    <form
+      onSubmit={(e) => submitForm(e)}
+      className="flex flex-col justify-around items-center"
+    >
+      <InputField
+        type="text"
+        name="name"
+        placeholder="Name"
+        error={errors.name && errors.name._errors.join(',')}
+      />
+      <InputField
+        type="number"
+        name="age"
+        placeholder="Age"
+        error={errors.age && errors.age._errors.join(',')}
+      />
+      <InputField
+        type="email"
+        name="email"
+        placeholder="Email"
+        error={errors.email && errors.email._errors.join(',')}
+      />
+      <PasswordStrength
+        strLength={passwordRef.current ? passwordRef.current.value.length : 0}
+      />
+      <input
+        type="password"
+        name="password"
+        ref={passwordRef}
+        placeholder="Password"
+      />
+      <span className="text-red-500 h-10 text-[14px] text-center">
+        {errors.password && errors.password._errors.join(', ')}
+      </span>
+      <InputField
+        type="password"
+        name="confirmPassword"
+        placeholder="Confirm password"
+        error={
+          errors.confirmPassword && errors.confirmPassword._errors.join(',')
+        }
+      />
+      <div>
+        Gender:
+        <select name="select">
+          <option value="select" selected>
+            select
+          </option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
+      </div>
+      <span className="text-red-500 h-10 text-[14px]">
+        {errors.select && errors.select._errors.join(', ')}
+      </span>
+      <div className="flex flex-col">
+        <InputField
+          type="checkbox"
+          name="checkboxNonControlled"
+          label="scales"
+          error={
+            errors.checkboxNonControlled &&
+            errors.checkboxNonControlled._errors.join(', ')
+          }
+        />
+      </div>
+      <InputField
+        type="file"
+        name="fileNonControlled"
+        label="file"
+        error={
+          errors.fileNonControlled &&
+          errors.fileNonControlled._errors.join(', ')
+        }
+      />
+      <input type="text" name="country" list="country" placeholder="Country" />
+      <datalist id="country">
+        {countries.countries.map((country, index) => (
+          <option key={index}>{country}</option>
+        ))}
+      </datalist>
+      <span className="text-red-500 h-10 text-[14px]">
+        {errors.country && errors.country._errors.join(', ')}
+      </span>
+      <Button styles={'hover:bg-blue-900'} type="submit">
+        Submit
+      </Button>
+    </form>
+  );
+}
+
+export default UncontrolledForm;
